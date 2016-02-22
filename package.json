@@ -1,0 +1,39 @@
+{
+  "name": "react-native-autocomplete-input",
+  "version": "0.0.1",
+  "description": "Pure javascript autocomplete input for react-native",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint ./*.js ./example/*.js",
+    "test": "npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/l-urence/react-native-autocomplete.git"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "StaticRenderer.js",
+    "index.js"
+  ],
+  "keywords": [
+    "react-native",
+    "iOS",
+    "input",
+    "Android",
+    "autocomplete"
+  ],
+  "author": "Laurence Bortfeld",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/l-urence/react-native-autocomplete/issues"
+  },
+  "homepage": "https://github.com/l-urence/react-native-autocomplete#readme",
+  "devDependencies": {
+    "babel-eslint": "^5.0.0",
+    "eslint": "^2.0.1",
+    "eslint-plugin-babel": "^3.1.0",
+    "eslint-plugin-react": "^3.16.1"
+  }
+}
