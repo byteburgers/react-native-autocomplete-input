@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/l-urence/react-native-autocomplete.git"
+    "url": "git+ssh://git@github.com/l-urence/react-native-autocomplete-input.git"
   },
   "files": [
     "LICENSE",
@@ -27,9 +27,9 @@
   "author": "Laurence Bortfeld",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/l-urence/react-native-autocomplete/issues"
+    "url": "https://github.com/l-urence/react-native-autocomplete-input/issues"
   },
-  "homepage": "https://github.com/l-urence/react-native-autocomplete#readme",
+  "homepage": "https://github.com/l-urence/react-native-autocomplete-input#readme",
   "devDependencies": {
     "babel-eslint": "^5.0.0",
     "eslint": "^2.0.1",
