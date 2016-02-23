@@ -1,7 +1,5 @@
-# react-native-autocomplete-input
+# react-native-autocomplete-input [![npm version](https://badge.fury.io/js/react-native-autocomplete-input.svg)](https://badge.fury.io/js/react-native-autocomplete-input)
 This is a pure javascript react-native component to display  autocomplete suggestions given an array of objects respective to the input text.
-
-[![npm version](https://badge.fury.io/js/react-native-autocomplete-input.svg)](https://badge.fury.io/js/react-native-autocomplete-input)
 
 ![Autocomplete Example](https://raw.githubusercontent.com/l-urence/react-native-autocomplete-input/master/example.gif)
 
