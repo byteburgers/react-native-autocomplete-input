@@ -108,11 +108,12 @@ class AutoComplete extends Component {
 
   render() {
     const { showResults } = this.state;
-    const { containerStyle, onEndEditing, style, ...props } = this.props;
+    const { containerStyle, inputContainerStyle, onEndEditing, style, ...props } = this.props;
     return (
       <View style={[styles.container, containerStyle]}>
-        <View style={[styles.input, style]}>
+        <View style={[styles.inputContainer, inputContainerStyle]}>
           <TextInput
+            style={[styles.input, style]}
             ref="textInput"
             onEndEditing={e =>
               this._showResults(false) || (onEndEditing && onEndEditing(e))
@@ -139,6 +140,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     ...border,
     margin: 10,
+    marginBottom: 0,
   }
   input: {
     backgroundColor: 'white',
