@@ -127,8 +127,7 @@ class AutoComplete extends Component {
 
 const border = {
   borderColor: '#b9b9b9',
-  borderRadius: 1,
-  borderWidth: 1
+  borderRadius: 1
 };
 
 const styles = StyleSheet.create({
@@ -137,6 +136,7 @@ const styles = StyleSheet.create({
   },
   input: {
     ...border,
+    borderWidth: 1,
     backgroundColor: 'white',
     borderBottomWidth: 0,
     height: 40,
@@ -146,6 +146,7 @@ const styles = StyleSheet.create({
   },
   list: {
     ...border,
+    borderWidth: 1,
     backgroundColor: 'white',
     borderTopWidth: 0,
     margin: 10,
