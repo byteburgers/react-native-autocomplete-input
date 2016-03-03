@@ -20,10 +20,15 @@ class AutoComplete extends Component {
      */
     containerStyle: View.propTypes.style,
     /**
-     * Assign an array of data objects which should be 
+     * Assign an array of data objects which should be
      * rendered in respect to the entered text.
      */
     data: PropTypes.array,
+    /*
+     * These styles will be applied to the container which surrounds
+     * the textInput component.
+     */
+    inputContainerStyle: View.propTypes.style,
     /**
      * These style will be applied to the result list view.
      */
