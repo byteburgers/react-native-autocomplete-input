@@ -136,13 +136,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  input: {
+  inputContainer: {
     ...border,
-    backgroundColor: 'white',
-    borderBottomWidth: 0,
-    height: 40,
     margin: 10,
-    marginBottom: 0,
+  }
+  input: {
+    backgroundColor: 'white',
+    height: 40,
     paddingLeft: 3,
   },
   list: {
