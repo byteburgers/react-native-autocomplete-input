@@ -20,10 +20,15 @@ class AutoComplete extends Component {
      */
     containerStyle: View.propTypes.style,
     /**
-     * Assign an array of data objects which should be 
+     * Assign an array of data objects which should be
      * rendered in respect to the entered text.
      */
     data: PropTypes.array,
+    /*
+     * These styles will be applied to the container which surrounds
+     * the textInput component.
+     */
+    inputContainerStyle: View.propTypes.style,
     /**
      * These style will be applied to the result list view.
      */
@@ -108,17 +113,19 @@ class AutoComplete extends Component {
 
   render() {
     const { showResults } = this.state;
-    const { containerStyle, onEndEditing, style, ...props } = this.props;
+    const { containerStyle, inputContainerStyle, onEndEditing, style, ...props } = this.props;
     return (
       <View style={[styles.container, containerStyle]}>
-        <TextInput
-          style={[styles.input, style]}
-          ref="textInput"
-          onEndEditing={e =>
-            this._showResults(false) || (onEndEditing && onEndEditing(e))
-          }
-          {...props}
-        />
+        <View style={[styles.inputContainer, inputContainerStyle]}>
+          <TextInput
+            style={[styles.input, style]}
+            ref="textInput"
+            onEndEditing={e =>
+              this._showResults(false) || (onEndEditing && onEndEditing(e))
+            }
+            {...props}
+          />
+        </View>
         {showResults && this._renderItems()}
       </View>
     );
@@ -135,13 +142,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  input: {
+  inputContainer: {
     ...border,
-    backgroundColor: 'white',
-    borderBottomWidth: 0,
-    height: 40,
     margin: 10,
     marginBottom: 0,
+  },
+  input: {
+    backgroundColor: 'white',
+    height: 40,
     paddingLeft: 3,
   },
   list: {
