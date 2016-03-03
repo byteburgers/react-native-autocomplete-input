@@ -46,6 +46,8 @@ The full example from the screenshot can be found [here](https://github.com/l-ur
 | Prop | Type | Description |
 :------------ |:---------------:| :-----|
 | containerStyle | style | These styles will be applied to the container which surrounds the autocomplete component. |
+| inputContainerStyle | style | These styles will be applied to the container which surrounds the textInput component. |
+| style | style | These styles will be applied to the textInput component. |
 | data | array | Assign an array of data objects which should be rendered in respect to the entered text. |
 | listStyle | style | These style will be applied to the result list view. |
 | renderItem | function | `renderItem` will be called to render the data objects which will be displayed in the result view below the text input. |
