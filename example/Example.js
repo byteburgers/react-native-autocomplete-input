@@ -10,7 +10,7 @@ import React, {
 } from 'react-native';
 
 const API = 'http://swapi.co/api';
-const ROMAN = ['', 'I', 'II', 'II', 'IV', 'V', 'VI', 'VII'];
+const ROMAN = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
 
 class AutocompleteExample extends Component {
   constructor(props) {
