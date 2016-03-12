@@ -19,12 +19,11 @@ class AutocompleteExample extends Component {
   }
 
   _findFilm(query) {
-    const { films } = this.state;
-
     if (query === '') {
       return [];
     }
 
+    const { films } = this.state;
     const regex = new RegExp(`${query.trim()}`, 'i');
     return films.filter(film => film.title.search(regex) >= 0);
   }
