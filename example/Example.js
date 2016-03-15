@@ -10,7 +10,7 @@ import React, {
 } from 'react-native';
 
 const API = 'http://swapi.co/api';
-const ROMAN = ['', 'I', 'II', 'II', 'IV', 'V', 'VI', 'VII'];
+const ROMAN = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
 
 class AutocompleteExample extends Component {
   constructor(props) {
@@ -19,12 +19,11 @@ class AutocompleteExample extends Component {
   }
 
   _findFilm(query) {
-    const { films } = this.state;
-
     if (query === '') {
       return [];
     }
 
+    const { films } = this.state;
     const regex = new RegExp(`${query.trim()}`, 'i');
     return films.filter(film => film.title.search(regex) >= 0);
   }
