@@ -8,7 +8,8 @@ import React, {
   StyleSheet,
   Text,
   TextInput,
-  View
+  View,
+  ScrollView,
 } from 'react-native';
 
 class AutoComplete extends Component {
@@ -97,7 +98,7 @@ class AutoComplete extends Component {
 
     return (
       <View style={[styles.list, listStyle]}>
-        {items}
+        <ScrollView>{items}</ScrollView>
       </View>
     );
   }
