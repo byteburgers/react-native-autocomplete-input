@@ -1,6 +1,5 @@
 'use strict';
 
-import StaticRenderer from './StaticRenderer';
 import React, {
   Component,
   ListView,
@@ -82,24 +81,13 @@ class AutoComplete extends Component {
   _renderItems() {
     const { listStyle, renderItem } = this.props;
     const { dataSource } = this.state;
-    const itemIds = dataSource.rowIdentities[0];
-    const items = [];
-
-    for (let itemIdx = 0; itemIdx < itemIds.length; itemIdx++) {
-      const shouldUpdateItem = dataSource.rowShouldUpdate(0, itemIdx);
-      items.push(
-        <StaticRenderer
-          key={`i_${itemIds[itemIdx]}`}
-          shouldUpdate={shouldUpdateItem}
-          render={renderItem.bind(null, dataSource.getRowData(0, itemIdx))}
-        />
-      );
-    }
-
     return (
-      <View style={[styles.list, listStyle]}>
-        <ScrollView>{items}</ScrollView>
-      </View>
+      <ListView
+        dataSource={dataSource}
+        keyboardShouldPersistTaps={true}
+        renderRow={renderItem}
+        style={[styles.list, listStyle]}
+      />
     );
   }
 
