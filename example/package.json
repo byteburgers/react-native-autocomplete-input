@@ -6,7 +6,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
-    "react-native-autocomplete-input": "../",
-    "react-native": "^0.20.0"
+    "react-native": "^0.21.0",
+    "react-native-autocomplete-input": "file:///Users/lbo/code/mbm/vedian/react-native-autocomplete-input"
   }
 }
