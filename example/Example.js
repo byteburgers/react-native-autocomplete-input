@@ -6,7 +6,7 @@ import React, {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
 
 const API = 'http://swapi.co/api';
@@ -15,7 +15,10 @@ const ROMAN = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
 class AutocompleteExample extends Component {
   constructor(props) {
     super(props);
-    this.state = { query: '' };
+    this.state = {
+      films: [],
+      query: '',
+    };
   }
 
   _findFilm(query) {
