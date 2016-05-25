@@ -1,7 +1,7 @@
 'use strict';
 
-import React, {
-  Component,
+import React, { Component } from 'react'
+import {
   ListView,
   PropTypes,
   StyleSheet,
@@ -23,7 +23,7 @@ class AutoComplete extends Component {
      * Assign an array of data objects which should be
      * rendered in respect to the entered text.
      */
-    data: PropTypes.array,
+    data: React.PropTypes.array,
     /*
      * These styles will be applied to the container which surrounds
      * the textInput component.
@@ -38,7 +38,7 @@ class AutoComplete extends Component {
      * which will be displayed in the result view below the
      * text input.
      */
-    renderItem: PropTypes.func
+    renderItem: React.PropTypes.func
   };
 
   static defaultProps = {
