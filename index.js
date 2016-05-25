@@ -1,14 +1,12 @@
 'use strict';
 
-import React, {
-  Component,
+import React, { Component, PropTypes } from 'react';
+import {
   ListView,
-  PropTypes,
   StyleSheet,
   Text,
   TextInput,
   View,
-  ScrollView,
 } from 'react-native';
 
 class AutoComplete extends Component {

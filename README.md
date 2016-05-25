@@ -4,6 +4,8 @@ This is a pure javascript react-native component to display  autocomplete sugges
 ![Autocomplete Example](https://raw.githubusercontent.com/l-urence/react-native-autocomplete-input/master/example.gif)
 
 ## How to use react-native-autocomplete-input
+Tested with RN >= 0.26.2. If you want to use RN < 0.26 try to install react-native-autocomplete-input <= 0.0.5.
+
 Fist things first install the component from npmjs.org:
 
 ```shell
@@ -51,7 +53,6 @@ The full example from the screenshot can be found [here](https://github.com/l-ur
 | data | array | Assign an array of data objects which should be rendered in respect to the entered text. |
 | listStyle | style | These style will be applied to the result list view. |
 | renderItem | function | `renderItem` will be called to render the data objects which will be displayed in the result view below the text input. |
-
 
 ## Contribute
 Feel free to open issues or do a PR!
