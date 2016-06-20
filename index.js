@@ -96,13 +96,16 @@ class AutoComplete extends Component {
 
   _showResults(show) {
     const { showResults } = this.state;
+    let showResult = undefined;
     if (!showResults && show) {
       this.setState({showResults: true});
-      this.props.onShowResults(true);
+      showResult = true;
     } else if (showResults && !show) {
       this.setState({showResults: false});
-      this.props.onShowResults(false);
+      showResult = false;
     }
+    if(showResult != undefined && this.props.onShowResults != undefined)
+      this.props.onShowResults(showResult);
   }
 
   render() {
