@@ -36,7 +36,12 @@ class AutoComplete extends Component {
      * which will be displayed in the result view below the
      * text input.
      */
-    renderItem: PropTypes.func
+    renderItem: PropTypes.func,
+    /**
+     * `onShowResults` will be called when list is going to
+     * show/hide results.
+     */
+     onShowResults: PropTypes.func
   };
 
   static defaultProps = {
@@ -91,11 +96,16 @@ class AutoComplete extends Component {
 
   _showResults(show) {
     const { showResults } = this.state;
+    let showResult = undefined;
     if (!showResults && show) {
       this.setState({showResults: true});
+      showResult = true;
     } else if (showResults && !show) {
       this.setState({showResults: false});
+      showResult = false;
     }
+    if(showResult != undefined && this.props.onShowResults != undefined)
+      this.props.onShowResults(showResult);
   }
 
   render() {
