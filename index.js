@@ -8,6 +8,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import Timer from 'react-native-timer';
 
 class AutoComplete extends Component {
   static propTypes = {
@@ -36,12 +37,18 @@ class AutoComplete extends Component {
      * which will be displayed in the result view below the
      * text input.
      */
-    renderItem: PropTypes.func
-  };
+     renderItem: PropTypes.func,
+     /**
+     * `customDelay` will be called only when text changed and
+     * customDelay in millis have past with no changes.
+     */
+     customDelay: PropTypes.number,
+   };
 
   static defaultProps = {
     data: [],
     defaultValue: '',
+    customDelay: 0,
     renderItem: rowData => <Text>{rowData}</Text>
   };
 
@@ -50,8 +57,13 @@ class AutoComplete extends Component {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource: ds.cloneWithRows(props.data),
-      showResults: false
+      showResults: false,
+      value: '',
     };
+  }
+
+  componentWillUnmount() {
+    Timer.clearTimeout(this);
   }
 
   /**
@@ -98,18 +110,34 @@ class AutoComplete extends Component {
     }
   }
 
+  _onChangeWithDelay(text) {
+    this.setState({value:text}, () => {
+      if(this.props.onChangeText != undefined){
+        Timer.clearTimeout(this, 'onChangeWithDelay');
+        Timer.setTimeout(
+          this,
+          'onChangeWithDelay',
+          () => {this.props.onChangeText(this.state.value)},
+          this.props.customDelay
+        );
+      }
+    });
+  }
+
   render() {
     const { showResults } = this.state;
-    const { containerStyle, inputContainerStyle, onEndEditing, style, ...props } = this.props;
+    const { containerStyle, inputContainerStyle, onEndEditing, onChange, style, onChangeText, ...props } = this.props;
     return (
       <View style={[styles.container, containerStyle]}>
         <View style={[styles.inputContainer, inputContainerStyle]}>
           <TextInput
             style={[styles.input, style]}
+            value={this.state.value}
             ref="textInput"
             onEndEditing={e =>
               this._showResults(false) || (onEndEditing && onEndEditing(e))
             }
+            onChangeText = {text => this._onChangeWithDelay(text)}
             {...props}
           />
         </View>
