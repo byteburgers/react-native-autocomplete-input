@@ -1,12 +1,10 @@
-'use strict';
-
 import React, { Component, PropTypes } from 'react';
 import {
   ListView,
   StyleSheet,
   Text,
   TextInput,
-  View,
+  View
 } from 'react-native';
 
 class AutoComplete extends Component {
@@ -41,7 +39,7 @@ class AutoComplete extends Component {
      * `onShowResults` will be called when list is going to
      * show/hide results.
      */
-     onShowResults: PropTypes.func
+    onShowResults: PropTypes.func
   };
 
   static defaultProps = {
@@ -52,11 +50,17 @@ class AutoComplete extends Component {
 
   constructor(props) {
     super(props);
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
       dataSource: ds.cloneWithRows(props.data),
       showResults: false
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const dataSource = this.state.dataSource.cloneWithRows(nextProps.data);
+    this._showResults(dataSource.getRowCount() > 0);
+    this.setState({ dataSource });
   }
 
   /**
@@ -73,12 +77,6 @@ class AutoComplete extends Component {
   focus() {
     const { textInput } = this.refs;
     textInput && textInput.focus();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const dataSource = this.state.dataSource.cloneWithRows(nextProps.data);
-    this._showResults(dataSource.getRowCount() > 0);
-    this.setState({dataSource});
   }
 
   _renderItems() {
@@ -99,10 +97,10 @@ class AutoComplete extends Component {
     const { onShowResults } = this.props;
 
     if (!showResults && show) {
-      this.setState({showResults: true});
+      this.setState({ showResults: true });
       onShowResults && onShowResults(true);
     } else if (showResults && !show) {
-      this.setState({showResults: false});
+      this.setState({ showResults: false });
       onShowResults && onShowResults(false);
     }
   }
@@ -141,19 +139,19 @@ const styles = StyleSheet.create({
   inputContainer: {
     ...border,
     margin: 10,
-    marginBottom: 0,
+    marginBottom: 0
   },
   input: {
     backgroundColor: 'white',
     height: 40,
-    paddingLeft: 3,
+    paddingLeft: 3
   },
   list: {
     ...border,
     backgroundColor: 'white',
     borderTopWidth: 0,
     margin: 10,
-    marginTop: 0,
+    marginTop: 0
   }
 });
 

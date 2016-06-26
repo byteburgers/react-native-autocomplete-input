@@ -1,12 +1,10 @@
-'use strict';
-
 import Autocomplete from 'react-native-autocomplete-input';
 import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native';
 
 const API = 'http://swapi.co/api';
@@ -17,8 +15,15 @@ class AutocompleteExample extends Component {
     super(props);
     this.state = {
       films: [],
-      query: '',
+      query: ''
     };
+  }
+
+  componentDidMount() {
+    fetch(`${API}/films/`).then(res => res.json()).then(json => {
+      const { results: films } = json;
+      this.setState({ films });
+    });
   }
 
   _findFilm(query) {
@@ -31,16 +36,9 @@ class AutocompleteExample extends Component {
     return films.filter(film => film.title.search(regex) >= 0);
   }
 
-  componentDidMount() {
-    fetch(`${API}/films/`).then(res => res.json()).then(json => {
-      const { results: films } = json;
-      this.setState({films});
-    });
-  }
-
   _renderFilm(films) {
     if (films.length > 0) {
-      const { title, director, opening_crawl, episode_id} = films[0];
+      const { title, director, opening_crawl, episode_id } = films[0];
       const roman = episode_id < ROMAN.length ? ROMAN[episode_id] : episode_id;
       return (
         <View style={styles.info}>
@@ -71,10 +69,10 @@ class AutocompleteExample extends Component {
           containerStyle={styles.autocompleteContainer}
           data={films.length === 1 && comp(query, films[0].title) ? [] : films}
           defaultValue={query}
-          onChangeText={text => this.setState({query: text})}
+          onChangeText={text => this.setState({ query: text })}
           placeholder="Enter Star Wars film title"
-          renderItem={({title, release_date}) => (
-            <TouchableOpacity onPress={() => this.setState({query: title})}>
+          renderItem={({ title, release_date }) => (
+            <TouchableOpacity onPress={() => this.setState({ query: title })}>
               <Text style={styles.itemText}>
                 {title} ({release_date.split('-')[0]})
               </Text>
@@ -105,7 +103,7 @@ const styles = StyleSheet.create({
   },
   info: {
     paddingTop: 60,
-    flex:4,
+    flex: 4
   },
   infoText: {
     textAlign: 'center'
@@ -121,7 +119,7 @@ const styles = StyleSheet.create({
     color: 'grey',
     fontSize: 12,
     marginBottom: 10,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   openingText: {
     textAlign: 'center'
