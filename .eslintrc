@@ -6,6 +6,9 @@
       "jsx": true
     }
   },
+  "globals": {
+    "fetch": false
+  },
   "env": {
     "es6": true
   },
@@ -19,9 +22,13 @@
     "no-unused-expressions": "off",
     "no-use-before-define": "off",
 
+    // Import
+    "import/no-extraneous-dependencies": "off",
+
     // React
     "react/jsx-boolean-value": ["error", "always"],
     "react/jsx-uses-react": "error",
-    "react/jsx-uses-vars": "error"
+    "react/jsx-uses-vars": "error",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
   }
 }

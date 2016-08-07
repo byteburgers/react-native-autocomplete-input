@@ -67,7 +67,7 @@ class AutoComplete extends Component {
    * Proxy `blur()` to autocomplete's text input.
    */
   blur() {
-    const { textInput } = this.refs;
+    const { textInput } = this;
     textInput && textInput.blur();
   }
 
@@ -75,7 +75,7 @@ class AutoComplete extends Component {
    * Proxy `focus()` to autocomplete's text input.
    */
   focus() {
-    const { textInput } = this.refs;
+    const { textInput } = this;
     textInput && textInput.focus();
   }
 
@@ -113,7 +113,7 @@ class AutoComplete extends Component {
         <View style={[styles.inputContainer, inputContainerStyle]}>
           <TextInput
             style={[styles.input, style]}
-            ref="textInput"
+            ref={ref => (this.textInput = ref)}
             onEndEditing={e =>
               this._showResults(false) || (onEndEditing && onEndEditing(e))
             }
