@@ -61,15 +61,5 @@
     "react-native": "^0.31.0",
     "react-native-mock": "^0.2.3",
     "sinon": "^1.17.4"
-  },
-  "babel": {
-    "plugins": [
-      "transform-class-properties",
-      "transform-es2015-arrow-functions",
-      "transform-es2015-destructuring",
-      "transform-es2015-modules-commonjs",
-      "transform-object-rest-spread",
-      "transform-react-jsx"
-    ]
   }
 }
