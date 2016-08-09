@@ -9,7 +9,7 @@ This is a pure javascript react-native component to display  autocomplete sugges
 ## How to use react-native-autocomplete-input
 Tested with RN >= 0.26.2. If you want to use RN < 0.26 try to install react-native-autocomplete-input <= 0.0.5.
 
-Fist things first install the component from npmjs.org:
+First things first install the component from npmjs.org:
 
 ```shell
 $ npm install --save react-native-autocomplete-input
@@ -25,7 +25,7 @@ This brief example should illustrate the usage of the autocomplete:
 
 ```javascript
 // ...
-render() { 
+render() {
   const { query } = this.state;
   const data = this._filterData(query)
   <Autocomplete
@@ -33,7 +33,7 @@ render() {
     defaultValue={query}
     onChangeText={text => this.setState({query: text})}
     renderItem={data => (
-      <TouchableOpacity onPress={() => 
+      <TouchableOpacity onPress={() =>
           this.setState({query: data})
         }
       >
@@ -42,7 +42,7 @@ render() {
     )}
   />
 }
-// ... 
+// ...
 ```
 
 The full example from the screenshot can be found [here](https://github.com/l-urence/react-native-autocomplete-input/blob/master/example/Example.js)
