@@ -134,11 +134,10 @@ const border = {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    zIndex: 1,
   },
   inputContainer: {
     ...border,
-    margin: 10,
     marginBottom: 0
   },
   input: {
@@ -150,8 +149,9 @@ const styles = StyleSheet.create({
     ...border,
     backgroundColor: 'white',
     borderTopWidth: 0,
-    margin: 10,
-    marginTop: 0
+    left: 0,
+    position: 'absolute',
+    right: 0
   }
 });
 
