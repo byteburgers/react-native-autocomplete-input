@@ -50,7 +50,7 @@ class AutocompleteExample extends Component {
     }
 
     return (
-      <View style={styles.info}>
+      <View style={styles.descriptionContainer}>
         <Text style={styles.infoText}>Enter Title of a Star Wars movie</Text>
       </View>
     );
@@ -62,7 +62,6 @@ class AutocompleteExample extends Component {
     const comp = (s, s2) => s.toLowerCase().trim() === s2.toLowerCase().trim();
     return (
       <View style={styles.container}>
-        {this._renderFilm(films)}
         <Autocomplete
           autoCapitalize="none"
           autoCorrect={false}
@@ -79,6 +78,7 @@ class AutocompleteExample extends Component {
             </TouchableOpacity>
           )}
         />
+        {this._renderFilm(films)}
       </View>
     );
   }
@@ -88,22 +88,18 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#F5FCFF',
     flex: 1,
-    paddingTop: 20
+    paddingTop: 25
   },
   autocompleteContainer: {
-    flex: 1,
-    left: 0,
-    position: 'absolute',
-    right: 0,
-    top: 20
+    marginLeft: 10,
+    marginRight: 10
   },
   itemText: {
     fontSize: 15,
     margin: 2
   },
-  info: {
-    paddingTop: 60,
-    flex: 4
+  descriptionContainer: {
+    flex: 1
   },
   infoText: {
     textAlign: 'center'
