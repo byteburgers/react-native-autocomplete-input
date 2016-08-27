@@ -149,8 +149,7 @@ const styles = StyleSheet.create({
     zIndex: 1
   },
   inputContainer: {
-    ...border,
-    marginBottom: 0
+    ...border
   },
   input: {
     backgroundColor: 'white',
