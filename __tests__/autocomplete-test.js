@@ -2,10 +2,13 @@
 
 import Autocomplete from '../';
 import React from 'react';
-import { ListView } from 'react-native';
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
+import {
+  ListView,
+  Text
+} from 'react-native';
 
 const ITEMS = [
   "A New Hope",
@@ -45,4 +48,27 @@ describe('<AutocompleteInput />', () => {
     autocomplete.setProps({ data: [] });
     expect(autocomplete.children()).to.have.length(1);
   });
+
+  it('should render custom text input', () => {
+    const text = 'Custom Text Input';
+    const autocomplete = shallow(
+      <Autocomplete data={[]} foo="bar" renderTextInput={props =>
+          <Text {...props}>{text}</Text>
+        }
+      />
+    );
+
+    const customInput = autocomplete.find('Text')
+    expect(autocomplete.find('TextInput')).to.have.length(0);
+    expect(customInput.children().get(0)).to.equal(text);
+    expect(customInput.prop('foo')).to.equal('bar');
+  })
+
+  it('should render default <TextInput /> if no custom one is supplied', () => {
+    const autocomplete = shallow(<Autocomplete data={[]} foo="bar" />);
+
+    const textInput = autocomplete.childAt(0).children().first();
+    expect(textInput.name()).to.equal('TextInput');
+    expect(textInput.prop('foo')).to.equal('bar');
+  })
 });
