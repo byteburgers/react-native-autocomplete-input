@@ -11,23 +11,15 @@ const API = 'http://swapi.co/api';
 const ROMAN = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
 
 class AutocompleteExample extends Component {
-  static renderFilm(films) {
-    if (films.length > 0) {
-      const { title, director, opening_crawl, episode_id } = films[0];
-      const roman = episode_id < ROMAN.length ? ROMAN[episode_id] : episode_id;
-
-      return (
-        <View style={styles.info}>
-          <Text style={styles.titleText}>{roman}. {title}</Text>
-          <Text style={styles.directorText}>({director})</Text>
-          <Text style={styles.openingText}>{opening_crawl}</Text>
-        </View>
-      );
-    }
+  static renderFilm(film) {
+    const { title, director, opening_crawl, episode_id } = film;
+    const roman = episode_id < ROMAN.length ? ROMAN[episode_id] : episode_id;
 
     return (
-      <View style={styles.descriptionContainer}>
-        <Text style={styles.infoText}>Enter Title of a Star Wars movie</Text>
+      <View>
+        <Text style={styles.titleText}>{roman}. {title}</Text>
+        <Text style={styles.directorText}>({director})</Text>
+        <Text style={styles.openingText}>{opening_crawl}</Text>
       </View>
     );
   }
@@ -79,7 +71,15 @@ class AutocompleteExample extends Component {
             </TouchableOpacity>
           )}
         />
-        {AutocompleteExample.renderFilm(films)}
+        <View style={styles.descriptionContainer}>
+          {films.length > 0 ? (
+            AutocompleteExample.renderFilm(films[0])
+          ) : (
+            <Text style={styles.infoText}>
+              Enter Title of a Star Wars movie
+            </Text>
+          )}
+        </View>
       </View>
     );
   }
@@ -100,7 +100,10 @@ const styles = StyleSheet.create({
     margin: 2
   },
   descriptionContainer: {
-    flex: 1
+    // `backgroundColor` needs to be set otherwise the
+    // autocomplete input will disappear on text input.
+    backgroundColor: '#F5FCFF',
+    marginTop: 8
   },
   infoText: {
     textAlign: 'center'
