@@ -26,9 +26,10 @@
     "import/no-extraneous-dependencies": "off",
 
     // React
+    "react/forbid-prop-types": "off",
     "react/jsx-boolean-value": ["error", "always"],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/jsx-uses-react": "error",
-    "react/jsx-uses-vars": "error",
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "react/jsx-uses-vars": "error"
   }
 }

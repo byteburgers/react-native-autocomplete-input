@@ -11,35 +11,11 @@ const API = 'http://swapi.co/api';
 const ROMAN = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
 
 class AutocompleteExample extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      films: [],
-      query: ''
-    };
-  }
-
-  componentDidMount() {
-    fetch(`${API}/films/`).then(res => res.json()).then(json => {
-      const { results: films } = json;
-      this.setState({ films });
-    });
-  }
-
-  _findFilm(query) {
-    if (query === '') {
-      return [];
-    }
-
-    const { films } = this.state;
-    const regex = new RegExp(`${query.trim()}`, 'i');
-    return films.filter(film => film.title.search(regex) >= 0);
-  }
-
-  _renderFilm(films) {
+  static renderFilm(films) {
     if (films.length > 0) {
       const { title, director, opening_crawl, episode_id } = films[0];
       const roman = episode_id < ROMAN.length ? ROMAN[episode_id] : episode_id;
+
       return (
         <View style={styles.info}>
           <Text style={styles.titleText}>{roman}. {title}</Text>
@@ -56,9 +32,34 @@ class AutocompleteExample extends Component {
     );
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      films: [],
+      query: ''
+    };
+  }
+
+  componentDidMount() {
+    fetch(`${API}/films/`).then(res => res.json()).then((json) => {
+      const { results: films } = json;
+      this.setState({ films });
+    });
+  }
+
+  findFilm(query) {
+    if (query === '') {
+      return [];
+    }
+
+    const { films } = this.state;
+    const regex = new RegExp(`${query.trim()}`, 'i');
+    return films.filter(film => film.title.search(regex) >= 0);
+  }
+
   render() {
     const { query } = this.state;
-    const films = this._findFilm(query);
+    const films = this.findFilm(query);
     const comp = (s, s2) => s.toLowerCase().trim() === s2.toLowerCase().trim();
     return (
       <View style={styles.container}>
@@ -78,7 +79,7 @@ class AutocompleteExample extends Component {
             </TouchableOpacity>
           )}
         />
-        {this._renderFilm(films)}
+        {AutocompleteExample.renderFilm(films)}
       </View>
     );
   }
