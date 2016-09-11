@@ -39,7 +39,11 @@ class AutoComplete extends Component {
      * `onShowResults` will be called when list is going to
      * show/hide results.
      */
-    onShowResults: PropTypes.func
+    onShowResults: PropTypes.func,
+    /**
+     * renders custom TextInput. All props passed to this function
+     */
+    renderTextInput: PropTypes.func
   };
 
   static defaultProps = {
@@ -105,20 +109,30 @@ class AutoComplete extends Component {
     }
   }
 
+  renderTextInput() {
+    const { onEndEditing, style } = this.props;
+    let props = {
+      style: [styles.input, style],
+      ref: ref => (this.textInput = ref),
+      onEndEditing: e =>
+        this._showResults(false) || (onEndEditing && onEndEditing(e))
+      ,
+      ...this.props
+    };
+    if( this.props.renderTextInput ) {
+      return this.props.renderTextInput(props);
+    } else {
+      return ( <TextInput {...props} /> )
+    }
+  }
+
   render() {
     const { showResults } = this.state;
-    const { containerStyle, inputContainerStyle, onEndEditing, style, ...props } = this.props;
+    const { containerStyle, inputContainerStyle, ...props } = this.props;
     return (
       <View style={[styles.container, containerStyle]}>
         <View style={[styles.inputContainer, inputContainerStyle]}>
-          <TextInput
-            style={[styles.input, style]}
-            ref={ref => (this.textInput = ref)}
-            onEndEditing={e =>
-              this._showResults(false) || (onEndEditing && onEndEditing(e))
-            }
-            {...props}
-          />
+          {this.renderTextInput()}
         </View>
         {showResults && this._renderItems()}
       </View>
