@@ -57,6 +57,7 @@ The full example from the screenshot can be found [here](https://github.com/l-ur
 | listStyle | style | These style will be applied to the result list view. |
 | renderItem | function | `renderItem` will be called to render the data objects which will be displayed in the result view below the text input. |
 | onShowResult | function | `onShowResult` will be called when the autocomplete suggestions appear or disappear.
+| renderTextInput | function | render custom TextInput. All props passed to this function
 
 ## Contribute
 Feel free to open issues or do a PR!
