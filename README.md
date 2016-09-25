@@ -22,7 +22,7 @@ $ npm install --save l-urence/react-native-autocomplete-input
 ```
 
 ### Android
-On Android please install the v.1.12 release. The v2.0.0 release don’t show the suggestion list correctly because RN for Android doesn’t support overflows (see [#20](https://github.com/l-urence/react-native-autocomplete-input/issues/2://github.com/l-urence/react-native-autocomplete-input/issues/20)).
+On Android please install the v.1.12 release. The v2.0.0 release don’t show the suggestion list correctly because RN for Android doesn’t support overflows (see [#20](//github.com/l-urence/react-native-autocomplete-input/issues/20)).
 
 ### Example
 This brief example should illustrate the usage of the autocomplete:
