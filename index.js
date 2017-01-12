@@ -37,7 +37,7 @@ class AutoComplete extends Component {
     renderItem: PropTypes.func,
     /**
      * `renderSeparator` will be called to render the list separators
-     * which will be displayed between the list elements in the result view 
+     * which will be displayed between the list elements in the result view
      * below the text input.
      */
     renderSeparator: PropTypes.func,
@@ -57,7 +57,7 @@ class AutoComplete extends Component {
     data: [],
     defaultValue: '',
     renderItem: rowData => <Text>{rowData}</Text>,
-    renderSeparator: null,
+    renderSeparator: null
   };
 
   constructor(props) {
