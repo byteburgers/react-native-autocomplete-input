@@ -36,9 +36,16 @@ class AutoComplete extends Component {
      */
     renderItem: PropTypes.func,
     /**
+     * `renderSeparator` will be called to render the list separators
+     * which will be displayed between the list elements in the result view 
+     * below the text input.
+     */
+    renderSeparator: PropTypes.func,
+    /**
      * `onShowResults` will be called when list is going to
      * show/hide results.
      */
+
     onShowResults: PropTypes.func,
     /**
      * renders custom TextInput. All props passed to this function.
@@ -49,7 +56,8 @@ class AutoComplete extends Component {
   static defaultProps = {
     data: [],
     defaultValue: '',
-    renderItem: rowData => <Text>{rowData}</Text>
+    renderItem: rowData => <Text>{rowData}</Text>,
+    renderSeparator: null,
   };
 
   constructor(props) {
@@ -84,13 +92,14 @@ class AutoComplete extends Component {
   }
 
   _renderItems() {
-    const { listStyle, renderItem } = this.props;
+    const { listStyle, renderItem, renderSeparator } = this.props;
     const { dataSource } = this.state;
     return (
       <ListView
         dataSource={dataSource}
         keyboardShouldPersistTaps={true}
         renderRow={renderItem}
+        renderSeparator={renderSeparator}
         style={[styles.list, listStyle]}
       />
     );

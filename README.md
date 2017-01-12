@@ -64,6 +64,7 @@ The full example from the screenshot can be found [here](https://github.com/l-ur
 | data | array | Assign an array of data objects which should be rendered in respect to the entered text. |
 | listStyle | style | These style will be applied to the result list view. |
 | renderItem | function | `renderItem` will be called to render the data objects which will be displayed in the result view below the text input. |
+| renderSeparator | function | `renderSeparator` will be called to render the list separators which will be displayed between the list elements in the result view below the text input. |
 | onShowResult | function | `onShowResult` will be called when the autocomplete suggestions appear or disappear.
 | renderTextInput | function | render custom TextInput. All props passed to this function.
 
