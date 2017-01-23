@@ -30,7 +30,7 @@ describe('<AutocompleteInput />', () => {
   it('Should hide suggestion list on initial render', () => {
     const autocomplete = shallow(<Autocomplete data={[]} />);
     expect(autocomplete.length).to.equal(1);
-    expect(autocomplete.children()).to.have.length(1);
+    expect(autocomplete.childAt(1).children()).to.have.length(0);
   });
 
   it('Should show suggestion list when data gets updated with length > 0', () => {
@@ -38,7 +38,7 @@ describe('<AutocompleteInput />', () => {
     overrideGetRowCount(autocomplete, ITEMS);
 
     autocomplete.setProps({ data: ITEMS });
-    expect(autocomplete.children()).to.have.length(2);
+    expect(autocomplete.childAt(1).children()).to.have.length(1);
   });
 
   it('Should hide suggestion list when data gets updates with length < 1', () => {
@@ -46,7 +46,7 @@ describe('<AutocompleteInput />', () => {
     overrideGetRowCount(autocomplete, []);
 
     autocomplete.setProps({ data: [] });
-    expect(autocomplete.children()).to.have.length(1);
+    expect(autocomplete.childAt(1).children()).to.have.length(0);
   });
 
   it('should render custom text input', () => {

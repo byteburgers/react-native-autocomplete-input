@@ -52,7 +52,8 @@ class AutocompleteExample extends Component {
   render() {
     const { query } = this.state;
     const films = this.findFilm(query);
-    const comp = (s, s2) => s.toLowerCase().trim() === s2.toLowerCase().trim();
+    const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
+
     return (
       <View style={styles.container}>
         <Autocomplete

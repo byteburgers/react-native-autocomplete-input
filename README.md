@@ -21,13 +21,6 @@ or install HEAD from github.com:
 $ npm install --save l-urence/react-native-autocomplete-input
 ```
 
-### Android
-On Android please install the v.1.1.2 release. The v2.0.0 release don’t show the suggestion list correctly because RN for Android doesn’t support overflows (see [#20](//github.com/l-urence/react-native-autocomplete-input/issues/20)).
-
-```shell
-$ npm install --save react-native-autocomplete-input@1.1.2
-```
-
 ### Example
 This brief example should illustrate the usage of the autocomplete:
 
@@ -53,7 +46,39 @@ render() {
 // ...
 ```
 
-The full example from the screenshot can be found [here](https://github.com/l-urence/react-native-autocomplete-input/blob/master/example/Example.js)
+The full example for Android and iOS from the screenshot can be found [here](//github.com/l-urence/react-native-autocomplete-input/blob/master/example/).
+
+### Android
+Android and iOS have different layout systems, because of that it is not possible to use overflows on Android (see [#20](//github.com/l-urence/react-native-autocomplete-input/issues/20). For that reason it is necessary to wrap the autocomplete into a separate component on Android and align it *absolute* to your content, to allow  the suggestion list to overlap the other content.
+
+```
+//...
+
+render() {
+  return(
+    <View>
+      <View style={autocompleteContainer}>
+        <Autocomplete {/* your props */} />
+      </View>
+    <Text>Some content</Text>
+    <View>
+  );
+}
+
+//...
+
+const style = StyleSheet.create({
+  autocompleteContainer: {
+    flex: 1,
+    left: 0,
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    zIndex: 1
+  }
+});
+
+```
 
 ## react-native-autocomplete-input props
 | Prop | Type | Description |

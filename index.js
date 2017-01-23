@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import {
   ListView,
+  Platform,
   StyleSheet,
   Text,
   TextInput,
@@ -45,7 +46,6 @@ class AutoComplete extends Component {
      * `onShowResults` will be called when list is going to
      * show/hide results.
      */
-
     onShowResults: PropTypes.func,
     /**
      * renders custom TextInput. All props passed to this function.
@@ -136,12 +136,15 @@ class AutoComplete extends Component {
   render() {
     const { showResults } = this.state;
     const { containerStyle, inputContainerStyle } = this.props;
+
     return (
       <View style={[styles.container, containerStyle]}>
         <View style={[styles.inputContainer, inputContainerStyle]}>
           {this._renderTextInput()}
         </View>
-        {showResults && this._renderItems()}
+        <View>
+          {showResults && this._renderItems()}
+        </View>
       </View>
     );
   }
@@ -153,7 +156,24 @@ const border = {
   borderWidth: 1
 };
 
-const styles = StyleSheet.create({
+const androidStyles = {
+  container: {
+    flex: 1
+  },
+  inputContainer: {
+    ...border,
+    marginBottom: 0
+  },
+  list: {
+    ...border,
+    backgroundColor: 'white',
+    borderTopWidth: 0,
+    margin: 10,
+    marginTop: 0
+  }
+};
+
+const iosStyles = {
   container: {
     zIndex: 1
   },
@@ -173,6 +193,18 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 0
   }
+};
+
+const styles = StyleSheet.create({
+  input: {
+    backgroundColor: 'white',
+    height: 40,
+    paddingLeft: 3
+  },
+  ...Platform.select({
+    android: { ...androidStyles },
+    ios: { ...iosStyles }
+  })
 });
 
 export default AutoComplete;
