@@ -23,6 +23,7 @@
     "no-use-before-define": "off",
 
     // Import
+    "import/extensions": ["off", "never"],
     "import/no-extraneous-dependencies": "off",
 
     // React

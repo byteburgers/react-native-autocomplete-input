@@ -1,5 +1,14 @@
 {
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".ios.js", ".android.js"]
+      }
+    }
+  },
+
+
   "rules": {
     "import/no-unresolved": [2, {ignore: ['react-native-autocomplete-input']}]
-  }
+  },
 }
