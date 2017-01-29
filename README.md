@@ -49,15 +49,15 @@ render() {
 The full example for Android and iOS from the screenshot can be found [here](//github.com/l-urence/react-native-autocomplete-input/blob/master/example/).
 
 ### Android
-Android and iOS have different layout systems, because of that it is not possible to use overflows on Android (see [#20](//github.com/l-urence/react-native-autocomplete-input/issues/20). For that reason it is necessary to wrap the autocomplete into a separate component on Android and align it *absolute* to your content, to allow  the suggestion list to overlap the other content.
+Android and iOS have different layout systems, because of that it is not possible to use overflows on Android (see [#20](//github.com/l-urence/react-native-autocomplete-input/issues/20)). For that reason it is necessary to wrap the autocomplete into a separate component on Android and align it *absolute* to your content, to allow  the suggestion list to overlap the other content.
 
-```
+```javascript
 //...
 
 render() {
   return(
     <View>
-      <View style={autocompleteContainer}>
+      <View style={styles.autocompleteContainer}>
         <Autocomplete {/* your props */} />
       </View>
     <Text>Some content</Text>
@@ -67,7 +67,7 @@ render() {
 
 //...
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   autocompleteContainer: {
     flex: 1,
     left: 0,
