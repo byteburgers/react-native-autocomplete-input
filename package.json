@@ -36,12 +36,7 @@
   "homepage": "https://github.com/l-urence/react-native-autocomplete-input#readme",
   "devDependencies": {
     "babel-eslint": "^7.1.1",
-    "babel-plugin-transform-class-properties": "^6.10.2",
-    "babel-plugin-transform-es2015-arrow-functions": "^6.8.0",
-    "babel-plugin-transform-es2015-destructuring": "^6.9.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.10.3",
-    "babel-plugin-transform-object-rest-spread": "^6.8.0",
-    "babel-plugin-transform-react-jsx": "^6.8.0",
+    "babel-preset-react-native": "^1.9.1",
     "babel-register": "^6.9.0",
     "chai": "^3.5.0",
     "enzyme": "^2.3.0",
