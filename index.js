@@ -63,19 +63,14 @@ class AutoComplete extends Component {
 
   constructor(props) {
     super(props);
+
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-    this.state = {
-      dataSource: ds.cloneWithRows(props.data),
-      showResults: props.data && props.data.length > 0
-    };
+    this.state = { dataSource: ds.cloneWithRows(props.data) };
   }
 
-  componentWillReceiveProps(nextProps) {
-    const dataSource = this.state.dataSource.cloneWithRows(nextProps.data);
-    this.setState({
-      dataSource,
-      showResults: dataSource.getRowCount() > 0
-    });
+  componentWillReceiveProps({ data }) {
+    const dataSource = this.state.dataSource.cloneWithRows(data);
+    this.setState({ dataSource });
   }
 
   /**
@@ -122,8 +117,9 @@ class AutoComplete extends Component {
   }
 
   render() {
-    const { showResults } = this.state;
+    const { dataSource } = this.state;
     const { containerStyle, inputContainerStyle, onShowResults } = this.props;
+    const showResults = dataSource.getRowCount() > 0;
 
     // Notify listener if the suggestion will be shown.
     onShowResults && onShowResults(showResults);
