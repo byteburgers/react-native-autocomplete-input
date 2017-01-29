@@ -57,7 +57,8 @@ class AutoComplete extends Component {
     data: [],
     defaultValue: '',
     renderItem: rowData => <Text>{rowData}</Text>,
-    renderSeparator: null
+    renderSeparator: null,
+    renderTextInput: props => <TextInput {...props} />
   };
 
   constructor(props) {
@@ -71,8 +72,10 @@ class AutoComplete extends Component {
 
   componentWillReceiveProps(nextProps) {
     const dataSource = this.state.dataSource.cloneWithRows(nextProps.data);
-    this._showResults(dataSource.getRowCount() > 0);
-    this.setState({ dataSource });
+    this.setState({
+      dataSource,
+      showResults: dataSource.getRowCount() > 0
+    });
   }
 
   /**
@@ -91,9 +94,10 @@ class AutoComplete extends Component {
     textInput && textInput.focus();
   }
 
-  _renderItems() {
-    const { listStyle, renderItem, renderSeparator } = this.props;
+  renderResultList() {
     const { dataSource } = this.state;
+    const { listStyle, renderItem, renderSeparator } = this.props;
+
     return (
       <ListView
         dataSource={dataSource}
@@ -105,45 +109,32 @@ class AutoComplete extends Component {
     );
   }
 
-  _showResults(show) {
-    const { showResults } = this.state;
-    const { onShowResults } = this.props;
-
-    if (!showResults && show) {
-      this.setState({ showResults: true });
-      onShowResults && onShowResults(true);
-    } else if (showResults && !show) {
-      this.setState({ showResults: false });
-      onShowResults && onShowResults(false);
-    }
-  }
-
-  _renderTextInput() {
+  renderTextInput() {
     const { onEndEditing, renderTextInput, style } = this.props;
     const props = {
       style: [styles.input, style],
       ref: ref => (this.textInput = ref),
-      onEndEditing: e =>
-        this._showResults(false) || (onEndEditing && onEndEditing(e)),
+      onEndEditing: e => onEndEditing && onEndEditing(e),
       ...this.props
     };
 
-    return renderTextInput
-      ? renderTextInput(props)
-      : (<TextInput {...props} />);
+    return renderTextInput(props);
   }
 
   render() {
     const { showResults } = this.state;
-    const { containerStyle, inputContainerStyle } = this.props;
+    const { containerStyle, inputContainerStyle, onShowResults } = this.props;
+
+    // Notify listener if the suggestion will be shown.
+    onShowResults && onShowResults(showResults);
 
     return (
       <View style={[styles.container, containerStyle]}>
         <View style={[styles.inputContainer, inputContainerStyle]}>
-          {this._renderTextInput()}
+          {this.renderTextInput()}
         </View>
         <View>
-          {showResults && this._renderItems()}
+          {showResults && this.renderResultList()}
         </View>
       </View>
     );
