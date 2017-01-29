@@ -8,7 +8,7 @@ import {
   View
 } from 'react-native';
 
-class AutoComplete extends Component {
+class Autocomplete extends Component {
   static propTypes = {
     ...TextInput.propTypes,
     /**
@@ -194,4 +194,4 @@ const styles = StyleSheet.create({
   })
 });
 
-export default AutoComplete;
+export default Autocomplete;
