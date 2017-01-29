@@ -31,6 +31,11 @@ class AutoComplete extends Component {
      */
     listStyle: ListView.propTypes.style,
     /**
+     * `onShowResults` will be called when list is going to
+     * show/hide results.
+     */
+    onShowResults: PropTypes.func,
+    /**
      * `renderItem` will be called to render the data objects
      * which will be displayed in the result view below the
      * text input.
@@ -42,11 +47,6 @@ class AutoComplete extends Component {
      * below the text input.
      */
     renderSeparator: PropTypes.func,
-    /**
-     * `onShowResults` will be called when list is going to
-     * show/hide results.
-     */
-    onShowResults: PropTypes.func,
     /**
      * renders custom TextInput. All props passed to this function.
      */
