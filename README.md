@@ -2,14 +2,14 @@
 [![npm version](https://badge.fury.io/js/react-native-autocomplete-input.svg)](https://badge.fury.io/js/react-native-autocomplete-input)
 [![Build Status](https://travis-ci.org/l-urence/react-native-autocomplete-input.svg)](https://travis-ci.org/l-urence/react-native-autocomplete-input)
 
-This is a pure javascript react-native component to display  autocomplete suggestions given an array of objects respective to the input text.
+A pure JS autocomplete component for React Native. Use this component in your own projects or use it as inspiration to build your own autocomplete.
 
 ![Autocomplete Example](https://raw.githubusercontent.com/l-urence/react-native-autocomplete-input/master/example.gif)
 
 ## How to use react-native-autocomplete-input
 Tested with RN >= 0.26.2. If you want to use RN < 0.26 try to install react-native-autocomplete-input <= 0.0.5.
 
-First things first install the component from npmjs.org:
+### Installation
 
 ```shell
 $ npm install --save react-native-autocomplete-input
@@ -22,34 +22,32 @@ $ npm install --save l-urence/react-native-autocomplete-input
 ```
 
 ### Example
-This brief example should illustrate the usage of the autocomplete:
 
 ```javascript
 // ...
+
 render() {
   const { query } = this.state;
   const data = this._filterData(query)
-  <Autocomplete
+  return (<Autocomplete
     data={data}
     defaultValue={query}
-    onChangeText={text => this.setState({query: text})}
+    onChangeText={text => this.setState({ query: text })}
     renderItem={data => (
-      <TouchableOpacity onPress={() =>
-          this.setState({query: data})
-        }
-      >
+      <TouchableOpacity onPress={() => this.setState({ query: data })}>
         <Text>{data}</Text>
       </TouchableOpacity>
     )}
-  />
+  />);
 }
+
 // ...
 ```
 
-The full example for Android and iOS from the screenshot can be found [here](//github.com/l-urence/react-native-autocomplete-input/blob/master/example/).
+A complete example for Android and iOS can be found [here](//github.com/l-urence/react-native-autocomplete-input/blob/master/example/).
 
 ### Android
-Android and iOS have different layout systems, because of that it is not possible to use overflows on Android (see [#20](//github.com/l-urence/react-native-autocomplete-input/issues/20)). For that reason it is necessary to wrap the autocomplete into a separate component on Android and align it *absolute* to your content, to allow  the suggestion list to overlap the other content.
+Android does not support overflows ([#20](https://github.com/l-urence/react-native-autocomplete-input/issues/20)), for that reason it is necessary to wrap the autocomplete into a *absolute* positioned view on Android. This will  allow the suggestion list to overlap other views inside your component.
 
 ```javascript
 //...
@@ -60,7 +58,9 @@ render() {
       <View style={styles.autocompleteContainer}>
         <Autocomplete {/* your props */} />
       </View>
-    <Text>Some content</Text>
+      <View>
+        <Text>Some content</Text>
+      <View />
     <View>
   );
 }
@@ -80,18 +80,18 @@ const styles = StyleSheet.create({
 
 ```
 
-## react-native-autocomplete-input props
+### Props
 | Prop | Type | Description |
-:------------ |:---------------:| :-----|
+| :------------ |:---------------:| :-----|
 | containerStyle | style | These styles will be applied to the container which surrounds the autocomplete component. |
+| data | array | An array with suggestion items to be rendered in `renderItem(item)`. Any array with length > 0 will open the suggestion list and any array with length < 1 will hide the list. |
 | inputContainerStyle | style | These styles will be applied to the container which surrounds the textInput component. |
-| style | style | These styles will be applied to the textInput component. |
-| data | array | Assign an array of data objects which should be rendered in respect to the entered text. |
 | listStyle | style | These style will be applied to the result list view. |
+| onShowResult | function | `onShowResult` will be called when the autocomplete suggestions appear or disappear. |
 | renderItem | function | `renderItem` will be called to render the data objects which will be displayed in the result view below the text input. |
 | renderSeparator | function | `renderSeparator` will be called to render the list separators which will be displayed between the list elements in the result view below the text input. |
-| onShowResult | function | `onShowResult` will be called when the autocomplete suggestions appear or disappear.
-| renderTextInput | function | render custom TextInput. All props passed to this function.
+| renderTextInput | function | render custom TextInput. All props passed to this function. |
+| style | style | These styles will be applied to the textInput component. |
 
 ## Contribute
 Feel free to open issues or do a PR!
