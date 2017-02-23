@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
 | style | style | These styles will be applied to the textInput component. |
 
 ## Known issues
-* By default the autocomplete will not behave as expected inside a `<ScrollView />`. Set the scroll views's prop `keyboardShouldPersistTaps={true}` to fix this ([#5](https://github.com/l-urence/react-native-autocomplete-input/issues/5)).
+* By default the autocomplete will not behave as expected inside a `<ScrollView />`. Set the scroll view's prop `keyboardShouldPersistTaps={true}` to fix this ([#5](https://github.com/l-urence/react-native-autocomplete-input/issues/5)).
     
 ## Contribute
 Feel free to open issues or do a PR!
