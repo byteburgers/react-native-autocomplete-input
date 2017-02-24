@@ -86,15 +86,15 @@ const styles = StyleSheet.create({
 | containerStyle | style | These styles will be applied to the container which surrounds the autocomplete component. |
 | data | array | An array with suggestion items to be rendered in `renderItem(item)`. Any array with length > 0 will open the suggestion list and any array with length < 1 will hide the list. |
 | inputContainerStyle | style | These styles will be applied to the container which surrounds the textInput component. |
-| listStyle | style | These style will be applied to the result list view. |
+| listContainerStyle | style | These styles will be applied to the container which surrounds the result list. |
+| listStyle | style | These style will be applied to the result list. |
 | onShowResult | function | `onShowResult` will be called when the autocomplete suggestions appear or disappear. |
 | renderItem | function | `renderItem` will be called to render the data objects which will be displayed in the result view below the text input. |
 | renderSeparator | function | `renderSeparator` will be called to render the list separators which will be displayed between the list elements in the result view below the text input. |
 | renderTextInput | function | render custom TextInput. All props passed to this function. |
-| style | style | These styles will be applied to the textInput component. |
 
 ## Known issues
 * By default the autocomplete will not behave as expected inside a `<ScrollView />`. Set the scroll view's prop `keyboardShouldPersistTaps={true}` to fix this ([#5](https://github.com/l-urence/react-native-autocomplete-input/issues/5)).
-    
+
 ## Contribute
 Feel free to open issues or do a PR!

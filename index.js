@@ -26,8 +26,13 @@ class Autocomplete extends Component {
      * the textInput component.
      */
     inputContainerStyle: View.propTypes.style,
+    /*
+     * These styles will be applied to the container which surrounds
+     * the result list.
+     */
+    listContainerStyle: View.propTypes.style,
     /**
-     * These style will be applied to the result list view.
+     * These style will be applied to the result list.
      */
     listStyle: ListView.propTypes.style,
     /**
@@ -118,7 +123,12 @@ class Autocomplete extends Component {
 
   render() {
     const { dataSource } = this.state;
-    const { containerStyle, inputContainerStyle, onShowResults } = this.props;
+    const {
+      containerStyle,
+      inputContainerStyle,
+      listContainerStyle,
+      onShowResults
+    } = this.props;
     const showResults = dataSource.getRowCount() > 0;
 
     // Notify listener if the suggestion will be shown.
@@ -129,7 +139,7 @@ class Autocomplete extends Component {
         <View style={[styles.inputContainer, inputContainerStyle]}>
           {this.renderTextInput()}
         </View>
-        <View>
+        <View style={listContainerStyle}>
           {showResults && this.renderResultList()}
         </View>
       </View>
