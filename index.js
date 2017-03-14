@@ -15,7 +15,7 @@ class Autocomplete extends Component {
      * These styles will be applied to the container which
      * surrounds the autocomplete component.
      */
-    containerStyle: PropTypes.object,
+    containerStyle: View.propTypes.style,
     /**
      * Assign an array of data objects which should be
      * rendered in respect to the entered text.
@@ -25,16 +25,16 @@ class Autocomplete extends Component {
      * These styles will be applied to the container which surrounds
      * the textInput component.
      */
-    inputContainerStyle: PropTypes.object,
+    inputContainerStyle: View.propTypes.style,
     /*
      * These styles will be applied to the container which surrounds
      * the result list.
      */
-    listContainerStyle: PropTypes.object,
+    listContainerStyle: View.propTypes.style,
     /**
      * These style will be applied to the result list.
      */
-    listStyle: PropTypes.object,
+    listStyle: ListView.propTypes.style,
     /**
      * `onShowResults` will be called when list is going to
      * show/hide results.
