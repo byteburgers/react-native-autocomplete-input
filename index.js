@@ -127,7 +127,8 @@ class Autocomplete extends Component {
       containerStyle,
       inputContainerStyle,
       listContainerStyle,
-      onShowResults
+      onShowResults,
+      hideResults
     } = this.props;
     const showResults = dataSource.getRowCount() > 0;
 
@@ -139,9 +140,12 @@ class Autocomplete extends Component {
         <View style={[styles.inputContainer, inputContainerStyle]}>
           {this.renderTextInput()}
         </View>
-        <View style={listContainerStyle}>
-          {showResults && this.renderResultList()}
-        </View>
+        {
+          !hideResults &&
+          <View style={listContainerStyle}>
+            {showResults && this.renderResultList()}
+          </View>
+        }
       </View>
     );
   }
