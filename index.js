@@ -17,6 +17,10 @@ class Autocomplete extends Component {
      */
     containerStyle: View.propTypes.style,
     /**
+     * Set to `true` to hide the suggestion list.
+     */
+    hideResults: PropTypes.bool,
+    /**
      * Assign an array of data objects which should be
      * rendered in respect to the entered text.
      */
@@ -125,6 +129,7 @@ class Autocomplete extends Component {
     const { dataSource } = this.state;
     const {
       containerStyle,
+      hideResults,
       inputContainerStyle,
       listContainerStyle,
       onShowResults
@@ -139,9 +144,11 @@ class Autocomplete extends Component {
         <View style={[styles.inputContainer, inputContainerStyle]}>
           {this.renderTextInput()}
         </View>
-        <View style={listContainerStyle}>
-          {showResults && this.renderResultList()}
-        </View>
+        {!hideResults && (
+          <View style={listContainerStyle}>
+            {showResults && this.renderResultList()}
+          </View>
+        )}
       </View>
     );
   }
