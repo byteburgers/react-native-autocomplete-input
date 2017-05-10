@@ -105,7 +105,7 @@ class Autocomplete extends Component {
     return (
       <ListView
         dataSource={dataSource}
-        keyboardShouldPersistTaps={true}
+        keyboardShouldPersistTaps="always"
         renderRow={renderItem}
         renderSeparator={renderSeparator}
         style={[styles.list, listStyle]}
