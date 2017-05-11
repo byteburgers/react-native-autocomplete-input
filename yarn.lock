@@ -3349,9 +3349,9 @@ react-dom@^15.2.1, react-dom@^15.4.0:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
 
-react-native-mock@^0.2.3:
-  version "0.2.9"
-  resolved "https://registry.yarnpkg.com/react-native-mock/-/react-native-mock-0.2.9.tgz#e213c714a20f532ba0df03474205e5276683c298"
+react-native-mock@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/react-native-mock/-/react-native-mock-0.3.1.tgz#13d22433c5351a8a7fb8aedd7862b614d087851c"
   dependencies:
     cubic-bezier "^0.1.2"
     invariant "^2.2.1"
