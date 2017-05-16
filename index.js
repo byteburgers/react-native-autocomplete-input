@@ -67,7 +67,8 @@ class Autocomplete extends Component {
     defaultValue: '',
     renderItem: rowData => <Text>{rowData}</Text>,
     renderSeparator: null,
-    renderTextInput: props => <TextInput {...props} />
+    renderTextInput: props => <TextInput {...props} />,
+    keyboardShouldPersistTaps: 'always',
   };
 
   constructor(props) {
@@ -100,12 +101,12 @@ class Autocomplete extends Component {
 
   renderResultList() {
     const { dataSource } = this.state;
-    const { listStyle, renderItem, renderSeparator } = this.props;
+    const { listStyle, renderItem, renderSeparator, keyboardShouldPersistTaps } = this.props;
 
     return (
       <ListView
         dataSource={dataSource}
-        keyboardShouldPersistTaps="always"
+        keyboardShouldPersistTaps={keyboardShouldPersistTaps}
         renderRow={renderItem}
         renderSeparator={renderSeparator}
         style={[styles.list, listStyle]}
