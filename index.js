@@ -31,6 +31,10 @@ class Autocomplete extends Component {
      */
     inputContainerStyle: View.propTypes.style,
     /*
+     * Set `keyboardShouldPersistTaps` to true if RN version is <= 0.39.
+     */
+    keyboardShouldPersistTaps: View.propTypes.keyboardShouldPersistTaps,
+    /*
      * These styles will be applied to the container which surrounds
      * the result list.
      */
@@ -69,6 +73,7 @@ class Autocomplete extends Component {
   static defaultProps = {
     data: [],
     defaultValue: '',
+    keyboardShouldPersistTaps: 'always',
     onStartShouldSetResponderCapture: () => false,
     renderItem: rowData => <Text>{rowData}</Text>,
     renderSeparator: null,
@@ -106,13 +111,13 @@ class Autocomplete extends Component {
 
   renderResultList() {
     const { dataSource } = this.state;
-    const { listStyle, renderItem, renderSeparator } = this.props;
+    const { listStyle, renderItem, renderSeparator, keyboardShouldPersistTaps } = this.props;
 
     return (
       <ListView
         ref={(resultList) => { this.resultList = resultList; }}
         dataSource={dataSource}
-        keyboardShouldPersistTaps="always"
+        keyboardShouldPersistTaps={keyboardShouldPersistTaps}
         renderRow={renderItem}
         renderSeparator={renderSeparator}
         style={[styles.list, listStyle]}
