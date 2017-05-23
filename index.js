@@ -79,6 +79,7 @@ class Autocomplete extends Component {
 
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = { dataSource: ds.cloneWithRows(props.data) };
+    this.resultList = null;
   }
 
   componentWillReceiveProps({ data }) {
@@ -108,7 +109,7 @@ class Autocomplete extends Component {
 
     return (
       <ListView
-        ref={"resultList"}
+        ref={(resultList) => { this.resultList = resultList; }}
         dataSource={dataSource}
         keyboardShouldPersistTaps="always"
         renderRow={renderItem}
@@ -153,7 +154,9 @@ class Autocomplete extends Component {
         {!hideResults && (
           <View
             onStartShouldSetResponderCapture={() => {
-              intercept ? intercept(this.refs.resultList) : console.log('onStartShouldSetResponderCapture is not defined');
+              if (intercept) {
+                intercept(this.resultList);
+              }
             }}
             style={listContainerStyle}>
             {showResults && this.renderResultList()}
