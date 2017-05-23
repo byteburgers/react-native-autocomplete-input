@@ -17,14 +17,14 @@ class Autocomplete extends Component {
      */
     containerStyle: View.propTypes.style,
     /**
-     * Set to `true` to hide the suggestion list.
-     */
-    hideResults: PropTypes.bool,
-    /**
      * Assign an array of data objects which should be
      * rendered in respect to the entered text.
      */
     data: PropTypes.array,
+    /**
+     * Set to `true` to hide the suggestion list.
+     */
+    hideResults: PropTypes.bool,
     /*
      * These styles will be applied to the container which surrounds
      * the textInput component.
@@ -44,6 +44,10 @@ class Autocomplete extends Component {
      * show/hide results.
      */
     onShowResults: PropTypes.func,
+    /**
+     * method for intercepting swipe on ListView. Used for ScrollView support on Android
+     */
+    onStartShouldSetResponderCapture: PropTypes.func,
     /**
      * `renderItem` will be called to render the data objects
      * which will be displayed in the result view below the
@@ -65,6 +69,7 @@ class Autocomplete extends Component {
   static defaultProps = {
     data: [],
     defaultValue: '',
+    onStartShouldSetResponderCapture: () => false,
     renderItem: rowData => <Text>{rowData}</Text>,
     renderSeparator: null,
     renderTextInput: props => <TextInput {...props} />
@@ -75,6 +80,7 @@ class Autocomplete extends Component {
 
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = { dataSource: ds.cloneWithRows(props.data) };
+    this.resultList = null;
   }
 
   componentWillReceiveProps({ data }) {
@@ -104,6 +110,7 @@ class Autocomplete extends Component {
 
     return (
       <ListView
+        ref={(resultList) => { this.resultList = resultList; }}
         dataSource={dataSource}
         keyboardShouldPersistTaps="always"
         renderRow={renderItem}
@@ -132,7 +139,8 @@ class Autocomplete extends Component {
       hideResults,
       inputContainerStyle,
       listContainerStyle,
-      onShowResults
+      onShowResults,
+      onStartShouldSetResponderCapture
     } = this.props;
     const showResults = dataSource.getRowCount() > 0;
 
@@ -145,7 +153,10 @@ class Autocomplete extends Component {
           {this.renderTextInput()}
         </View>
         {!hideResults && (
-          <View style={listContainerStyle}>
+          <View
+            style={listContainerStyle}
+            onStartShouldSetResponderCapture={onStartShouldSetResponderCapture}
+          >
             {showResults && this.renderResultList()}
           </View>
         )}
