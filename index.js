@@ -59,7 +59,11 @@ class Autocomplete extends Component {
     /**
      * renders custom TextInput. All props passed to this function.
      */
-    renderTextInput: PropTypes.func
+    renderTextInput: PropTypes.func,
+    /**
+     * method for intercepting swipe on ListView. Used for ScrollView support on Android
+     */
+    onStartShouldSetResponderCapture: PropTypes.func
   };
 
   static defaultProps = {
@@ -75,6 +79,7 @@ class Autocomplete extends Component {
 
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = { dataSource: ds.cloneWithRows(props.data) };
+    this.resultList = null;
   }
 
   componentWillReceiveProps({ data }) {
@@ -104,6 +109,7 @@ class Autocomplete extends Component {
 
     return (
       <ListView
+        ref={(resultList) => { this.resultList = resultList; }}
         dataSource={dataSource}
         keyboardShouldPersistTaps="always"
         renderRow={renderItem}
@@ -132,7 +138,8 @@ class Autocomplete extends Component {
       hideResults,
       inputContainerStyle,
       listContainerStyle,
-      onShowResults
+      onShowResults,
+      onStartShouldSetResponderCapture: intercept
     } = this.props;
     const showResults = dataSource.getRowCount() > 0;
 
@@ -145,7 +152,14 @@ class Autocomplete extends Component {
           {this.renderTextInput()}
         </View>
         {!hideResults && (
-          <View style={listContainerStyle}>
+          <View
+            onStartShouldSetResponderCapture={() => {
+              if (intercept) {
+                intercept(this.resultList);
+              }
+            }}
+            style={listContainerStyle}
+          >
             {showResults && this.renderResultList()}
           </View>
         )}
