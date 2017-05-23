@@ -158,7 +158,8 @@ class Autocomplete extends Component {
                 intercept(this.resultList);
               }
             }}
-            style={listContainerStyle}>
+            style={listContainerStyle}
+           >
             {showResults && this.renderResultList()}
           </View>
         )}
