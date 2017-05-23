@@ -159,7 +159,7 @@ class Autocomplete extends Component {
               }
             }}
             style={listContainerStyle}
-           >
+          >
             {showResults && this.renderResultList()}
           </View>
         )}
