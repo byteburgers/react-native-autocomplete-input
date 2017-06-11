@@ -5,7 +5,8 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  View
+  View,
+  ViewPropTypes
 } from 'react-native';
 
 class Autocomplete extends Component {
@@ -15,7 +16,7 @@ class Autocomplete extends Component {
      * These styles will be applied to the container which
      * surrounds the autocomplete component.
      */
-    containerStyle: View.propTypes.style,
+    containerStyle: ViewPropTypes.style,
     /**
      * Assign an array of data objects which should be
      * rendered in respect to the entered text.
@@ -29,16 +30,16 @@ class Autocomplete extends Component {
      * These styles will be applied to the container which surrounds
      * the textInput component.
      */
-    inputContainerStyle: View.propTypes.style,
+    inputContainerStyle: ViewPropTypes.style,
     /*
      * Set `keyboardShouldPersistTaps` to true if RN version is <= 0.39.
      */
-    keyboardShouldPersistTaps: View.propTypes.keyboardShouldPersistTaps,
+    keyboardShouldPersistTaps: ViewPropTypes.keyboardShouldPersistTaps,
     /*
      * These styles will be applied to the container which surrounds
      * the result list.
      */
-    listContainerStyle: View.propTypes.style,
+    listContainerStyle: ViewPropTypes.style,
     /**
      * These style will be applied to the result list.
      */
