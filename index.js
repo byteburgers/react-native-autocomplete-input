@@ -33,7 +33,10 @@ class Autocomplete extends Component {
     /*
      * Set `keyboardShouldPersistTaps` to true if RN version is <= 0.39.
      */
-    keyboardShouldPersistTaps: View.propTypes.keyboardShouldPersistTaps,
+    keyboardShouldPersistTaps: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.boolean
+    ]),
     /*
      * These styles will be applied to the container which surrounds
      * the result list.
