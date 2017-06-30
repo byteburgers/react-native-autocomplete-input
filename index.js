@@ -42,6 +42,10 @@ class Autocomplete extends Component {
       PropTypes.bool
     ]),
     /*
+     * Render list above input. Defaults to false.
+     */
+    invertList: PropTypes.bool,
+    /*
      * These styles will be applied to the container which surrounds
      * the result list.
      */
@@ -80,6 +84,7 @@ class Autocomplete extends Component {
   static defaultProps = {
     data: [],
     defaultValue: '',
+    invertList: false,
     keyboardShouldPersistTaps: 'always',
     onStartShouldSetResponderCapture: () => false,
     renderItem: rowData => <Text>{rowData}</Text>,
@@ -89,7 +94,6 @@ class Autocomplete extends Component {
 
   constructor(props) {
     super(props);
-
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = { dataSource: ds.cloneWithRows(props.data) };
     this.resultList = null;
@@ -149,14 +153,25 @@ class Autocomplete extends Component {
       onEndEditing: e => onEndEditing && onEndEditing(e),
       ...this.props
     };
-
     return renderTextInput(props);
+  }
+
+  /**
+   * Renders list above input - will invert entire autocomplete container
+   */
+  renderContainerDirection() {
+    const containerStyle = [styles.container, this.props.containerStyle];
+
+    if (this.props.invertList) {
+      containerStyle.push({ flexDirection: 'column-reverse' });
+    }
+
+    return containerStyle;
   }
 
   render() {
     const { dataSource } = this.state;
     const {
-      containerStyle,
       hideResults,
       inputContainerStyle,
       listContainerStyle,
@@ -169,7 +184,7 @@ class Autocomplete extends Component {
     onShowResults && onShowResults(showResults);
 
     return (
-      <View style={[styles.container, containerStyle]}>
+      <View style={this.renderContainerDirection()}>
         <View style={[styles.inputContainer, inputContainerStyle]}>
           {this.renderTextInput()}
         </View>
