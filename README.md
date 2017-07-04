@@ -84,9 +84,10 @@ const styles = StyleSheet.create({
 | Prop | Type | Description |
 | :------------ |:---------------:| :-----|
 | containerStyle | style | These styles will be applied to the container which surrounds the autocomplete component. |
-| hideResults | bool | Set to `true` to hide the suggestion list.
+| hideResults | bool | Set to `true` to hide the suggestion list. |
 | data | array | An array with suggestion items to be rendered in `renderItem(item)`. Any array with length > 0 will open the suggestion list and any array with length < 1 will hide the list. |
 | inputContainerStyle | style | These styles will be applied to the container which surrounds the textInput component. |
+| invertList | bool | Set to `true` to render the list above input field. |
 | listContainerStyle | style | These styles will be applied to the container which surrounds the result list. |
 | listStyle | style | These style will be applied to the result list. |
 | onShowResult | function | `onShowResult` will be called when the autocomplete suggestions appear or disappear. |

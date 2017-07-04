@@ -5,7 +5,8 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  View
+  View,
+  ViewPropTypes
 } from 'react-native';
 
 class Autocomplete extends Component {
@@ -15,7 +16,7 @@ class Autocomplete extends Component {
      * These styles will be applied to the container which
      * surrounds the autocomplete component.
      */
-    containerStyle: View.propTypes.style,
+    containerStyle: ViewPropTypes.style,
     /**
      * Assign an array of data objects which should be
      * rendered in respect to the entered text.
@@ -29,16 +30,20 @@ class Autocomplete extends Component {
      * These styles will be applied to the container which surrounds
      * the textInput component.
      */
-    inputContainerStyle: View.propTypes.style,
+    inputContainerStyle: ViewPropTypes.style,
+    /*
+     * Render list above input. Defaults to false.
+     */
+    invertList: PropTypes.bool,
     /*
      * Set `keyboardShouldPersistTaps` to true if RN version is <= 0.39.
      */
-    keyboardShouldPersistTaps: ListView.propTypes.keyboardShouldPersistTaps,
+    keyboardShouldPersistTaps: PropTypes.string,
     /*
      * These styles will be applied to the container which surrounds
      * the result list.
      */
-    listContainerStyle: View.propTypes.style,
+    listContainerStyle: ViewPropTypes.style,
     /**
      * These style will be applied to the result list.
      */
@@ -73,6 +78,7 @@ class Autocomplete extends Component {
   static defaultProps = {
     data: [],
     defaultValue: '',
+    invertList: false,
     keyboardShouldPersistTaps: 'always',
     onStartShouldSetResponderCapture: () => false,
     renderItem: rowData => <Text>{rowData}</Text>,
@@ -82,7 +88,6 @@ class Autocomplete extends Component {
 
   constructor(props) {
     super(props);
-
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = { dataSource: ds.cloneWithRows(props.data) };
     this.resultList = null;
@@ -112,7 +117,6 @@ class Autocomplete extends Component {
   renderResultList() {
     const { dataSource } = this.state;
     const { listStyle, renderItem, renderSeparator, keyboardShouldPersistTaps } = this.props;
-
     return (
       <ListView
         ref={(resultList) => { this.resultList = resultList; }}
@@ -133,14 +137,23 @@ class Autocomplete extends Component {
       onEndEditing: e => onEndEditing && onEndEditing(e),
       ...this.props
     };
-
     return renderTextInput(props);
+  }
+
+  /**
+   * Renders list above input - will invert entire autocomplete container
+   */
+  renderContainerDirection() {
+    const containerStyle = [styles.container, this.props.containerStyle];
+    if (this.props.invertList) {
+      containerStyle.push({flexDirection: 'column-reverse'});
+    }
+    return containerStyle
   }
 
   render() {
     const { dataSource } = this.state;
     const {
-      containerStyle,
       hideResults,
       inputContainerStyle,
       listContainerStyle,
@@ -153,7 +166,7 @@ class Autocomplete extends Component {
     onShowResults && onShowResults(showResults);
 
     return (
-      <View style={[styles.container, containerStyle]}>
+      <View style={this.renderContainerDirection()}>
         <View style={[styles.inputContainer, inputContainerStyle]}>
           {this.renderTextInput()}
         </View>
