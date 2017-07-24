@@ -1,12 +1,16 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import {
   ListView,
   Platform,
   StyleSheet,
   Text,
   TextInput,
-  View
+  View,
+  ViewPropTypes
 } from 'react-native';
+import PropTypes from 'prop-types';
+
+let rnVersion = Number.parseFloat(require('react-native/package.json').version);
 
 class Autocomplete extends Component {
   static propTypes = {
@@ -15,7 +19,7 @@ class Autocomplete extends Component {
      * These styles will be applied to the container which
      * surrounds the autocomplete component.
      */
-    containerStyle: View.propTypes.style,
+    containerStyle: rnVersion >= 0.44 ? ViewPropTypes.style : View.propTypes.style,
     /**
      * Assign an array of data objects which should be
      * rendered in respect to the entered text.
@@ -29,16 +33,19 @@ class Autocomplete extends Component {
      * These styles will be applied to the container which surrounds
      * the textInput component.
      */
-    inputContainerStyle: View.propTypes.style,
+    inputContainerStyle: rnVersion >= 0.44 ? ViewPropTypes.style : View.propTypes.style,
     /*
      * Set `keyboardShouldPersistTaps` to true if RN version is <= 0.39.
      */
-    keyboardShouldPersistTaps: ListView.propTypes.keyboardShouldPersistTaps,
+    keyboardShouldPersistTaps: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.bool
+    ]),
     /*
      * These styles will be applied to the container which surrounds
      * the result list.
      */
-    listContainerStyle: View.propTypes.style,
+    listContainerStyle: rnVersion >= 0.44 ? ViewPropTypes.style : View.propTypes.style,
     /**
      * These style will be applied to the result list.
      */
