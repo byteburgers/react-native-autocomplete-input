@@ -44,6 +44,10 @@ class Autocomplete extends Component {
      */
     listStyle: ListView.propTypes.style,
     /**
+     * These style will be applied to the result view placeholder.
+     */
+    listPlaceholderContainerStyle: View.propTypes.style,
+    /**
      * `onShowResults` will be called when list is going to
      * show/hide results.
      */
@@ -67,7 +71,11 @@ class Autocomplete extends Component {
     /**
      * renders custom TextInput. All props passed to this function.
      */
-    renderTextInput: PropTypes.func
+    renderTextInput: PropTypes.func,
+    /**
+     * render custom view when there is nothing to show.
+     */
+    renderListPlaceholder: PropTypes.func,
   };
 
   static defaultProps = {
@@ -137,6 +145,19 @@ class Autocomplete extends Component {
     return renderTextInput(props);
   }
 
+  renderListPlaceholder() {
+    const {
+      listPlaceholderContainerStyle,
+      renderListPlaceholder,
+    } = this.props;
+
+    return (
+      <View style={listPlaceholderContainerStyle}>
+        {renderListPlaceholder()}
+      </View>
+    )
+  }
+
   render() {
     const { dataSource } = this.state;
     const {
@@ -157,6 +178,7 @@ class Autocomplete extends Component {
         <View style={[styles.inputContainer, inputContainerStyle]}>
           {this.renderTextInput()}
         </View>
+        {!showResults && this.renderListPlaceholder()}
         {!hideResults && (
           <View
             style={listContainerStyle}
