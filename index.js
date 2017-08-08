@@ -153,7 +153,7 @@ class Autocomplete extends Component {
 
     return (
       <View style={listPlaceholderContainerStyle}>
-        {renderListPlaceholder()}
+        {renderListPlaceholder && renderListPlaceholder()}
       </View>
     )
   }
