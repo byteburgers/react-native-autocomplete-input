@@ -75,7 +75,7 @@ class Autocomplete extends Component {
     /**
      * render custom view when there is nothing to show.
      */
-    renderListPlaceholder: PropTypes.func,
+    renderListPlaceholder: PropTypes.func
   };
 
   static defaultProps = {
@@ -148,14 +148,14 @@ class Autocomplete extends Component {
   renderListPlaceholder() {
     const {
       listPlaceholderContainerStyle,
-      renderListPlaceholder,
+      renderListPlaceholder
     } = this.props;
 
     return (
       <View style={listPlaceholderContainerStyle}>
         {renderListPlaceholder && renderListPlaceholder()}
       </View>
-    )
+    );
   }
 
   render() {
