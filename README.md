@@ -4,4 +4,4 @@ This fork applies critical fixes on top of Laurence Bortfeld's [react-native-aut
 
 ## Critical fixes
 
-- [#1](https://github.com/Instawork/react-native-autocomplete-input/pull/1): Migrate to prop-types package
+- [#55](https://github.com/l-urence/react-native-autocomplete-input/pull/55): Migrate to prop-types package
