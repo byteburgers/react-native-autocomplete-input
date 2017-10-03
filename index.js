@@ -7,10 +7,10 @@ import {
   Text,
   TextInput,
   View,
-  ViewPropTypes
+  ViewPropTypes as RNViewPropTypes
 } from 'react-native';
 
-let rnVersion = Number.parseFloat(require('react-native/package.json').version);
+const ViewPropTypes = RNViewPropTypes || View.propTypes;
 
 class Autocomplete extends Component {
   static propTypes = {
@@ -19,7 +19,7 @@ class Autocomplete extends Component {
      * These styles will be applied to the container which
      * surrounds the autocomplete component.
      */
-    containerStyle: rnVersion >= 0.44 ? ViewPropTypes.style : View.propTypes.style,
+    containerStyle: ViewPropTypes.style,
     /**
      * Assign an array of data objects which should be
      * rendered in respect to the entered text.
@@ -33,7 +33,7 @@ class Autocomplete extends Component {
      * These styles will be applied to the container which surrounds
      * the textInput component.
      */
-    inputContainerStyle: rnVersion >= 0.44 ? ViewPropTypes.style : View.propTypes.style,
+    inputContainerStyle: ViewPropTypes.style,
     /*
      * Set `keyboardShouldPersistTaps` to true if RN version is <= 0.39.
      */
@@ -45,7 +45,7 @@ class Autocomplete extends Component {
      * These styles will be applied to the container which surrounds
      * the result list.
      */
-    listContainerStyle: rnVersion >= 0.44 ? ViewPropTypes.style : View.propTypes.style,
+    listContainerStyle: ViewPropTypes.style,
     /**
      * These style will be applied to the result list.
      */
