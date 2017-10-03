@@ -6,7 +6,7 @@ import {
   Text,
   TextInput,
   View,
-  ViewPropTypes as RNViewPropTypes,
+  ViewPropTypes as RNViewPropTypes
 } from 'react-native';
 import PropTypes from 'prop-types';
 
