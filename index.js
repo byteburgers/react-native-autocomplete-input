@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  ListView,
+  FlatList,
+  ScrollView,
   Platform,
   StyleSheet,
   Text,
@@ -49,7 +50,7 @@ class Autocomplete extends Component {
     /**
      * These style will be applied to the result list.
      */
-    listStyle: ListView.propTypes.style,
+    listStyle: ScrollView.propTypes.style,
     /**
      * `onShowResults` will be called when list is going to
      * show/hide results.
@@ -65,6 +66,7 @@ class Autocomplete extends Component {
      * text input.
      */
     renderItem: PropTypes.func,
+    keyExtractor: PropTypes.func.isRequired,
     /**
      * `renderSeparator` will be called to render the list separators
      * which will be displayed between the list elements in the result view
@@ -74,7 +76,8 @@ class Autocomplete extends Component {
     /**
      * renders custom TextInput. All props passed to this function.
      */
-    renderTextInput: PropTypes.func
+    renderTextInput: PropTypes.func,
+    flatListProps: PropTypes.object,
   };
 
   static defaultProps = {
@@ -82,22 +85,26 @@ class Autocomplete extends Component {
     defaultValue: '',
     keyboardShouldPersistTaps: 'always',
     onStartShouldSetResponderCapture: () => false,
-    renderItem: rowData => <Text>{rowData}</Text>,
+    renderItem: ({ item }) => <Text>{item}</Text>,
     renderSeparator: null,
-    renderTextInput: props => <TextInput {...props} />
+    renderTextInput: props => <TextInput {...props} />,
+    flatListProps: {},
   };
 
   constructor(props) {
     super(props);
 
-    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-    this.state = { dataSource: ds.cloneWithRows(props.data) };
+    this.state = { data: props.data };
+
     this.resultList = null;
+    this.textInput = null;
+
+    this.onRefListView = this.onRefListView.bind(this);
+    this.onRefTextInput = this.onRefTextInput.bind(this);
   }
 
   componentWillReceiveProps({ data }) {
-    const dataSource = this.state.dataSource.cloneWithRows(data);
-    this.setState({ dataSource });
+    this.setState({ data });
   }
 
   /**
@@ -116,27 +123,44 @@ class Autocomplete extends Component {
     textInput && textInput.focus();
   }
 
+  onRefListView(resultList) {
+    this.resultList = resultList;
+  }
+
   renderResultList() {
-    const { dataSource } = this.state;
-    const { listStyle, renderItem, renderSeparator, keyboardShouldPersistTaps } = this.props;
+    const { data } = this.state;
+    const {
+      listStyle,
+      renderItem,
+      keyExtractor,
+      renderSeparator,
+      keyboardShouldPersistTaps,
+      flatListProps
+    } = this.props;
 
     return (
-      <ListView
-        ref={(resultList) => { this.resultList = resultList; }}
-        dataSource={dataSource}
+      <FlatList
+        ref={this.onRefListView}
+        data={data}
         keyboardShouldPersistTaps={keyboardShouldPersistTaps}
-        renderRow={renderItem}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
         renderSeparator={renderSeparator}
         style={[styles.list, listStyle]}
+        {...flatListProps}
       />
     );
+  }
+
+  onRefTextInput(textInput) {
+    this.textInput = textInput
   }
 
   renderTextInput() {
     const { onEndEditing, renderTextInput, style } = this.props;
     const props = {
       style: [styles.input, style],
-      ref: ref => (this.textInput = ref),
+      ref: this.onRefTextInput,
       onEndEditing: e => onEndEditing && onEndEditing(e),
       ...this.props
     };
@@ -145,7 +169,7 @@ class Autocomplete extends Component {
   }
 
   render() {
-    const { dataSource } = this.state;
+    const { data } = this.state;
     const {
       containerStyle,
       hideResults,
@@ -154,7 +178,7 @@ class Autocomplete extends Component {
       onShowResults,
       onStartShouldSetResponderCapture
     } = this.props;
-    const showResults = dataSource.getRowCount() > 0;
+    const showResults = data.length > 0;
 
     // Notify listener if the suggestion will be shown.
     onShowResults && onShowResults(showResults);
