@@ -77,7 +77,7 @@ class Autocomplete extends Component {
      * renders custom TextInput. All props passed to this function.
      */
     renderTextInput: PropTypes.func,
-    flatListProps: PropTypes.object,
+    flatListProps: PropTypes.object
   };
 
   static defaultProps = {
@@ -88,7 +88,7 @@ class Autocomplete extends Component {
     renderItem: ({ item }) => <Text>{item}</Text>,
     renderSeparator: null,
     renderTextInput: props => <TextInput {...props} />,
-    flatListProps: {},
+    flatListProps: {}
   };
 
   constructor(props) {
@@ -153,7 +153,7 @@ class Autocomplete extends Component {
   }
 
   onRefTextInput(textInput) {
-    this.textInput = textInput
+    this.textInput = textInput;
   }
 
   renderTextInput() {
