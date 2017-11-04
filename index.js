@@ -101,6 +101,7 @@ class Autocomplete extends Component {
 
     this.onRefListView = this.onRefListView.bind(this);
     this.onRefTextInput = this.onRefTextInput.bind(this);
+    this.onEndEditing = this.onEndEditing.bind(this);
   }
 
   componentWillReceiveProps({ data }) {
@@ -156,12 +157,16 @@ class Autocomplete extends Component {
     this.textInput = textInput;
   }
 
+  onEndEditing(e) {
+    this.props.onEndEditing && this.props.onEndEditing(e)
+  }
+
   renderTextInput() {
-    const { onEndEditing, renderTextInput, style } = this.props;
+    const { renderTextInput, style } = this.props;
     const props = {
       style: [styles.input, style],
       ref: this.onRefTextInput,
-      onEndEditing: e => onEndEditing && onEndEditing(e),
+      onEndEditing: this.onEndEditing,
       ...this.props
     };
 
