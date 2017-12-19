@@ -33,9 +33,9 @@ render() {
     data={data}
     defaultValue={query}
     onChangeText={text => this.setState({ query: text })}
-    renderItem={data => (
-      <TouchableOpacity onPress={() => this.setState({ query: data })}>
-        <Text>{data}</Text>
+    renderItem={item => (
+      <TouchableOpacity onPress={() => this.setState({ query: item })}>
+        <Text>{item}</Text>
       </TouchableOpacity>
     )}
   />);
