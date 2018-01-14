@@ -118,7 +118,8 @@ class Autocomplete extends Component {
 
   renderResultList() {
     const { dataSource } = this.state;
-    const { listStyle, renderItem, renderSeparator, keyboardShouldPersistTaps, onEndReached, onEndReachedThreshold } = this.props;
+    const { listStyle, renderItem, renderSeparator, keyboardShouldPersistTaps, onEndReached,
+             onEndReachedThreshold } = this.props;
 
     return (
       <ListView
