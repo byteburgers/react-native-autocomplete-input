@@ -1,6 +1,6 @@
 {
-  "name": "react-native-autocomplete-input",
-  "version": "3.5.0",
+  "name": "rn-autocomplete-input",
+  "version": "1.0.0",
   "description": "Pure javascript autocomplete input for react-native",
   "main": "index.js",
   "options": {
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/l-urence/react-native-autocomplete-input.git"
+    "url": "git+ssh://git@github.com:franj0/react-native-autocomplete-input.git"
   },
   "files": [
     "LICENSE",

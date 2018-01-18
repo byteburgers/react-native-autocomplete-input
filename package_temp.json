@@ -1,0 +1,11 @@
+{
+  "name": "rn-autocomplete-input",
+  "version": "1.0.0",
+  "description": "Forked from https://github.com/l-urence/react-native-autocomplete-input.git",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -144,6 +144,7 @@ class Autocomplete extends Component {
   renderTextInput() {
     const { onEndEditing, renderTextInput, style } = this.props;
     const props = {
+      underlineAndroidColor:"transparent",
       style: [styles.input, style],
       ref: ref => (this.textInput = ref),
       onEndEditing: e => onEndEditing && onEndEditing(e),
