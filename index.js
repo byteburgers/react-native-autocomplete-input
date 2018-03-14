@@ -119,8 +119,11 @@ class Autocomplete extends Component {
       onEndReached,
       onEndReachedThreshold,
       data,
+      itemHeight,
+      maxListHeight,
       keyExtractor
     } = this.props;
+    let height = itemHeight ? Math.min(itemHeight*data.length,maxListHeight) : maxListHeight;
     return (
       <FlatList
         ref={(resultList) => { this.resultList = resultList; }}
@@ -131,7 +134,7 @@ class Autocomplete extends Component {
         renderSeparator={renderSeparator}
         onEndReached={onEndReached}
         onEndReachedThreshold={onEndReachedThreshold}
-        style={[styles.list, listStyle]}
+        style={[styles.list,{height},listStyle]}
       />
     );
   }
@@ -219,9 +222,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     height: 40,
     paddingLeft: 3
-  },
-  list: {
-    height: 400,
   },
   ...Platform.select({
     android: { ...androidStyles },
