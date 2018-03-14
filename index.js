@@ -220,6 +220,9 @@ const styles = StyleSheet.create({
     height: 40,
     paddingLeft: 3
   },
+  list: {
+    height: 400,
+  },
   ...Platform.select({
     android: { ...androidStyles },
     ios: { ...iosStyles }
