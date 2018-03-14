@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  FlatList,
   View,
   ViewPropTypes as RNViewPropTypes
 } from 'react-native';
@@ -89,15 +90,7 @@ class Autocomplete extends Component {
 
   constructor(props) {
     super(props);
-
-    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-    this.state = { dataSource: ds.cloneWithRows(props.data) };
     this.resultList = null;
-  }
-
-  componentWillReceiveProps({ data }) {
-    const dataSource = this.state.dataSource.cloneWithRows(data);
-    this.setState({ dataSource });
   }
 
   /**
@@ -117,22 +110,24 @@ class Autocomplete extends Component {
   }
 
   renderResultList() {
-    const { dataSource } = this.state;
+    //const { dataSource } = this.state;
     const {
       listStyle,
       renderItem,
       renderSeparator,
       keyboardShouldPersistTaps,
       onEndReached,
-      onEndReachedThreshold
+      onEndReachedThreshold,
+      data,
+      keyExtractor
     } = this.props;
-
     return (
-      <ListView
+      <FlatList
         ref={(resultList) => { this.resultList = resultList; }}
-        dataSource={dataSource}
+        data={data}
         keyboardShouldPersistTaps={keyboardShouldPersistTaps}
-        renderRow={renderItem}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor || ((item,index) => index.toString())}
         renderSeparator={renderSeparator}
         onEndReached={onEndReached}
         onEndReachedThreshold={onEndReachedThreshold}
@@ -140,6 +135,7 @@ class Autocomplete extends Component {
       />
     );
   }
+
 
   renderTextInput() {
     const { onEndEditing, renderTextInput, style } = this.props;
@@ -154,7 +150,6 @@ class Autocomplete extends Component {
   }
 
   render() {
-    const { dataSource } = this.state;
     const {
       containerStyle,
       hideResults,
@@ -163,10 +158,9 @@ class Autocomplete extends Component {
       onShowResults,
       onStartShouldSetResponderCapture
     } = this.props;
-    const showResults = dataSource.getRowCount() > 0;
 
     // Notify listener if the suggestion will be shown.
-    onShowResults && onShowResults(showResults);
+    onShowResults && onShowResults(hideResults);
 
     return (
       <View style={[styles.container, containerStyle]}>
@@ -175,10 +169,10 @@ class Autocomplete extends Component {
         </View>
         {!hideResults && (
           <View
-            style={listContainerStyle}
+            style={[listContainerStyle]}
             onStartShouldSetResponderCapture={onStartShouldSetResponderCapture}
           >
-            {showResults && this.renderResultList()}
+            {!hideResults && this.renderResultList()}
           </View>
         )}
       </View>
@@ -186,22 +180,15 @@ class Autocomplete extends Component {
   }
 }
 
-const border = {
-  borderColor: '#b9b9b9',
-  borderRadius: 1,
-  borderWidth: 1
-};
 
 const androidStyles = {
   container: {
     flex: 1
   },
   inputContainer: {
-    ...border,
     marginBottom: 0
   },
   list: {
-    ...border,
     backgroundColor: 'white',
     borderTopWidth: 0,
     margin: 10,
@@ -213,21 +200,17 @@ const iosStyles = {
   container: {
     zIndex: 1
   },
-  inputContainer: {
-    ...border
-  },
   input: {
     backgroundColor: 'white',
     height: 40,
     paddingLeft: 3
   },
   list: {
-    ...border,
     backgroundColor: 'white',
     borderTopWidth: 0,
     left: 0,
     position: 'absolute',
-    right: 0
+    right: 0,
   }
 };
 
