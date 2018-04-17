@@ -199,6 +199,7 @@ const androidStyles = {
     left: 0,
     position: 'absolute',
     right: 0,
+    zindex: 1,
   }
 };
 
