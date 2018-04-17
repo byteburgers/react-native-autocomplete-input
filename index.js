@@ -120,10 +120,10 @@ class Autocomplete extends Component {
       onEndReachedThreshold,
       data,
       itemHeight,
-      maxListHeight,
+      maxItems,
       keyExtractor
     } = this.props;
-    let height = itemHeight ? Math.min(itemHeight*data.length,maxListHeight) : maxListHeight;
+    let height = Math.min(itemHeight*data.length,maxItems*itemHeight);
     return (
       <FlatList
         ref={(resultList) => { this.resultList = resultList; }}
