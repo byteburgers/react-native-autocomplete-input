@@ -195,7 +195,10 @@ const androidStyles = {
     backgroundColor: 'white',
     borderTopWidth: 0,
     margin: 10,
-    marginTop: 0
+    marginTop: 0,
+    left: 0,
+    position: 'absolute',
+    right: 0,
   }
 };
 
