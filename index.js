@@ -186,7 +186,8 @@ class Autocomplete extends Component {
 
 const androidStyles = {
   container: {
-    flex: 1
+    flex: 1,
+    zindex: 1,
   },
   inputContainer: {
     marginBottom: 0
@@ -199,7 +200,6 @@ const androidStyles = {
     left: 0,
     position: 'absolute',
     right: 0,
-    zindex: 1,
   }
 };
 
