@@ -76,7 +76,7 @@ class Autocomplete extends Component {
      */
     renderTextInput: PropTypes.func,
     /**
-    * pass custom function for dataSource comparison
+    * `rowHasChanged` will be used for data objects comparison for dataSource
     */
     rowHasChanged: PropTypes.func
   };
