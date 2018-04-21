@@ -78,7 +78,7 @@ class Autocomplete extends Component {
     /**
     * `rowHasChanged` will be used for data objects comparison for dataSource
     */
-    rowHasChanged: PropTypes.func
+    rowHasChanged: PropTypes.func,
   };
 
   static defaultProps = {
