@@ -78,7 +78,7 @@ class Autocomplete extends Component {
     /**
     * `rowHasChanged` will be used for data objects comparison for dataSource
     */
-    rowHasChanged: PropTypes.func,
+    rowHasChanged: PropTypes.func
   };
 
   static defaultProps = {
@@ -88,7 +88,7 @@ class Autocomplete extends Component {
     onStartShouldSetResponderCapture: () => false,
     renderItem: rowData => <Text>{rowData}</Text>,
     renderSeparator: null,
-    renderTextInput: props => <TextInput {...props} />
+    renderTextInput: props => <TextInput {...props} />,
     rowHasChanged: (r1, r2) => r1 !== r2
   };
 
