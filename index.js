@@ -74,7 +74,11 @@ class Autocomplete extends Component {
     /**
      * renders custom TextInput. All props passed to this function.
      */
-    renderTextInput: PropTypes.func
+    renderTextInput: PropTypes.func,
+    /**
+    * `rowHasChanged` will be used for data objects comparison for dataSource
+    */
+    rowHasChanged: PropTypes.func
   };
 
   static defaultProps = {
@@ -84,13 +88,14 @@ class Autocomplete extends Component {
     onStartShouldSetResponderCapture: () => false,
     renderItem: rowData => <Text>{rowData}</Text>,
     renderSeparator: null,
-    renderTextInput: props => <TextInput {...props} />
+    renderTextInput: props => <TextInput {...props} />,
+    rowHasChanged: (r1, r2) => r1 !== r2
   };
 
   constructor(props) {
     super(props);
 
-    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+    const ds = new ListView.DataSource({ rowHasChanged: props.rowHasChanged });
     this.state = { dataSource: ds.cloneWithRows(props.data) };
     this.resultList = null;
   }
