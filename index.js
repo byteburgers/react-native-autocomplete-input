@@ -199,7 +199,7 @@ class Autocomplete extends Component {
           style={listContainerStyle}
           onStartShouldSetResponderCapture={onStartShouldSetResponderCapture}
         >
-          {this.showList()}
+          {showResults && this.showList()}
         </View>
       </View>
     );
