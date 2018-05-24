@@ -8,7 +8,7 @@ import {
   TextInput,
   View,
   ViewPropTypes as RNViewPropTypes,
-  FlatList,
+  FlatList
 } from 'react-native';
 
 const ViewPropTypes = RNViewPropTypes || View.propTypes;
@@ -91,7 +91,7 @@ class Autocomplete extends Component {
     renderSeparator: null,
     renderTextInput: props => <TextInput {...props} />,
     rowHasChanged: (r1, r2) => r1 !== r2,
-    renderListComponent: props => <FlatList {...props}/>
+    renderListComponent: props => <FlatList {...props} />
   };
 
   constructor(props) {
@@ -123,6 +123,12 @@ class Autocomplete extends Component {
     textInput && textInput.focus();
   }
 
+  showList() {
+    if (this.props.hideResults) return null;
+    if (this.props.renderListComponent) return this.renderListComponent();
+    return this.renderResultList();
+  }
+
   renderResultList() {
     const { dataSource } = this.state;
     const {
@@ -149,11 +155,11 @@ class Autocomplete extends Component {
   }
 
   renderListComponent() {
-    const {renderListComponent, style, data} = this.props;
+    const { renderListComponent, style, data } = this.props;
     const props = {
       style: [styles.list, style],
-      data: data,
-      ...this.props,
+      data,
+      ...this.props
     };
 
     return renderListComponent(props);
@@ -171,26 +177,17 @@ class Autocomplete extends Component {
     return renderTextInput(props);
   }
 
-  showList(){
-    if(this.props.hideResults) return null;
-    if(this.props.renderListComponent) return this.renderListComponent();
-    return this.renderResultList();
-  }
-
   render() {
     const { dataSource } = this.state;
     const {
       containerStyle,
-      hideResults,
       inputContainerStyle,
       listContainerStyle,
       onShowResults,
       onStartShouldSetResponderCapture,
-      renderListComponent
     } = this.props;
     const showResults = dataSource.getRowCount() > 0;
     
-
     // Notify listener if the suggestion will be shown.
     onShowResults && onShowResults(showResults);
     return (
@@ -199,8 +196,8 @@ class Autocomplete extends Component {
           {this.renderTextInput()}
         </View>
         <View
-            style={listContainerStyle}
-            onStartShouldSetResponderCapture={onStartShouldSetResponderCapture}
+          style={listContainerStyle}
+          onStartShouldSetResponderCapture={onStartShouldSetResponderCapture}
           >
           {this.showList()}
         </View>
