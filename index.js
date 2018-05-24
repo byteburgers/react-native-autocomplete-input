@@ -7,7 +7,8 @@ import {
   Text,
   TextInput,
   View,
-  ViewPropTypes as RNViewPropTypes
+  ViewPropTypes as RNViewPropTypes,
+  FlatList,
 } from 'react-native';
 
 const ViewPropTypes = RNViewPropTypes || View.propTypes;
@@ -89,7 +90,8 @@ class Autocomplete extends Component {
     renderItem: rowData => <Text>{rowData}</Text>,
     renderSeparator: null,
     renderTextInput: props => <TextInput {...props} />,
-    rowHasChanged: (r1, r2) => r1 !== r2
+    rowHasChanged: (r1, r2) => r1 !== r2,
+    renderListComponent: props => <FlatList {...props}/>
   };
 
   constructor(props) {
@@ -146,6 +148,17 @@ class Autocomplete extends Component {
     );
   }
 
+  renderListComponent() {
+    const {renderListComponent, style, data} = this.props;
+    const props = {
+      style: [styles.list, style],
+      data: data,
+      ...this.props,
+    };
+
+    return renderListComponent(props);
+  }
+
   renderTextInput() {
     const { onEndEditing, renderTextInput, style } = this.props;
     const props = {
@@ -158,6 +171,12 @@ class Autocomplete extends Component {
     return renderTextInput(props);
   }
 
+  showList(){
+    if(this.props.hideResults) return null;
+    if(this.props.renderListComponent) return this.renderListComponent();
+    return this.renderResultList();
+  }
+
   render() {
     const { dataSource } = this.state;
     const {
@@ -166,26 +185,25 @@ class Autocomplete extends Component {
       inputContainerStyle,
       listContainerStyle,
       onShowResults,
-      onStartShouldSetResponderCapture
+      onStartShouldSetResponderCapture,
+      renderListComponent
     } = this.props;
     const showResults = dataSource.getRowCount() > 0;
+    
 
     // Notify listener if the suggestion will be shown.
     onShowResults && onShowResults(showResults);
-
     return (
       <View style={[styles.container, containerStyle]}>
         <View style={[styles.inputContainer, inputContainerStyle]}>
           {this.renderTextInput()}
         </View>
-        {!hideResults && (
-          <View
+        <View
             style={listContainerStyle}
             onStartShouldSetResponderCapture={onStartShouldSetResponderCapture}
           >
-            {showResults && this.renderResultList()}
-          </View>
-        )}
+          {this.showList()}
+        </View>
       </View>
     );
   }
