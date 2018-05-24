@@ -184,10 +184,10 @@ class Autocomplete extends Component {
       inputContainerStyle,
       listContainerStyle,
       onShowResults,
-      onStartShouldSetResponderCapture,
+      onStartShouldSetResponderCapture
     } = this.props;
     const showResults = dataSource.getRowCount() > 0;
-    
+
     // Notify listener if the suggestion will be shown.
     onShowResults && onShowResults(showResults);
     return (
@@ -198,7 +198,7 @@ class Autocomplete extends Component {
         <View
           style={listContainerStyle}
           onStartShouldSetResponderCapture={onStartShouldSetResponderCapture}
-          >
+        >
           {this.showList()}
         </View>
       </View>
