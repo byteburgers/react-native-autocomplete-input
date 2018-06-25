@@ -60,8 +60,8 @@ render() {
       </View>
       <View>
         <Text>Some content</Text>
-      <View />
-    <View>
+      </View>
+    </View>
   );
 }
 
