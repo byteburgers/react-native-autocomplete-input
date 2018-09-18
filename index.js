@@ -49,7 +49,7 @@ class Autocomplete extends Component {
     /**
      * These style will be applied to the result list.
      */
-    listStyle: ListView.propTypes.style,
+    listStyle: ViewPropTypes.style,
     /**
      * `onShowResults` will be called when list is going to
      * show/hide results.
