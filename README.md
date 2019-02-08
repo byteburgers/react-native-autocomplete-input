@@ -28,17 +28,19 @@ $ npm install --save mrlaessig/react-native-autocomplete-input
 
 render() {
   const { query } = this.state;
-  const data = this._filterData(query)
-  return (<Autocomplete
-    data={data}
-    defaultValue={query}
-    onChangeText={text => this.setState({ query: text })}
-    renderItem={item => (
-      <TouchableOpacity onPress={() => this.setState({ query: item })}>
-        <Text>{item}</Text>
-      </TouchableOpacity>
-    )}
-  />);
+  const data = this._filterData(query);
+  return (
+    <Autocomplete
+      data={data}
+      defaultValue={query}
+      onChangeText={text => this.setState({ query: text })}
+      renderItem={item => (
+        <TouchableOpacity onPress={() => this.setState({ query: item })}>
+          <Text>{item}</Text>
+        </TouchableOpacity>
+      )}
+    />
+  );
 }
 
 // ...
