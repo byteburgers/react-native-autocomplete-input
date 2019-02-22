@@ -208,8 +208,7 @@ const androidStyles = {
   list: {
     ...border,
     backgroundColor: 'white',
-    borderTopWidth: 0,
-    margin: 10,
+    borderTopWidth: 0,    
     marginTop: 0
   }
 };
