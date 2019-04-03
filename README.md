@@ -1,10 +1,10 @@
 # react-native-autocomplete-input
 [![npm version](https://badge.fury.io/js/react-native-autocomplete-input.svg)](https://badge.fury.io/js/react-native-autocomplete-input)
-[![Build Status](https://travis-ci.org/l-urence/react-native-autocomplete-input.svg)](https://travis-ci.org/l-urence/react-native-autocomplete-input)
+[![Build Status](https://travis-ci.org/mrlaessig/react-native-autocomplete-input.svg)](https://travis-ci.org/mrlaessig/react-native-autocomplete-input)
 
 A pure JS autocomplete component for React Native. Use this component in your own projects or use it as inspiration to build your own autocomplete.
 
-![Autocomplete Example](https://raw.githubusercontent.com/l-urence/react-native-autocomplete-input/master/example.gif)
+![Autocomplete Example](https://raw.githubusercontent.com/mrlaessig/react-native-autocomplete-input/master/example.gif)
 
 ## How to use react-native-autocomplete-input
 Tested with RN >= 0.26.2. If you want to use RN < 0.26 try to install react-native-autocomplete-input <= 0.0.5.
@@ -18,7 +18,7 @@ $ npm install --save react-native-autocomplete-input
 or install HEAD from github.com:
 
 ```shell
-$ npm install --save l-urence/react-native-autocomplete-input
+$ npm install --save mrlaessig/react-native-autocomplete-input
 ```
 
 ### Example
@@ -33,6 +33,7 @@ render() {
     data={data}
     defaultValue={query}
     onChangeText={text => this.setState({ query: text })}
+
     renderItem={({ item, i }) => (
       <TouchableOpacity onPress={() => this.setState({ query: item })}>
         <Text>{item}</Text>
@@ -44,10 +45,10 @@ render() {
 // ...
 ```
 
-A complete example for Android and iOS can be found [here](//github.com/l-urence/react-native-autocomplete-input/blob/master/example/).
+A complete example for Android and iOS can be found [here](//github.com/mrlaessig/react-native-autocomplete-input/blob/master/example/).
 
 ### Android
-Android does not support overflows ([#20](https://github.com/l-urence/react-native-autocomplete-input/issues/20)), for that reason it is necessary to wrap the autocomplete into a *absolute* positioned view on Android. This will  allow the suggestion list to overlap other views inside your component.
+Android does not support overflows ([#20](https://github.com/mrlaessig/react-native-autocomplete-input/issues/20)), for that reason it is necessary to wrap the autocomplete into a *absolute* positioned view on Android. This will  allow the suggestion list to overlap other views inside your component.
 
 ```javascript
 //...
@@ -60,8 +61,8 @@ render() {
       </View>
       <View>
         <Text>Some content</Text>
-      <View />
-    <View>
+      </View>
+    </View>
   );
 }
 
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
 | flatListProps | object | custom props to FlatList[](https://facebook.github.io/react-native/docs/flatlist.html)]. |
 
 ## Known issues
-* By default the autocomplete will not behave as expected inside a `<ScrollView />`. Set the scroll view's prop to fix this: `keyboardShouldPersistTaps={true}` for RN <= 0.39, or `keyboardShouldPersistTaps='always'` for RN >= 0.40. ([#5](https://github.com/l-urence/react-native-autocomplete-input/issues/5)).
+* By default the autocomplete will not behave as expected inside a `<ScrollView />`. Set the scroll view's prop to fix this: `keyboardShouldPersistTaps={true}` for RN <= 0.39, or `keyboardShouldPersistTaps='always'` for RN >= 0.40. ([#5](https://github.com/mrlaessig/react-native-autocomplete-input/issues/5)).
 * If you want to test with Jest add ```jest.mock('react-native-autocomplete-input', () => 'Autocomplete');``` to your test.
 
 ## Contribute

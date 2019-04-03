@@ -92,9 +92,7 @@ class Autocomplete extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = { data: props.data };
-
     this.resultList = null;
     this.textInput = null;
 
@@ -136,6 +134,8 @@ class Autocomplete extends Component {
       renderSeparator,
       keyboardShouldPersistTaps,
       flatListProps
+      onEndReached,
+      onEndReachedThreshold
     } = this.props;
 
     return (
@@ -146,6 +146,8 @@ class Autocomplete extends Component {
         renderItem={renderItem}
         keyExtractor={keyExtractor}
         renderSeparator={renderSeparator}
+        onEndReached={onEndReached}
+        onEndReachedThreshold={onEndReachedThreshold}
         style={[styles.list, listStyle]}
         {...flatListProps}
       />
