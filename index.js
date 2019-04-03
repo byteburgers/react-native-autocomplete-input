@@ -133,7 +133,7 @@ class Autocomplete extends Component {
       keyExtractor,
       renderSeparator,
       keyboardShouldPersistTaps,
-      flatListProps
+      flatListProps,
       onEndReached,
       onEndReachedThreshold
     } = this.props;
