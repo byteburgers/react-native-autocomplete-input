@@ -65,7 +65,7 @@ class Autocomplete extends Component {
      * text input.
      */
     renderItem: PropTypes.func,
-    keyExtractor: PropTypes.func.isRequired,
+    keyExtractor: PropTypes.func,
     /**
      * `renderSeparator` will be called to render the list separators
      * which will be displayed between the list elements in the result view
@@ -105,6 +105,18 @@ class Autocomplete extends Component {
     this.setState({ data });
   }
 
+  onEndEditing(e) {
+    this.props.onEndEditing && this.props.onEndEditing(e);
+  }
+
+  onRefListView(resultList) {
+    this.resultList = resultList;
+  }
+
+  onRefTextInput(textInput) {
+    this.textInput = textInput;
+  }
+
   /**
    * Proxy `blur()` to autocomplete's text input.
    */
@@ -119,10 +131,6 @@ class Autocomplete extends Component {
   focus() {
     const { textInput } = this;
     textInput && textInput.focus();
-  }
-
-  onRefListView(resultList) {
-    this.resultList = resultList;
   }
 
   renderResultList() {
@@ -152,14 +160,6 @@ class Autocomplete extends Component {
         {...flatListProps}
       />
     );
-  }
-
-  onRefTextInput(textInput) {
-    this.textInput = textInput;
-  }
-
-  onEndEditing(e) {
-    this.props.onEndEditing && this.props.onEndEditing(e)
   }
 
   renderTextInput() {
