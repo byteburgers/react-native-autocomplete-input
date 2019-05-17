@@ -133,6 +133,14 @@ class Autocomplete extends Component {
     textInput && textInput.focus();
   }
 
+  /**
+   * Proxy `isFocused()` to autocomplete's text input.
+   */
+  isFocused() {
+    const { textInput } = this;
+    return textInput && textInput.isFocused();
+  }
+
   renderResultList() {
     const { data } = this.state;
     const {
