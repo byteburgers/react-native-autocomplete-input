@@ -58,11 +58,11 @@ describe('<AutocompleteInput />', () => {
       />
     );
 
-    const customInput = autocomplete.find('Text')
+    const customInput = autocomplete.find('Text');
     expect(autocomplete.find('TextInput')).to.have.length(0);
     expect(customInput.children().get(0)).to.equal(text);
     expect(customInput.prop('foo')).to.equal('bar');
-  })
+  });
 
   it('should render default <TextInput /> if no custom one is supplied', () => {
     const autocomplete = shallow(<Autocomplete data={[]} foo="bar" />);
@@ -70,5 +70,5 @@ describe('<AutocompleteInput />', () => {
     const textInput = autocomplete.childAt(0).children().first();
     expect(textInput.name()).to.equal('TextInput');
     expect(textInput.prop('foo')).to.equal('bar');
-  })
+  });
 });

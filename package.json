@@ -1,6 +1,6 @@
 {
   "name": "react-native-autocomplete-input",
-  "version": "3.6.0",
+  "version": "4.0.0",
   "description": "Pure javascript autocomplete input for react-native",
   "main": "index.js",
   "options": {
@@ -34,9 +34,7 @@
     "url": "https://github.com/l-urence/react-native-autocomplete-input/issues"
   },
   "homepage": "https://github.com/l-urence/react-native-autocomplete-input#readme",
-  "dependencies": {
-    "prop-types": "^15.5.10"
-  },
+  "dependencies": {},
   "devDependencies": {
     "babel-eslint": "^7.1.1",
     "babel-preset-react-native": "^1.9.1",
@@ -52,9 +50,9 @@
     "estraverse-fb": "^1.3.1",
     "mocha": "^3.2.0",
     "nyc": "^10.1.2",
-    "react": "~15.4.0-rc.4",
-    "react-addons-test-utils": "^15.2.1",
-    "react-dom": "^15.2.1",
+    "react": "~15.5.4",
+    "react-addons-test-utils": "^15.6.2",
+    "react-dom": "~15.5.4",
     "react-native": "^0.40.0",
     "react-native-mock": "^0.3.1",
     "sinon": "^1.17.4"
