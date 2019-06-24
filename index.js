@@ -10,6 +10,8 @@ import {
   ViewPropTypes as RNViewPropTypes
 } from 'react-native';
 
+// Keep this line for downwards compatibility with RN.
+// eslint-disable-next-line react/forbid-foreign-prop-types
 const ViewPropTypes = RNViewPropTypes || View.propTypes;
 
 class Autocomplete extends Component {
@@ -81,7 +83,6 @@ class Autocomplete extends Component {
 
   static defaultProps = {
     data: [],
-    defaultValue: '',
     keyboardShouldPersistTaps: 'always',
     onStartShouldSetResponderCapture: () => false,
     renderItem: ({ item }) => <Text>{item}</Text>,
