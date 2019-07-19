@@ -1,74 +1,72 @@
-'use strict';
-
-import Autocomplete from '../';
 import React from 'react';
-import { describe, it } from 'mocha';
-import { expect } from 'chai';
-import { shallow } from 'enzyme';
-import {
-  ListView,
-  Text
-} from 'react-native';
+import renderer from 'react-test-renderer';
+import { FlatList, Text, TextInput } from 'react-native';
+import Autocomplete from '..';
 
 const ITEMS = [
-  "A New Hope",
-  "The Empire Strikes Back",
-  "Return of the Jedi",
-  "The Phantom Menace",
-  "Attack of the Clones",
-  "Revenge of the Sith"
+  'A New Hope',
+  'The Empire Strikes Back',
+  'Return of the Jedi',
+  'The Phantom Menace',
+  'Attack of the Clones',
+  'Revenge of the Sith'
 ];
 
-function overrideGetRowCount(autocomplete, data) {
-  const DataSourcePrototype = ListView.DataSource.prototype;
-  autocomplete.state().dataSource = Object.assign(DataSourcePrototype, {
-    getRowCount: () => data.length
-  });
-}
+const keyExtractor = (item, index) => `key-${index}`;
 
 describe('<AutocompleteInput />', () => {
   it('Should hide suggestion list on initial render', () => {
-    const autocomplete = shallow(<Autocomplete data={[]} />);
-    expect(autocomplete.length).to.equal(1);
-    expect(autocomplete.childAt(1).children()).to.have.length(0);
+    const r = renderer.create(<Autocomplete data={[]} />);
+    const autocomplete = r.root;
+
+    expect(autocomplete.findAllByType(FlatList)).toHaveLength(0);
   });
 
   it('Should show suggestion list when data gets updated with length > 0', () => {
-    const autocomplete = shallow(<Autocomplete data={[]} />);
-    overrideGetRowCount(autocomplete, ITEMS);
+    const testRenderer = renderer.create(<Autocomplete data={[]} />);
+    const autocomplete = testRenderer.root;
 
-    autocomplete.setProps({ data: ITEMS });
-    expect(autocomplete.childAt(1).children()).to.have.length(1);
+    expect(autocomplete.findAllByType(FlatList)).toHaveLength(0);
+
+    testRenderer.update(<Autocomplete data={ITEMS} keyExtractor={keyExtractor} />);
+
+    const list = autocomplete.findByType(FlatList);
+    expect(list.props.data).toEqual(ITEMS);
+
+    const texts = list.findAllByType(Text);
+    expect(texts).toHaveLength(ITEMS.length);
   });
 
   it('Should hide suggestion list when data gets updates with length < 1', () => {
-    const autocomplete = shallow(<Autocomplete data={[]} />);
-    overrideGetRowCount(autocomplete, []);
+    const props = { data: ITEMS, keyExtractor };
+    const testRenderer = renderer.create(<Autocomplete {...props} />);
+    const autocomplete = testRenderer.root;
 
-    autocomplete.setProps({ data: [] });
-    expect(autocomplete.childAt(1).children()).to.have.length(0);
+    expect(autocomplete.findAllByType(FlatList)).toHaveLength(1);
+    testRenderer.update(<Autocomplete data={[]} />);
+
+    expect(autocomplete.findAllByType(FlatList)).toHaveLength(0);
   });
 
   it('should render custom text input', () => {
     const text = 'Custom Text Input';
-    const autocomplete = shallow(
-      <Autocomplete data={[]} foo="bar" renderTextInput={props =>
-          <Text {...props}>{text}</Text>
-        }
-      />
+    const testRenderer = renderer.create(
+      <Autocomplete data={[]} foo="bar" renderTextInput={props => <Text {...props}>{text}</Text>} />
     );
 
-    const customInput = autocomplete.find('Text');
-    expect(autocomplete.find('TextInput')).to.have.length(0);
-    expect(customInput.children().get(0)).to.equal(text);
-    expect(customInput.prop('foo')).to.equal('bar');
+    const autocomplete = testRenderer.root;
+    const customTextInput = autocomplete.findByType(Text);
+
+    expect(customTextInput.children[0].children).toEqual([text]);
+    expect(autocomplete.findAllByType(TextInput)).toHaveLength(0);
   });
 
   it('should render default <TextInput /> if no custom one is supplied', () => {
-    const autocomplete = shallow(<Autocomplete data={[]} foo="bar" />);
+    const props = { foo: 'bar' };
+    const testRenderer = renderer.create(<Autocomplete data={[]} {...props} />);
+    const autocomplete = testRenderer.root;
+    const textInput = autocomplete.findByType(TextInput);
 
-    const textInput = autocomplete.childAt(0).children().first();
-    expect(textInput.name()).to.equal('TextInput');
-    expect(textInput.prop('foo')).to.equal('bar');
+    expect(textInput.props).toEqual(expect.objectContaining(props));
   });
 });
