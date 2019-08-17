@@ -93,17 +93,12 @@ class Autocomplete extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { data: props.data };
     this.resultList = null;
     this.textInput = null;
 
     this.onRefListView = this.onRefListView.bind(this);
     this.onRefTextInput = this.onRefTextInput.bind(this);
     this.onEndEditing = this.onEndEditing.bind(this);
-  }
-
-  componentWillReceiveProps({ data }) {
-    this.setState({ data });
   }
 
   onEndEditing(e) {
@@ -143,8 +138,8 @@ class Autocomplete extends Component {
   }
 
   renderResultList() {
-    const { data } = this.state;
     const {
+      data,
       listStyle,
       renderItem,
       keyExtractor,
@@ -184,8 +179,8 @@ class Autocomplete extends Component {
   }
 
   render() {
-    const { data } = this.state;
     const {
+      data,
       containerStyle,
       hideResults,
       inputContainerStyle,
