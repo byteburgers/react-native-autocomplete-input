@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
 | inputContainerStyle | style | These styles will be applied to the container which surrounds the textInput component. |
 | listContainerStyle | style | These styles will be applied to the container which surrounds the result list. |
 | listStyle | style | These style will be applied to the result list. |
-| onShowResult | function | `onShowResult` will be called when the autocomplete suggestions appear or disappear. |
+| onShowResults | function | `onShowResults` will be called when the autocomplete suggestions appear or disappear. |
 | onStartShouldSetResponderCapture | function | `onStartShouldSetResponderCapture` will be passed to the result list view container ([onStartShouldSetResponderCapture](https://facebook.github.io/react-native/docs/gesture-responder-system.html#capture-shouldset-handlers)). |
 | renderItem | function | `renderItem` will be called to render the data objects which will be displayed in the result view below the text input. |
 | keyExtractor | function | `keyExtractor(item, i)` will be called to get key for each item. It's up to you which string to return as a key. |
