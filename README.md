@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
 | inputContainerStyle | style | These styles will be applied to the container which surrounds the textInput component. |
 | listContainerStyle | style | These styles will be applied to the container which surrounds the result list. |
 | listStyle | style | These style will be applied to the result list. |
-| onShowResult | function | `onShowResult` will be called when the autocomplete suggestions appear or disappear. |
+| onShowResults | function | `onShowResults` will be called when the autocomplete suggestions appear or disappear. |
 | onStartShouldSetResponderCapture | function | `onStartShouldSetResponderCapture` will be passed to the result list view container ([onStartShouldSetResponderCapture](https://facebook.github.io/react-native/docs/gesture-responder-system.html#capture-shouldset-handlers)). |
 | renderTextInput | function | render custom TextInput. All props passed to this function. |
 | flatListProps | object | custom props to [FlatList](https://facebook.github.io/react-native/docs/flatlist.html). |
