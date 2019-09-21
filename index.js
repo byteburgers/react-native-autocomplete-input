@@ -160,6 +160,7 @@ class Autocomplete extends Component {
         renderSeparator={renderSeparator}
         onEndReached={onEndReached}
         onEndReachedThreshold={onEndReachedThreshold}
+        nestedScrollEnabled={true}
         style={[styles.list, listStyle]}
         {...flatListProps}
       />
