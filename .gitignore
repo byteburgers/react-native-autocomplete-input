@@ -37,3 +37,6 @@ coverage
 
 package-lock.json
 yarn-error.log
+
+.history/
+.vscode/
