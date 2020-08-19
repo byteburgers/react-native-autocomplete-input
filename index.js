@@ -17,6 +17,10 @@ const ViewPropTypes = RNViewPropTypes || View.propTypes;
 class Autocomplete extends Component {
   static propTypes = {
     ...TextInput.propTypes,
+        /**
+     * These styles will be applied to the textInput.
+     */
+    textInputStyle: ViewPropTypes.style,
     /**
      * These styles will be applied to the container which
      * surrounds the autocomplete component.
@@ -167,9 +171,9 @@ class Autocomplete extends Component {
   }
 
   renderTextInput() {
-    const { renderTextInput, style } = this.props;
+    const { renderTextInput, style, textInputStyle } = this.props;
     const props = {
-      style: [styles.input, style],
+      style: [textInputStyle, style],
       ref: this.onRefTextInput,
       onEndEditing: this.onEndEditing,
       ...this.props
