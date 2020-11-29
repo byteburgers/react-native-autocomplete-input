@@ -7,7 +7,7 @@ import {
   View
 } from 'react-native';
 
-const API = 'https://swapi.co/api';
+const API = 'https://swapi.dev/api';
 const ROMAN = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
 
 class AutocompleteExample extends Component {
@@ -64,10 +64,10 @@ class AutocompleteExample extends Component {
           defaultValue={query}
           onChangeText={text => this.setState({ query: text })}
           placeholder="Enter Star Wars film title"
-          renderItem={({ title, release_date }) => (
+          renderItem={({ title }) => (
             <TouchableOpacity onPress={() => this.setState({ query: title })}>
               <Text style={styles.itemText}>
-                {title} ({release_date.split('-')[0]})
+                {title}
               </Text>
             </TouchableOpacity>
           )}
