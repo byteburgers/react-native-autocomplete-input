@@ -64,10 +64,10 @@ class AutocompleteExample extends Component {
           defaultValue={query}
           onChangeText={text => this.setState({ query: text })}
           placeholder="Enter Star Wars film title"
-          renderItem={({ title, release_date }) => (
-            <TouchableOpacity onPress={() => this.setState({ query: title })}>
+          renderItem={({item}) => (
+            <TouchableOpacity onPress={() => this.setState({ query: item.title })}>
               <Text style={styles.itemText}>
-                {title} ({release_date.split('-')[0]})
+                {item.title} ({item.release_date.split('-')[0]})
               </Text>
             </TouchableOpacity>
           )}
