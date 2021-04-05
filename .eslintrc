@@ -1,9 +1,7 @@
 {
-  "extends": "airbnb",
-
+  "extends": ["airbnb", "prettier"],
 
   "parser": "babel-eslint",
-
 
   "parserOptions": {
     "ecmaFeatures": {
@@ -11,23 +9,16 @@
     }
   },
 
-
   "globals": {
     "fetch": false
   },
 
-
   "env": {
     "es6": true,
-    "jest/globals": true,
+    "jest/globals": true
   },
 
-
-  "plugins": [
-    "jest",
-    "react",
-  ],
-
+  "plugins": ["jest", "react"],
 
   "settings": {
     "import/resolver": {
@@ -37,10 +28,8 @@
     }
   },
 
-
   "rules": {
     "camelcase": "off",
-    "comma-dangle": ["error", "never"],
     "no-underscore-dangle": "off",
     "no-unused-expressions": "off",
     "no-use-before-define": "off",
@@ -58,6 +47,7 @@
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "react/require-default-props": "off",
-    "react/jsx-one-expression-per-line": "off"
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-props-no-spreading": "off"
   }
 }

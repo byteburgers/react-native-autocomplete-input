@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run lint && npm run testonly",
-    "lint": "eslint ./*.js ./example/*.js ./__tests__/*.js",
+    "lint": "eslint ./*.js ./__tests__/*.js",
     "testonly": "jest"
   },
   "repository": {
@@ -27,26 +27,24 @@
   "author": "Laurence Bortfeld",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/l-urence/react-native-autocomplete-input/issues"
+    "url": "https://github.com/mrlaessig/react-native-autocomplete-input/issues"
   },
-  "homepage": "https://github.com/l-urence/react-native-autocomplete-input#readme",
+  "homepage": "https://github.com/mrlaessig/react-native-autocomplete-input#readme",
   "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/runtime": "^7.5.5",
-    "@react-native-community/eslint-config": "^0.0.5",
-    "babel-jest": "^24.8.0",
-    "eslint": "^6.3.0",
-    "eslint-config-airbnb": "^17.1.1",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jest": "^22.13.6",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "jest": "^24.8.0",
-    "metro-react-native-babel-preset": "^0.55.0",
-    "react": "^16.8.6",
-    "react-native": "^0.60.4",
-    "react-test-renderer": "16.8.6"
-  },
-  "jest": {
-    "preset": "react-native"
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^26.6.3",
+    "eslint": "^7.23.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.3.2",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.23.1",
+    "jest": "^26.6.3",
+    "metro-react-native-babel-preset": "^0.65.2",
+    "prettier": "^2.2.1",
+    "react": "^17.0.2",
+    "react-native": "^0.64.0",
+    "react-test-renderer": "^17.0.2"
   }
 }

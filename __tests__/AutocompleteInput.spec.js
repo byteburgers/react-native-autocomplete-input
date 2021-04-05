@@ -9,12 +9,11 @@ const ITEMS = [
   'Return of the Jedi',
   'The Phantom Menace',
   'Attack of the Clones',
-  'Revenge of the Sith'
+  'Revenge of the Sith',
 ];
 
-const keyExtractor = (item, index) => `key-${index}`;
-
 describe('<AutocompleteInput />', () => {
+  FlatList.propTypes = {};
   it('Should hide suggestion list on initial render', () => {
     const r = renderer.create(<Autocomplete data={[]} />);
     const autocomplete = r.root;
@@ -28,7 +27,7 @@ describe('<AutocompleteInput />', () => {
 
     expect(autocomplete.findAllByType(FlatList)).toHaveLength(0);
 
-    testRenderer.update(<Autocomplete data={ITEMS} keyExtractor={keyExtractor} />);
+    testRenderer.update(<Autocomplete data={ITEMS} />);
 
     const list = autocomplete.findByType(FlatList);
     expect(list.props.data).toEqual(ITEMS);
@@ -38,7 +37,7 @@ describe('<AutocompleteInput />', () => {
   });
 
   it('Should hide suggestion list when data gets updates with length < 1', () => {
-    const props = { data: ITEMS, keyExtractor };
+    const props = { data: ITEMS };
     const testRenderer = renderer.create(<Autocomplete {...props} />);
     const autocomplete = testRenderer.root;
 
@@ -51,7 +50,11 @@ describe('<AutocompleteInput />', () => {
   it('should render custom text input', () => {
     const text = 'Custom Text Input';
     const testRenderer = renderer.create(
-      <Autocomplete data={[]} foo="bar" renderTextInput={props => <Text {...props}>{text}</Text>} />
+      <Autocomplete
+        data={[]}
+        foo="bar"
+        renderTextInput={(props) => <Text {...props}>{text}</Text>}
+      />
     );
 
     const autocomplete = testRenderer.root;
