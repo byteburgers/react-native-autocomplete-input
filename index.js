@@ -48,6 +48,72 @@ export const AutocompleteInput = (props) => {
   );
 };
 
+AutocompleteInput.propTypes = {
+  ...TextInput.propTypes,
+  /**
+   * These styles will be applied to the container which
+   * surrounds the autocomplete component.
+   */
+  containerStyle: ViewPropTypes ? ViewPropTypes.style : PropTypes.object,
+  /**
+   * Assign an array of data objects which should be
+   * rendered in respect to the entered text.
+   */
+  data: PropTypes.array,
+  /**
+   * Props which can be applied to result `FlatList`.
+   */
+  flatListProps: FlatList.propTypes || PropTypes.object,
+  /**
+   * Set to `true` to hide the suggestion list.
+   */
+  hideResults: PropTypes.bool,
+  /**
+   * These styles will be applied to the container which surrounds
+   * the textInput component.
+   */
+  inputContainerStyle: ViewPropTypes ? ViewPropTypes.style : PropTypes.object,
+  /**
+   * Set `keyboardShouldPersistTaps` to true if RN version is <= 0.39.
+   */
+  keyboardShouldPersistTaps: PropTypes.oneOfType([
+    PropTypes.oneOf(['always', 'handeld', 'never']),
+    PropTypes.bool,
+  ]),
+  /**
+   * These style will be applied to the result list.
+   */
+  listContainerStyle: ViewPropTypes ? ViewPropTypes.style : PropTypes.object,
+  /**
+   * `onShowResults` will be called when list is going to
+   * show/hide results.
+   */
+  onShowResults: PropTypes.func,
+  /**
+   * `onShowResults` will be called when list is going to
+   * show/hide results.
+   */
+  onStartShouldSetResponderCapture: PropTypes.func,
+  /**
+   * renders custom TextInput. All props passed to this function.
+   */
+  renderTextInput: PropTypes.func,
+};
+
+const defaultKeyExtractor = (_, index) => `key-${index}`;
+const defaultRenderItem = ({ item }) => <Text>{item}</Text>;
+
+AutocompleteInput.defaultProps = {
+  data: [],
+  keyboardShouldPersistTaps: 'always',
+  onStartShouldSetResponderCapture: () => false,
+  renderTextInput: (props) => <TextInput {...props} />,
+  flatListProps: {
+    renderItem: defaultRenderItem,
+    keyExtractor: defaultKeyExtractor,
+  },
+};
+
 const border = {
   borderColor: '#b9b9b9',
   borderRadius: 1,
@@ -105,33 +171,5 @@ const styles = StyleSheet.create({
     default: iosStyles,
   }),
 });
-
-AutocompleteInput.propTypes = {
-  ...TextInput.propTypes,
-  containerStyle: ViewPropTypes ? ViewPropTypes.style : PropTypes.object,
-  data: PropTypes.array,
-  flatListProps: FlatList.propTypes || PropTypes.object,
-  hideResults: PropTypes.bool,
-  inputContainerStyle: ViewPropTypes ? ViewPropTypes.style : PropTypes.object,
-  keyboardShouldPersistTaps: PropTypes.oneOf(['always', 'handeld', 'never']),
-  listContainerStyle: ViewPropTypes ? ViewPropTypes.style : PropTypes.object,
-  onShowResults: PropTypes.func,
-  onStartShouldSetResponderCapture: PropTypes.func,
-  renderTextInput: PropTypes.func,
-};
-
-const defaultKeyExtractor = (_, index) => `key-${index}`;
-const defaultRenderItem = ({ item }) => <Text>{item}</Text>;
-
-AutocompleteInput.defaultProps = {
-  data: [],
-  keyboardShouldPersistTaps: 'always',
-  onStartShouldSetResponderCapture: () => false,
-  renderTextInput: (props) => <TextInput {...props} />,
-  flatListProps: {
-    renderItem: defaultRenderItem,
-    keyExtractor: defaultKeyExtractor,
-  },
-};
 
 export default AutocompleteInput;
