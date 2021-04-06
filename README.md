@@ -28,17 +28,16 @@ $ npm install --save mrlaessig/react-native-autocomplete-input
 
 render() {
   const { query } = this.state;
-  const data = this._filterData(query);
+  const data = filterData(query);
   return (
     <Autocomplete
       data={data}
-      defaultValue={query}
-      onChangeText={text => this.setState({ query: text })}
-      renderItem={({ item, i }) => (
-        <TouchableOpacity onPress={() => this.setState({ query: item })}>
-          <Text>{item}</Text>
-        </TouchableOpacity>
-      )}
+      value={query}
+      onChangeText={(text) => this.setState({ query: text })}
+      flatListProps={{
+        keyExtractor: (_, idx) => idx,
+        renderItem: ({ item }) => <Text>{item}</Text>,
+      }}
     />
   );
 }
@@ -93,9 +92,6 @@ const styles = StyleSheet.create({
 | listStyle | style | These style will be applied to the result list. |
 | onShowResult | function | `onShowResult` will be called when the autocomplete suggestions appear or disappear. |
 | onStartShouldSetResponderCapture | function | `onStartShouldSetResponderCapture` will be passed to the result list view container ([onStartShouldSetResponderCapture](https://facebook.github.io/react-native/docs/gesture-responder-system.html#capture-shouldset-handlers)). |
-| renderItem | function | `renderItem` will be called to render the data objects which will be displayed in the result view below the text input. |
-| keyExtractor | function | `keyExtractor(item, i)` will be called to get key for each item. It's up to you which string to return as a key. |
-| renderSeparator | function | `renderSeparator` will be called to render the list separators which will be displayed between the list elements in the result view below the text input. |
 | renderTextInput | function | render custom TextInput. All props passed to this function. |
 | flatListProps | object | custom props to FlatList[](https://facebook.github.io/react-native/docs/flatlist.html)]. |
 
