@@ -1,5 +1,5 @@
 {
-  "extends": ["airbnb", "prettier"],
+  "extends": ["airbnb", "plugin:prettier/recommended"],
 
   "parser": "babel-eslint",
 
@@ -18,7 +18,7 @@
     "jest/globals": true
   },
 
-  "plugins": ["jest", "react"],
+  "plugins": ["jest", "react", "prettier"],
 
   "settings": {
     "import/resolver": {
@@ -29,6 +29,7 @@
   },
 
   "rules": {
+    "prettier/prettier": "error",
     "camelcase": "off",
     "no-underscore-dangle": "off",
     "no-unused-expressions": "off",
