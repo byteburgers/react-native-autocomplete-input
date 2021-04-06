@@ -6,7 +6,7 @@ A pure JS autocomplete component for React Native. Use this component in your ow
 
 ![Autocomplete Example](https://raw.githubusercontent.com/mrlaessig/react-native-autocomplete-input/master/example.gif)
 
-Play around with the [Example Snack](https://byteburgers.com/autocomplete){:target="_blank" rel="noopener"}
+Play around with the [Example Snack](https://byteburgers.com/autocomplete)
 
 ## How to use react-native-autocomplete-input
 Tested with RN >= 0.26.2. If you want to use RN < 0.26 try to install react-native-autocomplete-input <= 0.0.5.
