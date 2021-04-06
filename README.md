@@ -1,6 +1,6 @@
 # react-native-autocomplete-input
 [![npm version](https://badge.fury.io/js/react-native-autocomplete-input.svg)](https://badge.fury.io/js/react-native-autocomplete-input)
-[![Build Status](https://travis-ci.org/mrlaessig/react-native-autocomplete-input.svg)](https://travis-ci.org/mrlaessig/react-native-autocomplete-input)
+[![Test](https://github.com/mrlaessig/react-native-autocomplete-input/actions/workflows/test.yml/badge.svg)](https://github.com/mrlaessig/react-native-autocomplete-input/actions/workflows/test.yml)
 
 A pure JS autocomplete component for React Native. Use this component in your own projects or use it as inspiration to build your own autocomplete.
 
