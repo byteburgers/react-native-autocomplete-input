@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
 | onShowResult | function | `onShowResult` will be called when the autocomplete suggestions appear or disappear. |
 | onStartShouldSetResponderCapture | function | `onStartShouldSetResponderCapture` will be passed to the result list view container ([onStartShouldSetResponderCapture](https://facebook.github.io/react-native/docs/gesture-responder-system.html#capture-shouldset-handlers)). |
 | renderTextInput | function | render custom TextInput. All props passed to this function. |
-| flatListProps | object | custom props to FlatList[](https://facebook.github.io/react-native/docs/flatlist.html)]. |
+| flatListProps | object | custom props to [FlatList](https://facebook.github.io/react-native/docs/flatlist.html). |
 
 ## Known issues
 * By default the autocomplete will not behave as expected inside a `<ScrollView />`. Set the scroll view's prop to fix this: `keyboardShouldPersistTaps={true}` for RN <= 0.39, or `keyboardShouldPersistTaps='always'` for RN >= 0.40. ([#5](https://github.com/mrlaessig/react-native-autocomplete-input/issues/5)).
