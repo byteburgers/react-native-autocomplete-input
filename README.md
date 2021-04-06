@@ -47,8 +47,6 @@ render() {
 // ...
 ```
 
-A complete example for Android and iOS can be found [here](//github.com/mrlaessig/react-native-autocomplete-input/blob/master/example/).
-
 ### Android
 Android does not support overflows ([#20](https://github.com/mrlaessig/react-native-autocomplete-input/issues/20)), for that reason it is necessary to wrap the autocomplete into a *absolute* positioned view on Android. This will  allow the suggestion list to overlap other views inside your component.
 
