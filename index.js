@@ -8,7 +8,7 @@ export const AutocompleteInput = (props) => {
   function renderResultList(data, listProps) {
     const { style, ...flatListProps } = listProps;
 
-    return <FlatList data={data} style={[styles.list, style]} {...flatListProps} />;
+    return <View><FlatList data={data} style={[styles.list, style]} {...flatListProps} /></View>;
   }
 
   function renderTextInput() {
