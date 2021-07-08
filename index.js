@@ -77,7 +77,7 @@ AutocompleteInput.propTypes = {
    * Set `keyboardShouldPersistTaps` to true if RN version is <= 0.39.
    */
   keyboardShouldPersistTaps: PropTypes.oneOfType([
-    PropTypes.oneOf(['always', 'handeld', 'never']),
+    PropTypes.oneOf(['always', 'handled', 'never']),
     PropTypes.bool,
   ]),
   /**
