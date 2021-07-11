@@ -74,13 +74,6 @@ AutocompleteInput.propTypes = {
    */
   inputContainerStyle: ViewPropTypes ? ViewPropTypes.style : PropTypes.object,
   /**
-   * Set `keyboardShouldPersistTaps` to true if RN version is <= 0.39.
-   */
-  keyboardShouldPersistTaps: PropTypes.oneOfType([
-    PropTypes.oneOf(['always', 'handled', 'never']),
-    PropTypes.bool,
-  ]),
-  /**
    * These style will be applied to the result list.
    */
   listContainerStyle: ViewPropTypes ? ViewPropTypes.style : PropTypes.object,
@@ -105,7 +98,6 @@ const defaultRenderItem = ({ item }) => <Text>{item}</Text>;
 
 AutocompleteInput.defaultProps = {
   data: [],
-  keyboardShouldPersistTaps: 'always',
   onStartShouldSetResponderCapture: () => false,
   renderTextInput: (props) => <TextInput {...props} />,
   flatListProps: {
