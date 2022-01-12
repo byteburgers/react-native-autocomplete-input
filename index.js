@@ -13,7 +13,7 @@ export const AutocompleteInput = (props) => {
     const { renderTextInput: renderFunction, style, refTextInput } = props;
     const textProps = {
       style: [styles.input, style],
-      refTextInput,
+      ref: refTextInput,
       ...props,
     };
 
