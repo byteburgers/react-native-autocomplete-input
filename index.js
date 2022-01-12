@@ -10,9 +10,10 @@ export const AutocompleteInput = (props) => {
   }
 
   function renderTextInput() {
-    const { renderTextInput: renderFunction, style } = props;
+    const { renderTextInput: renderFunction, style, refTextInput } = props;
     const textProps = {
       style: [styles.input, style],
+      refTextInput,
       ...props,
     };
 
