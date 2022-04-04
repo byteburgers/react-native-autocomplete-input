@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 import { FlatList, Platform, StyleSheet, Text, TextInput, View, ViewPropTypes } from 'react-native';
 
 export const AutocompleteInput = (props) => {
-  function renderResultList(data, listProps) {
-    const { style, ...flatListProps } = listProps;
+  function renderResultList() {
+    const { renderResultList: renderFunction, style } = props;
+    const listProps = {
+      style: [styles.list, style],
+      ...props,
+    };
 
-    return <FlatList data={data} style={[styles.list, style]} {...flatListProps} />;
+    return renderFunction(listProps);
   }
 
   function renderTextInput() {
@@ -27,6 +31,8 @@ export const AutocompleteInput = (props) => {
     listContainerStyle,
     onShowResults,
     onStartShouldSetResponderCapture,
+    // flatListProps is only used in defaultResultList
+    // eslint-disable-next-line no-unused-vars
     flatListProps,
   } = props;
 
@@ -35,13 +41,13 @@ export const AutocompleteInput = (props) => {
   onShowResults && onShowResults(showResults);
   return (
     <View style={[styles.container, containerStyle]}>
-      <View style={[styles.inputContainer, inputContainerStyle]}>{renderTextInput(props)}</View>
+      <View style={[styles.inputContainer, inputContainerStyle]}>{renderTextInput()}</View>
       {!hideResults && (
         <View
           style={listContainerStyle}
           onStartShouldSetResponderCapture={onStartShouldSetResponderCapture}
         >
-          {showResults && renderResultList(data, flatListProps)}
+          {showResults && renderResultList()}
         </View>
       )}
     </View>
@@ -91,15 +97,22 @@ AutocompleteInput.propTypes = {
    * renders custom TextInput. All props passed to this function.
    */
   renderTextInput: PropTypes.func,
+  /**
+   * renders custom result list. Can be used to replace FlatList.
+   * All props passed to this function.
+   */
+  renderResultList: PropTypes.func,
 };
 
 const defaultKeyExtractor = (_, index) => `key-${index}`;
 const defaultRenderItem = ({ item }) => <Text>{item}</Text>;
+const defaultResultList = ({ data, flatListProps }) => <FlatList data={data} {...flatListProps} />;
 
 AutocompleteInput.defaultProps = {
   data: [],
   onStartShouldSetResponderCapture: () => false,
   renderTextInput: (props) => <TextInput {...props} />,
+  renderResultList: defaultResultList,
   flatListProps: {
     renderItem: defaultRenderItem,
     keyExtractor: defaultKeyExtractor,
