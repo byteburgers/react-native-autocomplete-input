@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { FlatList, Text, TextInput } from 'react-native';
+import { FlatList, Text, TextInput, View } from 'react-native';
 import Autocomplete from '..';
 
 const ITEMS = [
@@ -94,5 +94,28 @@ describe('<AutocompleteInput />', () => {
 
     expect(list.props).toEqual(expect.objectContaining(flatListProps));
     expect(list.props).toEqual(expect.not.objectContaining(otherProps));
+  });
+
+  it('should render a custom result list', () => {
+    const testRenderer = renderer.create(
+      <Autocomplete
+        data={ITEMS}
+        renderResultList={({ data, style }) => (
+          <View style={style}>
+            {data.map((item, index) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <Text key={index}>{item}</Text>
+            ))}
+          </View>
+        )}
+      />
+    );
+
+    const autocomplete = testRenderer.root;
+
+    expect(autocomplete.findAllByType(FlatList)).toHaveLength(0);
+
+    const texts = autocomplete.findAllByType(Text);
+    expect(texts).toHaveLength(ITEMS.length);
   });
 });
