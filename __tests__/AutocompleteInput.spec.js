@@ -72,4 +72,25 @@ describe('<AutocompleteInput />', () => {
 
     expect(textInput.props).toEqual(expect.objectContaining(props));
   });
+
+  it('should render default <FlatList /> if no custom one is supplied', () => {
+    const testRenderer = renderer.create(<Autocomplete data={ITEMS} />);
+    const autocomplete = testRenderer.root;
+    const list = autocomplete.findByType(FlatList);
+
+    expect(list.props.data).toEqual(ITEMS);
+  });
+
+  it('should only pass props in flatListProps to <FlatList />', () => {
+    const flatListProps = { foo: 'bar' };
+    const otherProps = { baz: 'qux' };
+    const testRenderer = renderer.create(
+      <Autocomplete data={ITEMS} flatListProps={flatListProps} {...otherProps} />
+    );
+    const autocomplete = testRenderer.root;
+    const list = autocomplete.findByType(FlatList);
+
+    expect(list.props).toEqual(expect.objectContaining(flatListProps));
+    expect(list.props).toEqual(expect.not.objectContaining(otherProps));
+  });
 });
