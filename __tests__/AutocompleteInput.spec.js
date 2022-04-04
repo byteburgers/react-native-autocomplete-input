@@ -82,7 +82,9 @@ describe('<AutocompleteInput />', () => {
   });
 
   it('should only pass props in flatListProps to <FlatList />', () => {
-    const flatListProps = { foo: 'bar' };
+    // Using keyExtractor isn't important for the test, but prevents a warning
+    const keyExtractor = (_, index) => `key-${index}`;
+    const flatListProps = { foo: 'bar', keyExtractor };
     const otherProps = { baz: 'qux' };
     const testRenderer = renderer.create(
       <Autocomplete data={ITEMS} flatListProps={flatListProps} {...otherProps} />
