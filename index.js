@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FlatList, Platform, StyleSheet, Text, TextInput, View, ViewPropTypes } from 'react-native';
+import { FlatList, Platform, StyleSheet, Text, TextInput, View } from 'react-native';
+import { ViewPropTypes } from 'deprecated-react-native-prop-types';
 
 export const AutocompleteInput = (props) => {
   function renderResultList() {
