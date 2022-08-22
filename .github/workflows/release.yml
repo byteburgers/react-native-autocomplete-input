@@ -1,7 +1,6 @@
 name: release
 
 on:
-  on:
   workflow_run:
     workflows: ['test']
     branches: [master]
