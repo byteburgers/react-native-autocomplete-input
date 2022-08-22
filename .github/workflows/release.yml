@@ -1,13 +1,16 @@
 name: release
 
 on:
-  push:
-    branches: [ master ]
+  on:
+  workflow_run:
+    workflows: ['test']
+    branches: [master]
+    types: 
+      - completed
 
 jobs:
   release:
     runs-on: ubuntu-latest
-    needs: test
     steps:
     - uses: actions/checkout@v2
     - name: Setup Node
