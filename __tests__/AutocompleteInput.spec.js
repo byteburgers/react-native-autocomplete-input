@@ -119,4 +119,11 @@ describe('<AutocompleteInput />', () => {
     const texts = autocomplete.findAllByType(Text);
     expect(texts).toHaveLength(ITEMS.length);
   });
+
+  it('should forward the ref to the input', () => {
+    const inputRef = React.createRef();
+
+    renderer.create(<Autocomplete data={ITEMS} ref={inputRef} />);
+    expect(inputRef.current._reactInternals.elementType.displayName).toBe('TextInput');
+  });
 });
