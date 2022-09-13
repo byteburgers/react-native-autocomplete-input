@@ -12,4 +12,10 @@ markComment: >
 # Comment to post when closing a stale issue. Set to `false` to disable
 closeComment: >
   Closing this issue after a prolonged period of inactivity. If this issue is still present in the latest release, please feel free to create a new issue with up-to-date information.
-only: issues
+# Optionally, specify configuration settings that are specific to just 'issues' or 'pulls':
+pulls:
+  daysUntilStale: 30
+  markComment: >
+    This pull request has been automatically marked as stale because it has not had
+    recent activity. It will be closed if no further activity occurs. Thank you
+    for your contributions.
