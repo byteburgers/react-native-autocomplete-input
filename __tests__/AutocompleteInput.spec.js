@@ -14,14 +14,15 @@ const ITEMS = [
 
 describe('<AutocompleteInput />', () => {
   FlatList.propTypes = {};
-  it('Should hide suggestion list on initial render', () => {
+
+  it('should hide suggestion list on initial render', () => {
     const r = renderer.create(<Autocomplete data={[]} />);
     const autocomplete = r.root;
 
     expect(autocomplete.findAllByType(FlatList)).toHaveLength(0);
   });
 
-  it('Should show suggestion list when data gets updated with length > 0', () => {
+  it('should show suggestion list when data gets updated with length > 0', () => {
     const testRenderer = renderer.create(<Autocomplete data={[]} />);
     const autocomplete = testRenderer.root;
 
@@ -36,7 +37,7 @@ describe('<AutocompleteInput />', () => {
     expect(texts).toHaveLength(ITEMS.length);
   });
 
-  it('Should hide suggestion list when data gets updates with length < 1', () => {
+  it('should hide suggestion list when data gets updates with length < 1', () => {
     const props = { data: ITEMS };
     const testRenderer = renderer.create(<Autocomplete {...props} />);
     const autocomplete = testRenderer.root;
@@ -117,5 +118,12 @@ describe('<AutocompleteInput />', () => {
 
     const texts = autocomplete.findAllByType(Text);
     expect(texts).toHaveLength(ITEMS.length);
+  });
+
+  it('should forward the ref to the input', () => {
+    const inputRef = React.createRef();
+
+    renderer.create(<Autocomplete data={ITEMS} ref={inputRef} />);
+    expect(inputRef.current._reactInternals.elementType.displayName).toBe('TextInput');
   });
 });

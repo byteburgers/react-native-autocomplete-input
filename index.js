@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FlatList, Platform, StyleSheet, Text, TextInput, View } from 'react-native';
 import { ViewPropTypes } from 'deprecated-react-native-prop-types';
 
-export const AutocompleteInput = (props) => {
+export const AutocompleteInput = React.forwardRef((props, ref) => {
   function renderResultList() {
     const { renderResultList: renderFunction, style } = props;
     const listProps = {
@@ -18,6 +18,7 @@ export const AutocompleteInput = (props) => {
     const { renderTextInput: renderFunction, style } = props;
     const textProps = {
       style: [styles.input, style],
+      ref,
       ...props,
     };
 
@@ -53,7 +54,7 @@ export const AutocompleteInput = (props) => {
       )}
     </View>
   );
-};
+});
 
 AutocompleteInput.propTypes = {
   ...TextInput.propTypes,
