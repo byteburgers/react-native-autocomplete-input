@@ -2,11 +2,12 @@
   "name": "react-native-autocomplete-input",
   "version": "5.1.0",
   "description": "Pure javascript autocomplete input for react-native",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "npm run lint && npm run testonly",
-    "lint": "eslint ./*.js ./__tests__/*.js",
-    "testonly": "jest"
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
+    "testonly": "jest",
+    "build": "rm -rf dist && tsc"
   },
   "repository": {
     "type": "git",
@@ -15,7 +16,8 @@
   "files": [
     "LICENSE",
     "README.md",
-    "index.js"
+    "dist/index.js",
+    "dist/index.d.ts"
   ],
   "keywords": [
     "react-native",
@@ -31,8 +33,15 @@
   },
   "homepage": "https://github.com/mrlaessig/react-native-autocomplete-input#readme",
   "devDependencies": {
+    "@tsconfig/react-native": "^2.0.3",
+    "@types/jest": "^29.4.0",
+    "@types/react": "^18.0.28",
+    "@types/react-native": "^0.71.3",
+    "@types/react-test-renderer": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.52.0",
+    "@typescript-eslint/parser": "^5.52.0",
     "babel-eslint": "^10.1.0",
-    "babel-jest": "^26.6.3",
+    "babel-jest": "^29.4.3",
     "eslint": "^7.23.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.1.0",
@@ -41,12 +50,13 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.23.1",
-    "jest": "^26.6.3",
-    "metro-react-native-babel-preset": "^0.65.2",
+    "jest": "^29.4.3",
+    "metro-react-native-babel-preset": "^0.75.0",
     "prettier": "^2.2.1",
-    "react": "^17.0.2",
-    "react-native": "^0.68.2",
-    "react-test-renderer": "^17.0.2"
+    "react": "^18.2.0",
+    "react-native": "^0.71.3",
+    "react-test-renderer": "^18.2.0",
+    "typescript": "^4.9.5"
   },
   "dependencies": {
     "deprecated-react-native-prop-types": "^2.3.0"

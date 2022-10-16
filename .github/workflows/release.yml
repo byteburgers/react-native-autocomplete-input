@@ -15,7 +15,11 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@v1
       with:
-        node-version: '14.x'
+        node-version: '18.x'
+    - name: Install
+      run: yarn
+    - name: Build
+      run: yarn build
     - name: Release
       run: npx semantic-release
       env:

@@ -1,7 +1,8 @@
 {
-  "extends": ["airbnb", "plugin:prettier/recommended"],
-
-  "parser": "babel-eslint",
+  "extends": ["airbnb", "plugin:prettier/recommended", "eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "jest", "react", "prettier"],
+  "root": true,
 
   "parserOptions": {
     "ecmaFeatures": {
@@ -9,24 +10,15 @@
     }
   },
 
-  "globals": {
-    "fetch": false
-  },
-
-  "env": {
-    "es6": true,
-    "jest/globals": true
-  },
-
-  "plugins": ["jest", "react", "prettier"],
-
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [".js", ".ios.js", ".android.js"]
+        "extensions": [".js", ".tsx"]
       }
     }
   },
+
+  "ignorePatterns": ["dist"],
 
   "rules": {
     "prettier/prettier": "error",
@@ -44,7 +36,7 @@
     "react/destructuring-assignment": "off",
     "react/forbid-prop-types": "off",
     "react/jsx-boolean-value": ["error", "always"],
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx"] }],
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "react/require-default-props": "off",
