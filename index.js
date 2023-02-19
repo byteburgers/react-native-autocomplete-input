@@ -5,10 +5,11 @@ import { ViewPropTypes } from 'deprecated-react-native-prop-types';
 
 export const AutocompleteInput = React.forwardRef((props, ref) => {
   function renderResultList() {
-    const { renderResultList: renderFunction, style } = props;
+    const { renderResultList: renderFunction, data, flatListProps } = props;
     const listProps = {
-      style: [styles.list, style],
-      ...props,
+      data,
+      ...flatListProps,
+      style: [styles.list, flatListProps.style],
     };
 
     return renderFunction(listProps);
@@ -17,9 +18,9 @@ export const AutocompleteInput = React.forwardRef((props, ref) => {
   function renderTextInput() {
     const { renderTextInput: renderFunction, style } = props;
     const textProps = {
+      ...props,
       style: [styles.input, style],
       ref,
-      ...props,
     };
 
     return renderFunction(textProps);
@@ -33,9 +34,6 @@ export const AutocompleteInput = React.forwardRef((props, ref) => {
     listContainerStyle,
     onShowResults,
     onStartShouldSetResponderCapture,
-    // flatListProps is only used in defaultResultList
-    // eslint-disable-next-line no-unused-vars
-    flatListProps,
   } = props;
 
   const showResults = data.length > 0;
@@ -108,7 +106,7 @@ AutocompleteInput.propTypes = {
 
 const defaultKeyExtractor = (_, index) => `key-${index}`;
 const defaultRenderItem = ({ item }) => <Text>{item}</Text>;
-const defaultResultList = ({ data, flatListProps }) => <FlatList data={data} {...flatListProps} />;
+const defaultResultList = (props) => <FlatList {...props} />;
 
 AutocompleteInput.defaultProps = {
   data: [],
