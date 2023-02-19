@@ -38,19 +38,14 @@ function DefaultTextInput(props: TextInputProps): React.ReactNode {
 function AutocompleteInputComponent<T, Ref>(props: Props<T>, ref: React.ForwardedRef<Ref>) {
   const defaultRenderItems: ListRenderItem<T> = ({ item }) => <Text>{String(item)}</Text>;
   function renderResultList(): React.ReactNode {
-    const {
-      data,
-      renderResultList: renderFunction = DefaultResultList,
-      style,
-      flatListProps,
-    } = props;
+    const { data, renderResultList: renderFunction = DefaultResultList, flatListProps } = props;
 
     const listProps: FlatListProps<T> = {
-      style: [styles.list, style],
       data,
       renderItem: defaultRenderItems,
       keyExtractor: defaultKeyExtractor,
       ...flatListProps,
+      style: [styles.list, flatListProps.style],
     };
 
     return renderFunction(listProps);
@@ -59,9 +54,9 @@ function AutocompleteInputComponent<T, Ref>(props: Props<T>, ref: React.Forwarde
   function renderTextInput() {
     const { renderTextInput: renderFunction = DefaultTextInput, style } = props;
     const textProps = {
+      ...props,
       style: [styles.input, style],
       ref,
-      ...props,
     };
 
     return renderFunction?.(textProps);
