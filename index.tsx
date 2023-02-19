@@ -4,14 +4,13 @@ import type {
   TextInputProps,
   StyleProp,
   ViewStyle,
-  ViewProps,
   ListRenderItem,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { FlatList, Platform, StyleSheet, Text, TextInput, View } from 'react-native';
 import { ViewPropTypes } from 'deprecated-react-native-prop-types';
 
-type Props<T> = ViewProps & {
+type Props<T> = TextInputProps & {
   containerStyle?: StyleProp<ViewStyle>;
   hideResults?: boolean;
   inputContainerStyle?: StyleProp<ViewStyle>;
