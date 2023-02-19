@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { FlatList, Text, TextInput, View } from 'react-native';
-import Autocomplete from '..';
+import Autocomplete from '../index';
 
 const ITEMS = [
   'A New Hope',
@@ -10,11 +10,9 @@ const ITEMS = [
   'The Phantom Menace',
   'Attack of the Clones',
   'Revenge of the Sith',
-];
+] as const;
 
 describe('<AutocompleteInput />', () => {
-  FlatList.propTypes = {};
-
   it('should hide suggestion list on initial render', () => {
     const r = renderer.create(<Autocomplete data={[]} />);
     const autocomplete = r.root;
@@ -61,7 +59,7 @@ describe('<AutocompleteInput />', () => {
     const autocomplete = testRenderer.root;
     const customTextInput = autocomplete.findByType(Text);
 
-    expect(customTextInput.children[0].children).toEqual([text]);
+    expect((customTextInput.children[0] as { children: unknown[] }).children).toEqual([text]);
     expect(autocomplete.findAllByType(TextInput)).toHaveLength(0);
   });
 
@@ -103,7 +101,7 @@ describe('<AutocompleteInput />', () => {
         data={ITEMS}
         renderResultList={({ data, style }) => (
           <View style={style}>
-            {data.map((item, index) => (
+            {data?.map((item, index) => (
               // eslint-disable-next-line react/no-array-index-key
               <Text key={index}>{item}</Text>
             ))}
@@ -113,7 +111,6 @@ describe('<AutocompleteInput />', () => {
     );
 
     const autocomplete = testRenderer.root;
-
     expect(autocomplete.findAllByType(FlatList)).toHaveLength(0);
 
     const texts = autocomplete.findAllByType(Text);
@@ -124,6 +121,7 @@ describe('<AutocompleteInput />', () => {
     const inputRef = React.createRef();
 
     renderer.create(<Autocomplete data={ITEMS} ref={inputRef} />);
-    expect(inputRef.current._reactInternals.elementType.displayName).toBe('TextInput');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect((inputRef.current as any)._reactInternals.elementType.displayName).toBe('TextInput');
   });
 });

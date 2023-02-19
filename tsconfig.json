@@ -1,0 +1,18 @@
+{
+  "extends": "@tsconfig/react-native/tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "outDir": "dist",
+    "noEmit": false,
+    "target": "es2022",
+    "module": "esnext",
+    "esModuleInterop": true,
+  },
+  "files": ["index.tsx", "types.d.ts"],
+  "exclude": [
+    "__tests__",
+    "node_modules",
+    "babel.config.js",
+    "jest.config.js"
+  ]
+}
