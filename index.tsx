@@ -27,8 +27,8 @@ function defaultKeyExtractor(_: unknown, index: number) {
   return `key-${index}`;
 }
 
-function DefaultResultList<T>({ data, ...flatListProps }: FlatListProps<T>): React.ReactNode {
-  return <FlatList data={data} {...flatListProps} />;
+function DefaultResultList<T>(props: FlatListProps<T>): React.ReactNode {
+  return <FlatList {...props} />;
 }
 
 function DefaultTextInput(props: TextInputProps): React.ReactNode {
@@ -45,7 +45,7 @@ function AutocompleteInputComponent<T, Ref>(props: Props<T>, ref: React.Forwarde
       renderItem: defaultRenderItems,
       keyExtractor: defaultKeyExtractor,
       ...flatListProps,
-      style: [styles.list, flatListProps.style],
+      style: [styles.list, flatListProps?.style],
     };
 
     return renderFunction(listProps);
