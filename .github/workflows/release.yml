@@ -17,9 +17,9 @@ jobs:
       with:
         node-version: '18.x'
     - name: Install
-      run: yarn
+      run: npm ci 
     - name: Build
-      run: yarn build
+      run: npm run build
     - name: Release
       run: npx semantic-release
       env:

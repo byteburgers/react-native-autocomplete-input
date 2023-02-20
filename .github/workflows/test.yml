@@ -16,8 +16,8 @@ jobs:
       with:
         node-version: '18.x'
     - name: Install dependencies
-      run: yarn install
+      run: npm ci
     - name: Test
-      run: yarn test
+      run: npm test
     - name: Build
-      run: yarn build
+      run: npm run build
