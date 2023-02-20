@@ -14,13 +14,11 @@ Tested with RN >= 0.26.2. If you want to use RN < 0.26 try to install react-nati
 ### Installation
 
 ```shell
+# Install with npm
 $ npm install --save react-native-autocomplete-input
-```
 
-or install HEAD from github.com:
-
-```shell
-$ npm install --save mrlaessig/react-native-autocomplete-input
+# Install with yarn
+$ yarn add react-native-autocomplete-input
 ```
 
 ### Example
