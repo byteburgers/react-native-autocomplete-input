@@ -3,6 +3,7 @@
   "version": "5.1.0",
   "description": "Pure javascript autocomplete input for react-native",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "npm run lint && npm run testonly",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
