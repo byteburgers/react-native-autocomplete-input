@@ -16,30 +16,33 @@ type Props<T> = TextInputProps & {
   inputContainerStyle?: StyleProp<ViewStyle>;
   listContainerStyle?: StyleProp<ViewStyle>;
   onShowResults?: (showResults: boolean) => void;
-  renderResultList?: (props: FlatListProps<T>) => React.ReactNode;
-  renderTextInput?: (props: TextInputProps) => React.ReactNode;
+  renderResultList?: (props: FlatListProps<T>) => React.ReactElement;
+  renderTextInput?: (props: TextInputProps) => React.ReactElement;
   flatListProps?: Partial<Omit<FlatListProps<T>, 'data'>>;
   data: readonly T[];
 };
 
-function defaultKeyExtractor(_: unknown, index: number) {
+function defaultKeyExtractor(_: unknown, index: number): string {
   return `key-${index}`;
 }
 
-function DefaultResultList<T>(props: FlatListProps<T>): React.ReactNode {
+function DefaultResultList<T>(props: FlatListProps<T>): React.ReactElement {
   return <FlatList {...props} />;
 }
 
-function DefaultTextInput(props: TextInputProps): React.ReactNode {
+function DefaultTextInput(props: TextInputProps): React.ReactElement {
   return <TextInput {...props} />;
 }
 
-function AutocompleteInputComponent<T, Ref>(props: Props<T>, ref: React.ForwardedRef<Ref>) {
-  const defaultRenderItems: ListRenderItem<T> = ({ item }) => <Text>{String(item)}</Text>;
-  function renderResultList(): React.ReactNode {
+function AutocompleteInputComponent<Item, Ref>(
+  props: Props<Item>,
+  ref: React.ForwardedRef<Ref>
+): React.ReactElement {
+  const defaultRenderItems: ListRenderItem<Item> = ({ item }) => <Text>{String(item)}</Text>;
+  function renderResultList(): React.ReactElement {
     const { data, renderResultList: renderFunction = DefaultResultList, flatListProps } = props;
 
-    const listProps: FlatListProps<T> = {
+    const listProps: FlatListProps<Item> = {
       data,
       renderItem: defaultRenderItems,
       keyExtractor: defaultKeyExtractor,
@@ -73,6 +76,7 @@ function AutocompleteInputComponent<T, Ref>(props: Props<T>, ref: React.Forwarde
 
   const showResults = data.length > 0;
   onShowResults && onShowResults(showResults);
+
   return (
     <View style={[styles.container, containerStyle]}>
       <View style={[styles.inputContainer, inputContainerStyle]}>{renderTextInput()}</View>
