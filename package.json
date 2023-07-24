@@ -27,7 +27,6 @@
     "Android",
     "autocomplete"
   ],
-  "author": "Laurence Bortfeld",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/mrlaessig/react-native-autocomplete-input/issues"
