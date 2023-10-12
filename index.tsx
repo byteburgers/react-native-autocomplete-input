@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import { FlatList, Platform, StyleSheet, Text, TextInput, View } from 'react-native';
 import { ViewPropTypes } from 'deprecated-react-native-prop-types';
 
-type Props<T> = TextInputProps & {
+export type AutocompleteInputProps<T> = TextInputProps & {
   containerStyle?: StyleProp<ViewStyle>;
   hideResults?: boolean;
   inputContainerStyle?: StyleProp<ViewStyle>;
@@ -35,7 +35,7 @@ function DefaultTextInput(props: TextInputProps): React.ReactElement {
 }
 
 function AutocompleteInputComponent<Item, Ref>(
-  props: Props<Item>,
+  props: AutocompleteInputProps<Item>,
   ref: React.ForwardedRef<Ref>
 ): React.ReactElement {
   const defaultRenderItems: ListRenderItem<Item> = ({ item }) => <Text>{String(item)}</Text>;
