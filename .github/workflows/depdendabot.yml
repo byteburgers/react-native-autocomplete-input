@@ -1,0 +1,25 @@
+name: Approve and auto-merge dep PRs
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  automerge:
+    if: ${{ contains(github.head_ref, 'dependabot/npm_and_yarn') }}
+    needs: verify
+    runs-on: ubuntu-latest
+    env:
+      PR_URL: ${{github.event.pull_request.html_url}}
+      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    steps:
+      - name: Approve PR
+        run: gh pr review --approve "$PR_URL"
+      - name: Enable auto merge
+        run: gh pr merge --auto --merge "$PR_URL"
