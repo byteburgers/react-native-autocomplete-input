@@ -1,8 +1,6 @@
 name: Approve and auto-merge dependabot PRs
 
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
 
