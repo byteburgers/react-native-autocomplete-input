@@ -75,7 +75,7 @@ function AutocompleteInputComponent<Item, Ref>(
   } = props;
 
   const showResults = data.length > 0;
-  onShowResults && onShowResults(showResults);
+  onShowResults?.(showResults);
 
   return (
     <View style={[styles.container, containerStyle]}>
