@@ -36,7 +36,7 @@ function DefaultTextInput(props: TextInputProps): React.ReactElement {
 
 function AutocompleteInputComponent<Item, Ref>(
   props: AutocompleteInputProps<Item>,
-  ref: React.ForwardedRef<Ref>
+  ref: React.ForwardedRef<Ref>,
 ): React.ReactElement {
   const defaultRenderItems: ListRenderItem<Item> = ({ item }) => <Text>{String(item)}</Text>;
   function renderResultList(): React.ReactElement {
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
 });
 
 export const AutocompleteInput = React.forwardRef(
-  AutocompleteInputComponent
+  AutocompleteInputComponent,
 ) as typeof AutocompleteInputComponent;
 
 export default AutocompleteInput;

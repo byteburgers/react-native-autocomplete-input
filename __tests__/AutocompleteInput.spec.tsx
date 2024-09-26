@@ -53,7 +53,7 @@ describe('<AutocompleteInput />', () => {
         data={[]}
         foo="bar"
         renderTextInput={(props) => <Text {...props}>{text}</Text>}
-      />
+      />,
     );
 
     const autocomplete = testRenderer.root;
@@ -86,7 +86,7 @@ describe('<AutocompleteInput />', () => {
     const flatListProps = { foo: 'bar', keyExtractor };
     const otherProps = { baz: 'qux' };
     const testRenderer = renderer.create(
-      <Autocomplete data={ITEMS} flatListProps={flatListProps} {...otherProps} />
+      <Autocomplete data={ITEMS} flatListProps={flatListProps} {...otherProps} />,
     );
     const autocomplete = testRenderer.root;
     const list = autocomplete.findByType(FlatList);
@@ -107,7 +107,7 @@ describe('<AutocompleteInput />', () => {
             ))}
           </View>
         )}
-      />
+      />,
     );
 
     const autocomplete = testRenderer.root;
