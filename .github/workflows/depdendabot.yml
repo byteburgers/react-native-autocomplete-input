@@ -1,4 +1,4 @@
-name: Approve and auto-merge dep PRs
+name: Approve and auto-merge dependabot PRs
 
 on:
   push:
