@@ -11,7 +11,6 @@ permissions:
 jobs:
   automerge:
     if: ${{ contains(github.head_ref, 'dependabot/npm_and_yarn') }}
-    needs: verify
     runs-on: ubuntu-latest
     env:
       PR_URL: ${{github.event.pull_request.html_url}}
