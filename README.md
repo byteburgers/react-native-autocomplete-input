@@ -22,14 +22,14 @@ $ yarn add react-native-autocomplete-input
 
 ```javascript
 function MyComponent() {
-  const { query } = this.state;
+  const [ query, setQuery ] = useState('');
   const data = filterData(query);
 
   return (
     <Autocomplete
       data={data}
       value={query}
-      onChangeText={(text) => this.setState({ query: text })}
+      onChangeText={(text) => setQuery(text)}
       flatListProps={{
         keyExtractor: (_, idx) => idx,
         renderItem: ({ item }) => <Text>{item}</Text>,
