@@ -8,9 +8,6 @@ A pure JS autocomplete component for React Native. Use this component in your ow
 
 Play around with the [Example Snack](https://byteburgers.com/autocomplete)
 
-## How to use react-native-autocomplete-input
-Tested with RN >= 0.26.2. If you want to use RN < 0.26 try to install react-native-autocomplete-input <= 0.0.5.
-
 ### Installation
 
 ```shell
@@ -24,11 +21,10 @@ $ yarn add react-native-autocomplete-input
 ### Example
 
 ```javascript
-// ...
-
-render() {
+function MyComponent() {
   const { query } = this.state;
   const data = filterData(query);
+
   return (
     <Autocomplete
       data={data}
@@ -41,17 +37,13 @@ render() {
     />
   );
 }
-
-// ...
 ```
 
 ### Android
 Android does not support overflows ([#20](https://github.com/mrlaessig/react-native-autocomplete-input/issues/20)), for that reason it is necessary to wrap the autocomplete into a *absolute* positioned view on Android. This will  allow the suggestion list to overlap other views inside your component.
 
 ```javascript
-//...
-
-render() {
+function MyComponent() {
   return(
     <View>
       <View style={styles.autocompleteContainer}>
@@ -63,8 +55,6 @@ render() {
     </View>
   );
 }
-
-//...
 
 const styles = StyleSheet.create({
   autocompleteContainer: {
@@ -99,4 +89,4 @@ const styles = StyleSheet.create({
 * If you want to test with Jest add ```jest.mock('react-native-autocomplete-input', () => 'Autocomplete');``` to your test.
 
 ## Contribute
-Feel free to open issues or do a PR!
+Feel free to open issues or submit a PR!
