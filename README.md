@@ -44,7 +44,7 @@ Android does not support overflows ([#20](https://github.com/mrlaessig/react-nat
 
 ```javascript
 function MyComponent() {
-  return(
+  return (
     <View>
       <View style={styles.autocompleteContainer}>
         <Autocomplete {/* your props */} />
