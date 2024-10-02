@@ -100,12 +100,7 @@ describe('<AutocompleteInput />', () => {
       <Autocomplete
         data={ITEMS}
         renderResultList={({ data, style }) => (
-          <View style={style}>
-            {data?.map((item, index) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <Text key={index}>{item}</Text>
-            ))}
-          </View>
+          <View style={style}>{data?.map((item, index) => <Text key={index}>{item}</Text>)}</View>
         )}
       />,
     );
