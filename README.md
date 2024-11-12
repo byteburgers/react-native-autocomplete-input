@@ -23,7 +23,7 @@ $ yarn add react-native-autocomplete-input
 ```javascript
 function MyComponent() {
   const [ query, setQuery ] = useState('');
-  const data = filterData(query);
+  const data = useFilteredData(query);
 
   return (
     <Autocomplete
