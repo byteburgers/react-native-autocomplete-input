@@ -34,7 +34,7 @@ function DefaultTextInput(props: TextInputProps): React.ReactElement {
   return <TextInput {...props} />;
 }
 
-function AutocompleteInputComponent<Item, Ref>(
+export const AutocompleteInput = React.forwardRef(function AutocompleteInputComponent<Item, Ref>(
   props: AutocompleteInputProps<Item>,
   ref: React.ForwardedRef<Ref>,
 ): React.ReactElement {
@@ -61,7 +61,7 @@ function AutocompleteInputComponent<Item, Ref>(
       ref,
     };
 
-    return renderFunction?.(textProps);
+    return renderFunction(textProps);
   }
 
   const {
@@ -90,7 +90,7 @@ function AutocompleteInputComponent<Item, Ref>(
       )}
     </View>
   );
-}
+});
 
 const border = {
   borderColor: '#b9b9b9',
@@ -150,13 +150,9 @@ const styles = StyleSheet.create({
   }),
 });
 
-export const AutocompleteInput = React.forwardRef(
-  AutocompleteInputComponent,
-) as typeof AutocompleteInputComponent;
-
 export default AutocompleteInput;
 
-(AutocompleteInput as React.FC).propTypes = {
+AutocompleteInput.propTypes = {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   ...TextInput.propTypes,
