@@ -3,8 +3,8 @@ name: release
 on:
   workflow_run:
     workflows: ['test']
-    branches: [main]
-    types: 
+    branches: [main, beta]
+    types:
       - completed
 
 jobs:
