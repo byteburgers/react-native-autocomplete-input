@@ -49,7 +49,21 @@ export const AutocompleteInput = React.forwardRef(function AutocompleteInputComp
     ...textInputProps
   } = props;
 
-  function ResultListWrapper(): React.ReactElement {
+  function TextInputWrapper(): React.ReactElement {
+    const autocompleteTextInputProps = {
+      ...textInputProps,
+      style: [styles.input, style],
+      ref,
+    };
+
+    return (
+      <View style={[styles.inputContainer, inputContainerStyle]}>
+        <AutocompleteTextInput {...autocompleteTextInputProps} />;
+      </View>
+    );
+  }
+
+  function ResultListWrapper(): React.ReactElement | null {
     const resultListProps: FlatListProps<Item> = {
       data,
       renderItem: defaultRenderItem,
@@ -58,35 +72,28 @@ export const AutocompleteInput = React.forwardRef(function AutocompleteInputComp
       style: [styles.list, flatListProps?.style],
     };
 
-    return <ResultList {...resultListProps} />;
+    const showResults = data.length > 0;
+    onShowResults?.(showResults);
+
+    const doNotShowResults = hideResults || !showResults;
+    if (doNotShowResults) {
+      return null;
+    }
+
+    return (
+      <View
+        style={listContainerStyle}
+        onStartShouldSetResponderCapture={onStartShouldSetResponderCapture}
+      >
+        <ResultList {...resultListProps} />;
+      </View>
+    );
   }
-
-  function TextInputWrapper(): React.ReactElement {
-    const autocompleteTextInputProps = {
-      ...textInputProps,
-      style: [styles.input, style],
-      ref,
-    };
-
-    return <AutocompleteTextInput {...autocompleteTextInputProps} />;
-  }
-
-  const showResults = data.length > 0;
-  onShowResults?.(showResults);
 
   return (
     <View style={[styles.container, containerStyle]}>
-      <View style={[styles.inputContainer, inputContainerStyle]}>
-        <TextInputWrapper />
-      </View>
-      {!hideResults && (
-        <View
-          style={listContainerStyle}
-          onStartShouldSetResponderCapture={onStartShouldSetResponderCapture}
-        >
-          {showResults && <ResultListWrapper />}
-        </View>
-      )}
+      <TextInputWrapper />
+      <ResultListWrapper />
     </View>
   );
 });

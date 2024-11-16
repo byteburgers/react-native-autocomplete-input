@@ -96,6 +96,13 @@ describe('<AutocompleteInput />', () => {
     expect(ref!.current?.constructor.name).toBe('TextInput');
   });
 
+  it('should hide suggestion list when hideResults is true', () => {
+    render(<Autocomplete data={ITEMS} hideResults renderResultList={TestSuggestionList} />);
+
+    const suggestionList = screen.queryByTestId(suggestionListTestId);
+    expect(suggestionList).not.toBeOnTheScreen();
+  });
+
   it('should only pass text input props to the TextInput', () => {
     const MockTextInput = jest.fn(() => <></>) as jest.Mock<ReactElement>;
 
