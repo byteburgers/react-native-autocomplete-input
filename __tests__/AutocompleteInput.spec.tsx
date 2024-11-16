@@ -43,7 +43,8 @@ describe('<AutocompleteInput />', () => {
   });
 
   it('should apply default render list function', () => {
-    render(<Autocomplete data={ITEMS} renderResultList={undefined} />);
+    render(<Autocomplete data={ITEMS} />);
+
     const suggestions = screen.getAllByRole('text');
     suggestions.forEach((suggestion, index) => {
       expect(suggestion).toHaveTextContent(ITEMS[index]);
