@@ -39,30 +39,6 @@ export const AutocompleteInput = React.forwardRef(function AutocompleteInputComp
   ref: React.ForwardedRef<Ref>,
 ): React.ReactElement {
   const defaultRenderItems: ListRenderItem<Item> = ({ item }) => <Text>{String(item)}</Text>;
-  function renderResultList(): React.ReactElement {
-    const { data, renderResultList: renderFunction = DefaultResultList, flatListProps } = props;
-
-    const listProps: FlatListProps<Item> = {
-      data,
-      renderItem: defaultRenderItems,
-      keyExtractor: defaultKeyExtractor,
-      ...flatListProps,
-      style: [styles.list, flatListProps?.style],
-    };
-
-    return renderFunction(listProps);
-  }
-
-  function renderTextInput() {
-    const { renderTextInput: renderFunction = DefaultTextInput, style } = props;
-    const textProps = {
-      ...props,
-      style: [styles.input, style],
-      ref,
-    };
-
-    return renderFunction(textProps);
-  }
 
   const {
     data,
@@ -72,7 +48,34 @@ export const AutocompleteInput = React.forwardRef(function AutocompleteInputComp
     listContainerStyle,
     onShowResults,
     onStartShouldSetResponderCapture = () => false,
+    renderResultList: renderResultListFunction = DefaultResultList,
+    renderTextInput: renderTextInputFunction = DefaultTextInput,
+    flatListProps,
+    style,
+    ...textInputProps
   } = props;
+
+  function renderResultList(): React.ReactElement {
+    const listProps: FlatListProps<Item> = {
+      data,
+      renderItem: defaultRenderItems,
+      keyExtractor: defaultKeyExtractor,
+      ...flatListProps,
+      style: [styles.list, flatListProps?.style],
+    };
+
+    return renderResultListFunction(listProps);
+  }
+
+  function renderTextInput() {
+    const renderProps = {
+      ...textInputProps,
+      style: [styles.input, style],
+      ref,
+    };
+
+    return renderTextInputFunction(renderProps);
+  }
 
   const showResults = data.length > 0;
   onShowResults?.(showResults);
