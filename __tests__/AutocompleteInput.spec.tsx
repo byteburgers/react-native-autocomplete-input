@@ -50,7 +50,7 @@ describe('<AutocompleteInput />', () => {
     });
   });
 
-  it('should hide suggestion list when data gets updates with length < 1', () => {
+  it('should hide suggestion list when data gets updated with length < 1', () => {
     const { rerender } = render(
       <Autocomplete data={ITEMS} renderResultList={TestSuggestionList} />,
     );
