@@ -26,7 +26,7 @@ function defaultKeyExtractor(_: unknown, index: number): string {
   return `key-${index}`;
 }
 
-function defaultRenderItems<Item>({ item }: ListRenderItemInfo<Item>): React.ReactElement {
+function defaultRenderItem<Item>({ item }: ListRenderItemInfo<Item>): React.ReactElement {
   return <Text>{String(item)}</Text>;
 }
 
@@ -43,32 +43,32 @@ export const AutocompleteInput = React.forwardRef(function AutocompleteInputComp
     onShowResults,
     onStartShouldSetResponderCapture = () => false,
     renderResultList: ResultList = FlatList,
-    renderTextInput: AutoCompleteTextInput = TextInput,
+    renderTextInput: AutocompleteTextInput = TextInput,
     flatListProps,
     style,
     ...textInputProps
   } = props;
 
-  function renderResultList(): React.ReactElement {
-    const listProps: FlatListProps<Item> = {
+  function ResultListWrapper(): React.ReactElement {
+    const resultListProps: FlatListProps<Item> = {
       data,
-      renderItem: defaultRenderItems,
+      renderItem: defaultRenderItem,
       keyExtractor: defaultKeyExtractor,
       ...flatListProps,
       style: [styles.list, flatListProps?.style],
     };
 
-    return <ResultList {...listProps} />;
+    return <ResultList {...resultListProps} />;
   }
 
-  function renderTextInput(): React.ReactElement {
-    const renderProps = {
+  function TextInputWrapper(): React.ReactElement {
+    const autocompleteTextInputProps = {
       ...textInputProps,
       style: [styles.input, style],
       ref,
     };
 
-    return <AutoCompleteTextInput {...renderProps} />;
+    return <AutocompleteTextInput {...autocompleteTextInputProps} />;
   }
 
   const showResults = data.length > 0;
@@ -76,13 +76,15 @@ export const AutocompleteInput = React.forwardRef(function AutocompleteInputComp
 
   return (
     <View style={[styles.container, containerStyle]}>
-      <View style={[styles.inputContainer, inputContainerStyle]}>{renderTextInput()}</View>
+      <View style={[styles.inputContainer, inputContainerStyle]}>
+        <TextInputWrapper />
+      </View>
       {!hideResults && (
         <View
           style={listContainerStyle}
           onStartShouldSetResponderCapture={onStartShouldSetResponderCapture}
         >
-          {showResults && renderResultList()}
+          {showResults && <ResultListWrapper />}
         </View>
       )}
     </View>
