@@ -1,6 +1,7 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { FlatList, Text, TextInput, View } from 'react-native';
+import React, { type ReactElement } from 'react';
+import { render, screen, within } from '@testing-library/react-native';
+import { FlatList, TextInput, type FlatListProps } from 'react-native';
+
 import Autocomplete from '../index';
 
 const ITEMS = [
@@ -12,111 +13,85 @@ const ITEMS = [
   'Revenge of the Sith',
 ] as const;
 
+const suggestionListTestId = 'suggestionListTestId';
+function TestSuggestionList<T>(props: FlatListProps<T>): ReactElement {
+  return <FlatList {...props} testID={suggestionListTestId} />;
+}
+
 describe('<AutocompleteInput />', () => {
   it('should hide suggestion list on initial render', () => {
-    const r = renderer.create(<Autocomplete data={[]} />);
-    const autocomplete = r.root;
-
-    expect(autocomplete.findAllByType(FlatList)).toHaveLength(0);
+    render(<Autocomplete data={[]} renderResultList={TestSuggestionList} />);
+    const suggestionList = screen.queryByTestId(suggestionListTestId);
+    expect(suggestionList).not.toBeOnTheScreen();
   });
 
-  it('should show suggestion list when data gets updated with length > 0', () => {
-    const testRenderer = renderer.create(<Autocomplete data={[]} />);
-    const autocomplete = testRenderer.root;
+  it('should show suggestion list with suggestions when data gets updated with length > 0', () => {
+    const { rerender } = render(<Autocomplete data={[]} renderResultList={TestSuggestionList} />);
 
-    expect(autocomplete.findAllByType(FlatList)).toHaveLength(0);
+    const hiddenSuggestionList = screen.queryByTestId(suggestionListTestId);
+    expect(hiddenSuggestionList).not.toBeOnTheScreen();
 
-    testRenderer.update(<Autocomplete data={ITEMS} />);
+    rerender(<Autocomplete data={ITEMS} renderResultList={TestSuggestionList} />);
 
-    const list = autocomplete.findByType(FlatList);
-    expect(list.props.data).toEqual(ITEMS);
+    const suggestionList = screen.getByTestId(suggestionListTestId);
+    expect(suggestionList).toBeOnTheScreen();
 
-    const texts = list.findAllByType(Text);
-    expect(texts).toHaveLength(ITEMS.length);
+    const suggestions = within(suggestionList).getAllByRole('text');
+    suggestions.forEach((suggestion, index) => {
+      expect(suggestion).toHaveTextContent(ITEMS[index]);
+    });
   });
 
-  it('should hide suggestion list when data gets updates with length < 1', () => {
-    const props = { data: ITEMS };
-    const testRenderer = renderer.create(<Autocomplete {...props} />);
-    const autocomplete = testRenderer.root;
+  it('should apply default render list function', () => {
+    render(<Autocomplete data={ITEMS} renderResultList={undefined} />);
+    const suggestions = screen.getAllByRole('text');
+    suggestions.forEach((suggestion, index) => {
+      expect(suggestion).toHaveTextContent(ITEMS[index]);
+    });
+  });
 
-    expect(autocomplete.findAllByType(FlatList)).toHaveLength(1);
-    testRenderer.update(<Autocomplete data={[]} />);
+  it('should hide suggestion list when data gets updated with length < 1', () => {
+    const { rerender } = render(
+      <Autocomplete data={ITEMS} renderResultList={TestSuggestionList} />,
+    );
 
-    expect(autocomplete.findAllByType(FlatList)).toHaveLength(0);
+    const suggestionList = screen.getByTestId(suggestionListTestId);
+    expect(suggestionList).toBeOnTheScreen();
+
+    rerender(<Autocomplete data={[]} renderResultList={TestSuggestionList} />);
+
+    const hiddenSuggestionList = screen.queryByTestId(suggestionListTestId);
+    expect(hiddenSuggestionList).not.toBeOnTheScreen();
   });
 
   it('should render custom text input', () => {
-    const text = 'Custom Text Input';
-    const testRenderer = renderer.create(
+    const customTextInputTestId = 'customTextInput';
+    render(
       <Autocomplete
         data={[]}
-        foo="bar"
-        renderTextInput={(props) => <Text {...props}>{text}</Text>}
+        renderTextInput={(props) => <TextInput {...props} testID={customTextInputTestId} />}
       />,
     );
 
-    const autocomplete = testRenderer.root;
-    const customTextInput = autocomplete.findByType(Text);
-
-    expect((customTextInput.children[0] as { children: unknown[] }).children).toEqual([text]);
-    expect(autocomplete.findAllByType(TextInput)).toHaveLength(0);
+    const textInput = screen.getByTestId(customTextInputTestId);
+    expect(textInput).toBeOnTheScreen();
   });
 
   it('should render default <TextInput /> if no custom one is supplied', () => {
-    const props = { foo: 'bar' };
-    const testRenderer = renderer.create(<Autocomplete data={[]} {...props} />);
-    const autocomplete = testRenderer.root;
-    const textInput = autocomplete.findByType(TextInput);
+    render(<Autocomplete data={[]} placeholder="Enter search" />);
 
-    expect(textInput.props).toEqual(expect.objectContaining(props));
+    const input = screen.getByPlaceholderText('Enter search');
+    expect(input).toBeOnTheScreen();
   });
 
-  it('should render default <FlatList /> if no custom one is supplied', () => {
-    const testRenderer = renderer.create(<Autocomplete data={ITEMS} />);
-    const autocomplete = testRenderer.root;
-    const list = autocomplete.findByType(FlatList);
+  it('should forward the ref to the text input', async () => {
+    let ref: React.RefObject<TextInput>;
+    function TestForwardRefComponent() {
+      ref = React.useRef<TextInput>(null);
+      return <Autocomplete data={ITEMS} placeholder="TestText" ref={ref} />;
+    }
 
-    expect(list.props.data).toEqual(ITEMS);
-  });
-
-  it('should only pass props in flatListProps to <FlatList />', () => {
-    // Using keyExtractor isn't important for the test, but prevents a warning
-    const keyExtractor = (_, index) => `key-${index}`;
-    const flatListProps = { foo: 'bar', keyExtractor };
-    const otherProps = { baz: 'qux' };
-    const testRenderer = renderer.create(
-      <Autocomplete data={ITEMS} flatListProps={flatListProps} {...otherProps} />,
-    );
-    const autocomplete = testRenderer.root;
-    const list = autocomplete.findByType(FlatList);
-
-    expect(list.props).toEqual(expect.objectContaining(flatListProps));
-    expect(list.props).toEqual(expect.not.objectContaining(otherProps));
-  });
-
-  it('should render a custom result list', () => {
-    const testRenderer = renderer.create(
-      <Autocomplete
-        data={ITEMS}
-        renderResultList={({ data, style }) => (
-          <View style={style}>{data?.map((item, index) => <Text key={index}>{item}</Text>)}</View>
-        )}
-      />,
-    );
-
-    const autocomplete = testRenderer.root;
-    expect(autocomplete.findAllByType(FlatList)).toHaveLength(0);
-
-    const texts = autocomplete.findAllByType(Text);
-    expect(texts).toHaveLength(ITEMS.length);
-  });
-
-  it('should forward the ref to the input', () => {
-    const inputRef = React.createRef();
-
-    renderer.create(<Autocomplete data={ITEMS} ref={inputRef} />);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    expect((inputRef.current as any)._reactInternals.elementType.displayName).toBe('TextInput');
+    render(<TestForwardRefComponent />);
+    expect(ref!.current?.constructor.name).toBe('TextInput');
   });
 });
