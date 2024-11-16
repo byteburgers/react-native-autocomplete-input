@@ -96,7 +96,7 @@ describe('<AutocompleteInput />', () => {
   });
 
   it('should only pass text input props to the TextInput', () => {
-    const MockTextInput = jest.fn(() => null) as unknown as jest.Mock<ReactElement>;
+    const MockTextInput = jest.fn(() => <></>) as jest.Mock<ReactElement>;
 
     render(
       <Autocomplete
@@ -107,17 +107,19 @@ describe('<AutocompleteInput />', () => {
       />,
     );
 
-    expect(MockTextInput).toHaveBeenCalledWith({
-      placeholder: 'Enter search',
-      ref: null,
-      style: [
-        {
-          backgroundColor: 'white',
-          height: 40,
-          paddingLeft: 3,
-        },
-        undefined,
-      ],
-    });
+    expect(MockTextInput).toHaveBeenCalledWith(
+      {
+        placeholder: 'Enter search',
+        style: [
+          {
+            backgroundColor: 'white',
+            height: 40,
+            paddingLeft: 3,
+          },
+          undefined,
+        ],
+      },
+      {},
+    );
   });
 });

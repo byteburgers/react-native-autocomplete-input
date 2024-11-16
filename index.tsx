@@ -4,42 +4,36 @@ import type {
   TextInputProps,
   StyleProp,
   ViewStyle,
-  ListRenderItem,
+  ListRenderItemInfo,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { FlatList, Platform, StyleSheet, Text, TextInput, View } from 'react-native';
 import { ViewPropTypes } from 'deprecated-react-native-prop-types';
 
-export type AutocompleteInputProps<T> = TextInputProps & {
+export type AutocompleteInputProps<Item> = TextInputProps & {
   containerStyle?: StyleProp<ViewStyle>;
   hideResults?: boolean;
   inputContainerStyle?: StyleProp<ViewStyle>;
   listContainerStyle?: StyleProp<ViewStyle>;
   onShowResults?: (showResults: boolean) => void;
-  renderResultList?: (props: FlatListProps<T>) => React.ReactElement;
-  renderTextInput?: (props: TextInputProps) => React.ReactElement;
-  flatListProps?: Partial<Omit<FlatListProps<T>, 'data'>>;
-  data: readonly T[];
+  renderResultList?: React.FC<FlatListProps<Item>>;
+  renderTextInput?: React.FC<TextInputProps>;
+  flatListProps?: Partial<Omit<FlatListProps<Item>, 'data'>>;
+  data: readonly Item[];
 };
 
 function defaultKeyExtractor(_: unknown, index: number): string {
   return `key-${index}`;
 }
 
-function DefaultResultList<T>(props: FlatListProps<T>): React.ReactElement {
-  return <FlatList {...props} />;
-}
-
-function DefaultTextInput(props: TextInputProps): React.ReactElement {
-  return <TextInput {...props} />;
+function defaultRenderItems<Item>({ item }: ListRenderItemInfo<Item>): React.ReactElement {
+  return <Text>{String(item)}</Text>;
 }
 
 export const AutocompleteInput = React.forwardRef(function AutocompleteInputComponent<Item, Ref>(
   props: AutocompleteInputProps<Item>,
   ref: React.ForwardedRef<Ref>,
 ): React.ReactElement {
-  const defaultRenderItems: ListRenderItem<Item> = ({ item }) => <Text>{String(item)}</Text>;
-
   const {
     data,
     containerStyle,
@@ -48,8 +42,8 @@ export const AutocompleteInput = React.forwardRef(function AutocompleteInputComp
     listContainerStyle,
     onShowResults,
     onStartShouldSetResponderCapture = () => false,
-    renderResultList: renderResultListFunction = DefaultResultList,
-    renderTextInput: renderTextInputFunction = DefaultTextInput,
+    renderResultList: ResultList = FlatList,
+    renderTextInput: AutoCompleteTextInput = TextInput,
     flatListProps,
     style,
     ...textInputProps
@@ -64,17 +58,17 @@ export const AutocompleteInput = React.forwardRef(function AutocompleteInputComp
       style: [styles.list, flatListProps?.style],
     };
 
-    return renderResultListFunction(listProps);
+    return <ResultList {...listProps} />;
   }
 
-  function renderTextInput() {
+  function renderTextInput(): React.ReactElement {
     const renderProps = {
       ...textInputProps,
       style: [styles.input, style],
       ref,
     };
 
-    return renderTextInputFunction(renderProps);
+    return <AutoCompleteTextInput {...renderProps} />;
   }
 
   const showResults = data.length > 0;
