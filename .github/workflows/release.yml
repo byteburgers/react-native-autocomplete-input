@@ -3,7 +3,7 @@ name: release
 on:
   workflow_run:
     workflows: ['test']
-    branches: [main, beta]
+    branches: [main]
     types:
       - completed
 
@@ -29,7 +29,7 @@ jobs:
     - name: Build
       run: npm run build
     - name: Release
-      run: npx semantic-release 
+      run: npx nx release publish 
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

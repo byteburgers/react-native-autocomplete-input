@@ -4,8 +4,16 @@
 # Build
 dist
 
+# Expos
+.expo
+
 # node.js
 node_modules/
 npm-debug.log
 yarn.lock
 yarn-error.log
+
+
+
+.nx/cache
+.nx/workspace-data
