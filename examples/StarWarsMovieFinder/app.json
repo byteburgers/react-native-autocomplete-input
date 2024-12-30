@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "name": "StarWarsMovieFinder",
+    "slug": "StarWarsMovieFinder",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#ffffff"
+      }
+    }
+  }
+}
