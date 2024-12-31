@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import type {
   FlatListProps,
   TextInputProps,
@@ -6,9 +6,7 @@ import type {
   ViewStyle,
   ListRenderItemInfo,
 } from 'react-native';
-import PropTypes from 'prop-types';
 import { FlatList, Platform, StyleSheet, Text, TextInput, View } from 'react-native';
-import { ViewPropTypes } from 'deprecated-react-native-prop-types';
 
 export type AutocompleteInputProps<Item> = TextInputProps & {
   containerStyle?: StyleProp<ViewStyle>;
@@ -87,7 +85,9 @@ export const AutocompleteInput = React.forwardRef(function AutocompleteInputComp
       )}
     </View>
   );
-});
+}) as <Item, Ref>(
+  props: AutocompleteInputProps<Item> & { ref?: React.ForwardedRef<Ref> },
+) => ReactElement;
 
 const border = {
   borderColor: '#b9b9b9',
@@ -148,57 +148,3 @@ const styles = StyleSheet.create({
 });
 
 export default AutocompleteInput;
-
-AutocompleteInput.propTypes = {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  ...TextInput.propTypes,
-  /**
-   * These styles will be applied to the container which
-   * surrounds the autocomplete component.
-   */
-  containerStyle: ViewPropTypes ? ViewPropTypes.style : PropTypes.object,
-  /**
-   * Assign an array of data objects which should be
-   * rendered in respect to the entered text.
-   */
-  data: PropTypes.array,
-  /**
-   * Props which can be applied to result `FlatList`.
-   */
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  flatListProps: FlatList.propTypes || PropTypes.object,
-  /**
-   * Set to `true` to hide the suggestion list.
-   */
-  hideResults: PropTypes.bool,
-  /**
-   * These styles will be applied to the container which surrounds
-   * the textInput component.
-   */
-  inputContainerStyle: ViewPropTypes ? ViewPropTypes.style : PropTypes.object,
-  /**
-   * These style will be applied to the result list.
-   */
-  listContainerStyle: ViewPropTypes ? ViewPropTypes.style : PropTypes.object,
-  /**
-   * `onShowResults` will be called when list is going to
-   * show/hide results.
-   */
-  onShowResults: PropTypes.func,
-  /**
-   * `onShowResults` will be called when list is going to
-   * show/hide results.
-   */
-  onStartShouldSetResponderCapture: PropTypes.func,
-  /**
-   * renders custom TextInput. All props passed to this function.
-   */
-  renderTextInput: PropTypes.func,
-  /**
-   * renders custom result list. Can be used to replace FlatList.
-   * All props passed to this function.
-   */
-  renderResultList: PropTypes.func,
-};
