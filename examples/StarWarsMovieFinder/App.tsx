@@ -1,6 +1,6 @@
 import Autocomplete from 'react-native-autocomplete-input';
 import React, { useEffect, useState } from 'react';
-import { SWAPI, Movies, Movie, filterMovies } from './swapi';
+import { SWAPI, type Movies, filterMovies } from './swapi';
 import { MovieDetails } from './MovieDetails';
 import { Platform, StyleSheet, Text, TouchableOpacity, View, SafeAreaView } from 'react-native';
 
@@ -10,7 +10,7 @@ function StarWarsMovieFinder(): React.ReactElement {
   const queriedMovies = React.useMemo(() => filterMovies(allMovies, query), [allMovies, query]);
 
   const [firstMovieSuggestion] = queriedMovies;
-  const suggestions: Movies = React.useMemo(
+  const suggestions = React.useMemo(
     () =>
       firstMovieSuggestion?.compareTitle(query)
         ? [] // Close suggestion list in case movie title matches query
@@ -40,7 +40,7 @@ function StarWarsMovieFinder(): React.ReactElement {
             placeholder={placeholder}
             flatListProps={{
               keyboardShouldPersistTaps: 'always',
-              keyExtractor: (movie: Movie) => movie.episodeId.toString(),
+              keyExtractor: (movie) => movie.episodeId.toString(),
               renderItem: ({ item }) => (
                 <TouchableOpacity onPress={() => setQuery(item.title)}>
                   <Text style={styles.itemText}>{item.title}</Text>

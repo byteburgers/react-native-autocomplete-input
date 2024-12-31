@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import type {
   FlatListProps,
   TextInputProps,
@@ -87,7 +87,9 @@ export const AutocompleteInput = React.forwardRef(function AutocompleteInputComp
       )}
     </View>
   );
-});
+}) as <Item, Ref>(
+  props: AutocompleteInputProps<Item> & { ref?: React.ForwardedRef<Ref> },
+) => ReactElement;
 
 const border = {
   borderColor: '#b9b9b9',
