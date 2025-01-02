@@ -30,6 +30,8 @@ jobs:
       run: npm ci 
     - name: Build
       run: npm run build
+    - name: Copy files
+      run: cp -r {README.md,LICENSE} packages/react-native-autocomplete-input/.
     - name: Release
       run: cd packages/react-native-autocomplete-input && npx semantic-release
       env:
