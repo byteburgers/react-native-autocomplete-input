@@ -90,3 +90,19 @@ const styles = StyleSheet.create({
 
 ## Contribute
 Feel free to open issues or submit a PR!
+
+### Local development
+```shell
+# Install Dependencies
+$ npm i
+
+# Locally link the autocomplete package into the example project
+$ npm link react-native-autocomplete-input -w starwarsmoviefinder 
+
+# Enable package rebuild on changes
+$ npx nx watch --projects=react-native-autocomplete-input -- npm run build 
+
+# Run the example project
+$ npm run start -w starwarsmoviefinder
+```
+
