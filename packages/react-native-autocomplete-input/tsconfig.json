@@ -1,6 +1,6 @@
 {
   "extends": "@react-native/typescript-config/tsconfig.json",
   "compilerOptions": {
-    "types": ["@testing-library/react-native/extend-expect", "jest", "./types.d.ts"]
+    "types": ["jest", "./types.d.ts"]
   }
 }
