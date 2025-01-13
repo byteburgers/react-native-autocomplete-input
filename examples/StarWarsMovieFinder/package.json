@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "expo": "~52.0.23",
-    "expo-status-bar": "~2.0.0",
+    "expo-status-bar": "~2.0.1",
     "react": "18.3.1",
     "react-native": "0.76.5",
     "react-native-autocomplete-input": "^5.5.5"
