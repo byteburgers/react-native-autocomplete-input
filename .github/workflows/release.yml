@@ -6,6 +6,8 @@ on:
     branches: [main]
     types:
       - completed
+    paths:
+      - 'packages/react-native-autocomplete-input/**'
 
 jobs:
   release:
