@@ -41,7 +41,7 @@ export const AutocompleteInput = React.forwardRef(function AutocompleteInputComp
     onShowResults,
     onStartShouldSetResponderCapture = () => false,
     renderResultList: ResultList = FlatList,
-    renderTextInput: AutoCompleteTextInput = TextInput,
+    renderTextInput: customRenderTextInput = (props) => <TextInput {...props} />,
     flatListProps,
     style,
     ...textInputProps
@@ -59,14 +59,14 @@ export const AutocompleteInput = React.forwardRef(function AutocompleteInputComp
     return <ResultList {...listProps} />;
   }
 
-  function renderTextInput(): React.ReactElement {
+  function renderTextInput(): React.ReactNode {
     const renderProps = {
       ...textInputProps,
       style: [styles.input, style],
-      ref,
+      ...(ref && { ref }),
     };
 
-    return <AutoCompleteTextInput {...renderProps} />;
+    return customRenderTextInput(renderProps);
   }
 
   const showResults = data.length > 0;

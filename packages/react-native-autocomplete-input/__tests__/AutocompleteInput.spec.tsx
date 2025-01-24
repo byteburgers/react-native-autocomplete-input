@@ -1,5 +1,5 @@
 import React, { type ReactElement } from 'react';
-import { render, screen, within } from '@testing-library/react-native';
+import { render, screen, userEvent, within } from '@testing-library/react-native';
 import { FlatList, TextInput, type FlatListProps } from 'react-native';
 
 import Autocomplete from '../index';
@@ -104,7 +104,7 @@ describe('<AutocompleteInput />', () => {
         data={[]}
         placeholder="Enter search"
         renderResultList={() => <></>}
-        renderTextInput={MockTextInput}
+        renderTextInput={(props) => <MockTextInput {...props} />}
       />,
     );
 
@@ -122,5 +122,28 @@ describe('<AutocompleteInput />', () => {
       },
       {},
     );
+  });
+
+  it('should preserve custom text input on re-render', async () => {
+    function TestWrapper() {
+      const [text, setText] = React.useState('');
+      return (
+        <Autocomplete
+          data={ITEMS}
+          placeholder="Enter search"
+          renderTextInput={(props) => <TextInput {...props} value={text} onChangeText={setText} />}
+          value={text}
+        />
+      );
+    }
+
+    render(<TestWrapper />);
+
+    const input = screen.getByPlaceholderText('Enter search');
+    await userEvent.type(input, 'A');
+    expect(input).toHaveDisplayValue('A');
+
+    await userEvent.type(input, ' New Hope');
+    expect(input).toHaveDisplayValue('A New Hope');
   });
 });
