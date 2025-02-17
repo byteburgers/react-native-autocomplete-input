@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/byteburgers/react-native-autocomplete-input#readme",
   "devDependencies": {
-    "@react-native/typescript-config": "^0.76.1",
+    "@react-native/typescript-config": "^0.77.1",
     "@testing-library/react-native": "^13.0.1",
     "react-test-renderer": "18.3.1",
     "@types/jest": "^29.4.0",
