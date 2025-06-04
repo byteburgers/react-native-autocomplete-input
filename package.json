@@ -11,7 +11,7 @@
     "eslint": "^9.23.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-prettier": "^5.2.3",
-    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react": "^7.37.5",
     "nx": "20.7.0",
     "prettier": "^3.5.3",
     "typescript": "^5.8.2",
