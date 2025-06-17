@@ -14,7 +14,7 @@
     "eslint-plugin-react": "^7.37.5",
     "nx": "20.7.0",
     "prettier": "^3.5.3",
-    "typescript": "^5.8.2",
+    "typescript": "^5.8.3",
     "typescript-eslint": "^8.28.0"
   },
   "workspaces": [
