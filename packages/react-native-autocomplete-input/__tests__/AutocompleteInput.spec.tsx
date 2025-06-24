@@ -146,4 +146,28 @@ describe('<AutocompleteInput />', () => {
     await userEvent.type(input, ' New Hope');
     expect(input).toHaveDisplayValue('A New Hope');
   });
+
+  it('should render clear button when value is not empty', () => {
+    render(<Autocomplete data={[]} value="test" onClear={() => {}} />);
+
+    const clearButton = screen.getByLabelText('Clear text');
+    expect(clearButton).toBeOnTheScreen();
+  });
+
+  it('should not render clear button when value is empty', () => {
+    render(<Autocomplete data={[]} />);
+
+    const clearButton = screen.queryByLabelText('Clear text');
+    expect(clearButton).not.toBeOnTheScreen();
+  });
+
+  it('should call onClear when clear button is pressed', async () => {
+    const onClear = jest.fn();
+    render(<Autocomplete data={[]} value="test" onClear={onClear} />);
+
+    const clearButton = screen.getByLabelText('Clear text');
+
+    await userEvent.press(clearButton);
+    expect(onClear).toHaveBeenCalled();
+  });
 });
