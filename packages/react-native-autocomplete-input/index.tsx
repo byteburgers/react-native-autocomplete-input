@@ -6,7 +6,7 @@ import type {
   ViewStyle,
   ListRenderItemInfo,
 } from 'react-native';
-import { FlatList, Platform, StyleSheet, Text, TextInput, View } from 'react-native';
+import { FlatList, Platform, StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
 
 export type AutocompleteInputProps<Item> = TextInputProps & {
   containerStyle?: StyleProp<ViewStyle>;
@@ -18,6 +18,7 @@ export type AutocompleteInputProps<Item> = TextInputProps & {
   renderTextInput?: React.FC<TextInputProps>;
   flatListProps?: Partial<Omit<FlatListProps<Item>, 'data'>>;
   data: readonly Item[];
+  onClear?: () => void;
 };
 
 function defaultKeyExtractor(_: unknown, index: number): string {
@@ -44,6 +45,8 @@ export const AutocompleteInput = React.forwardRef(function AutocompleteInputComp
     renderTextInput: customRenderTextInput = (props) => <TextInput {...props} />,
     flatListProps,
     style,
+    onClear,
+    value,
     ...textInputProps
   } = props;
 
@@ -60,13 +63,30 @@ export const AutocompleteInput = React.forwardRef(function AutocompleteInputComp
   }
 
   function renderTextInput(): React.ReactNode {
-    const renderProps = {
+    const renderProps: TextInputProps = {
       ...textInputProps,
       style: [styles.input, style],
       ...(ref && { ref }),
     };
+    if (typeof value !== 'undefined') {
+      renderProps.value = value;
+    }
 
-    return customRenderTextInput(renderProps);
+    return (
+      <View style={styles.inputRow}>
+        {customRenderTextInput(renderProps)}
+        {onClear && value && value.length > 0 && (
+          <TouchableOpacity
+            onPress={onClear}
+            accessibilityLabel="Clear text"
+            style={styles.clearButton}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            <Text style={styles.clearButtonText}>×</Text>
+          </TouchableOpacity>
+        )}
+      </View>
+    );
   }
 
   const showResults = data.length > 0;
@@ -145,6 +165,24 @@ const styles = StyleSheet.create({
     ios: iosStyles,
     default: iosStyles,
   }),
+  inputRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    position: 'relative',
+  },
+  clearButton: {
+    position: 'absolute',
+    right: 0,
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    zIndex: 2,
+  },
+  clearButtonText: {
+    fontSize: 18,
+    color: '#888',
+  },
 });
 
 export default AutocompleteInput;
