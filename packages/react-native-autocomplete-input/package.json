@@ -31,14 +31,18 @@
   },
   "homepage": "https://github.com/byteburgers/react-native-autocomplete-input#readme",
   "devDependencies": {
-    "@react-native/typescript-config": "^0.80.2",
-    "@testing-library/react-native": "^13.0.1",
-    "react-test-renderer": "18.3.1",
+    "@testing-library/react-native": "^13.2.2",
     "@types/jest": "^30.0.0",
-    "@types/react": "~18.3.12",
+    "@types/react": "~19.1.0",
     "babel-jest": "^30.0.5",
+    "babel-preset-expo": "^13.2.3",
     "jest": "^30.0.4",
-    "react": "18.3.1",
-    "react-native": "0.77.0"
+    "react-native": "^0.80.1",
+    "react-native-builder-bob": "^0.23.2",
+    "react-test-renderer": "^19.1.0"
+  },
+  "jest": {
+    "preset": "react-native",
+    "testEnvironment": "node"
   }
 }
