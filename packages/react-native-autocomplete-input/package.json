@@ -33,13 +33,13 @@
   "devDependencies": {
     "@react-native/typescript-config": "^0.81.0",
     "@testing-library/react-native": "^13.3.3",
+    "react-test-renderer": "^19.1.0",
     "@types/jest": "^30.0.0",
     "@types/react": "~19.1.10",
     "babel-jest": "^30.0.5",
     "jest": "^30.0.4",
     "react": "^19.1.0",
-    "react-native": "0.81.4",
-    "react-test-renderer": "^19.1.0"
+    "react-native": "0.81.4"
   },
   "jest": {
     "preset": "react-native",

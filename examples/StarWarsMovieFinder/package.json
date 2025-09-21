@@ -18,8 +18,8 @@
     "react-native-autocomplete-input": "^5.5.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.27.4",
-    "@types/react": "~19.1.10"
+    "@types/react": "~19.1.10",
+    "@babel/core": "^7.28.3"
   },
   "private": true
 }
