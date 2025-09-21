@@ -18,12 +18,12 @@ jobs:
       pull-requests: write
       id-token: write
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
       with:
        fetch-depth: 0
        ref: ${{ github.event.workflow_run.head_branch }}
     - name: Setup Node
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v5
       with:
         node-version-file: '.node-version'
     - name: Install
