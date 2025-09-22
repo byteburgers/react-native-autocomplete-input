@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { type ReactElement } from 'react';
 import type {
   FlatListProps,
   TextInputProps,
@@ -15,7 +15,7 @@ export type AutocompleteInputProps<Item> = TextInputProps & {
   listContainerStyle?: StyleProp<ViewStyle>;
   onShowResults?: (showResults: boolean) => void;
   renderResultList?: React.FC<FlatListProps<Item>>;
-  renderTextInput?: React.FC<TextInputProps>;
+  renderTextInput?: (props: TextInputProps) => React.ReactNode;
   flatListProps?: Partial<Omit<FlatListProps<Item>, 'data'>>;
   data: readonly Item[];
 };

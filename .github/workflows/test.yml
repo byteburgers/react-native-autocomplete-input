@@ -15,8 +15,9 @@ jobs:
       uses: actions/setup-node@v5
       with:
         node-version-file: '.nvmrc'
+        cache: 'npm'
     - name: Install dependencies
-      run: npm ci
+      run: npm ci --verbose
     - name: Test
       run: npm test
     - name: Build

@@ -104,24 +104,22 @@ describe('<AutocompleteInput />', () => {
         data={[]}
         placeholder="Enter search"
         renderResultList={() => <></>}
-        renderTextInput={(props) => <MockTextInput {...props} />}
+        renderTextInput={MockTextInput}
       />,
     );
 
-    expect(MockTextInput).toHaveBeenCalledWith(
-      {
-        placeholder: 'Enter search',
-        style: [
-          {
-            backgroundColor: 'white',
-            height: 40,
-            paddingLeft: 3,
-          },
-          undefined,
-        ],
-      },
-      {},
-    );
+    expect(MockTextInput).toHaveBeenCalledTimes(1);
+    expect(MockTextInput).toHaveBeenCalledWith({
+      placeholder: 'Enter search',
+      style: [
+        {
+          backgroundColor: 'white',
+          height: 40,
+          paddingLeft: 3,
+        },
+        undefined,
+      ],
+    });
   });
 
   it('should preserve custom text input on re-render', async () => {
