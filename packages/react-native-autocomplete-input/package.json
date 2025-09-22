@@ -31,12 +31,13 @@
   },
   "homepage": "https://github.com/byteburgers/react-native-autocomplete-input#readme",
   "peerDependencies": {
-    "react": ">=16.8.0",
+    "react": ">=16.8.0 <19.1.1",
     "react-native": ">=0.60.0"
   },
   "devDependencies": {
     "@react-native/typescript-config": "^0.81.0",
-    "@testing-library/react-native": "^13.3.3",
+    "@testing-library/react-native": "13.3.3",
+    "react-test-renderer": "19.1.0",
     "@types/jest": "^30.0.0",
     "@types/react": "~19.1.10",
     "babel-jest": "^30.0.5",
