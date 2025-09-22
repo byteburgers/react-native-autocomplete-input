@@ -17,7 +17,7 @@ jobs:
         node-version-file: '.nvmrc'
         cache: 'npm'
     - name: Install dependencies
-      run: npm ci --no-audit --prefer-offline --retry 3
+      run: npm ci --verbose
     - name: Test
       run: npm test
     - name: Build
