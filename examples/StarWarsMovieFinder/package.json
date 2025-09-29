@@ -17,7 +17,7 @@
     "react-native-autocomplete-input": "^5.5.5"
   },
   "devDependencies": {
-    "@types/react": "~19.1.10"
+    "@types/react": "~19.1.15"
   },
   "private": true
 }
