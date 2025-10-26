@@ -9,3 +9,7 @@ updates:
       patterns:
         - "react"
         - "react-test-renderer"
+- package-ecosystem: "github-actions"
+  directory: "/"
+  schedule:
+    interval: "weekly"
