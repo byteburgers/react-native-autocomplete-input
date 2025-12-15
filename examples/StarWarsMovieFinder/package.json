@@ -13,7 +13,7 @@
     "expo": "~54.0.27",
     "expo-status-bar": "~3.0.9",
     "react": "19.2.0",
-    "react-native": "0.82.1",
+    "react-native": "0.83.0",
     "react-native-autocomplete-input": "^5.5.5"
   },
   "devDependencies": {
