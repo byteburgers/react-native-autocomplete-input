@@ -7,7 +7,7 @@
   "license": "MIT",
   "homepage": "https://github.com/byteburgers/react-native-autocomplete-input#readme",
   "devDependencies": {
-    "@nx/js": "^22.2.0",
+    "@nx/js": "^22.3.3",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
