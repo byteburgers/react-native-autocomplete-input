@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { SWAPI, type Movies, filterMovies } from './swapi';
 import { MovieDetails } from './MovieDetails';
 import { Platform, StyleSheet, Text, TouchableOpacity, View, SafeAreaView } from 'react-native';
+import { Search } from './Search';
 
 function StarWarsMovieFinder(): React.ReactElement {
   const [allMovies, setAllMovies] = useState<Movies>([]);
@@ -26,6 +27,7 @@ function StarWarsMovieFinder(): React.ReactElement {
 
   const isLoading = !allMovies.length;
   const placeholder = isLoading ? 'Loading data...' : 'Enter Star Wars film title';
+  const handleClear = () => setQuery('');
 
   return (
     <SafeAreaView style={styles.saveView}>
@@ -35,6 +37,15 @@ function StarWarsMovieFinder(): React.ReactElement {
             editable={!isLoading}
             autoCorrect={false}
             data={suggestions}
+            renderTextInput={() => (
+              <Search
+                isLoading={isLoading}
+                query={query}
+                setQuery={setQuery}
+                placeholder={placeholder}
+                onClear={handleClear}
+              />
+            )}
             value={query}
             onChangeText={setQuery}
             placeholder={placeholder}
