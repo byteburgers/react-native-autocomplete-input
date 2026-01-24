@@ -10,14 +10,14 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "expo": "~54.0.31",
-    "expo-status-bar": "~3.0.9",
+    "expo": "~55.0.0-preview.5",
+    "expo-status-bar": "~55.0.1",
     "react": "19.2.0",
     "react-native": "0.83.1",
     "react-native-autocomplete-input": "^5.5.5"
   },
   "devDependencies": {
-    "@types/react": "~19.2.7"
+    "@types/react": "~19.2.0"
   },
   "private": true
 }
