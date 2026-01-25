@@ -73,16 +73,15 @@ const styles = StyleSheet.create({
 | Prop | Type | Description |
 | :------------ |:---------------:| :-----|
 | containerStyle | style | These styles will be applied to the container which surrounds the autocomplete component. |
-| hideResults | bool | Set to `true` to hide the suggestion list.
-| data | array | An array with suggestion items to be rendered in `renderItem({ item, i })`. Any array with length > 0 will open the suggestion list and any array with length < 1 will hide the list. |
+| hideResults | bool | Set to `true` to hide the suggestion list. |
+| data | array | An array of suggestion items. Any array with length > 0 will open the suggestion list and any array with length < 1 will hide the list. Customize item rendering via `flatListProps.renderItem` (defaults to `Text(String(item))`). |
 | inputContainerStyle | style | These styles will be applied to the container which surrounds the textInput component. |
 | listContainerStyle | style | These styles will be applied to the container which surrounds the result list. |
-| listStyle | style | These style will be applied to the result list. |
-| onShowResults | function | `onShowResults` will be called when the autocomplete suggestions appear or disappear. |
+| onShowResults | function | `onShowResults` is called with a boolean indicating whether results are showing. |
 | onStartShouldSetResponderCapture | function | `onStartShouldSetResponderCapture` will be passed to the result list view container ([onStartShouldSetResponderCapture](https://reactnative.dev/docs/gesture-responder-system#capture-shouldset-handlers)). |
-| renderTextInput | function | render custom TextInput. All props passed to this function. |
-| flatListProps | object | custom props to [FlatList](https://reactnative.dev/docs/flatlist). |
-| renderResultList | function | render custom result list. Can be used to replace FlatList. All props passed to this function. |
+| renderTextInput | function | Render a custom TextInput. Receives all TextInput props. |
+| flatListProps | object | Custom props for the internal [FlatList](https://reactnative.dev/docs/flatlist). `data` is managed by the component and `style` is merged with the default list style. |
+| renderResultList | function | Render a custom result list component (defaults to FlatList). Receives the FlatList props. |
 
 ## Known issues
 * By default the autocomplete will not behave as expected inside a `<ScrollView />`. Set the scroll view's prop to fix this: `keyboardShouldPersistTaps={true}` for RN <= 0.39, or `keyboardShouldPersistTaps='always'` for RN >= 0.40. ([#5](https://github.com/mrlaessig/react-native-autocomplete-input/issues/5)). Alternatively, you can use renderResultList to render a custom result list that does not use FlatList. See the tests for an example.
@@ -105,4 +104,3 @@ $ npx nx watch --projects=react-native-autocomplete-input -- npm run build
 # Run the example project
 $ npm run start -w starwarsmoviefinder
 ```
-
