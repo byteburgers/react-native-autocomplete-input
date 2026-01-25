@@ -20,9 +20,11 @@ export function Search({ isLoading, query, setQuery, placeholder, onClear }: Pro
         onChangeText={setQuery}
         placeholder={placeholder}
       />
-      <Text style={styles.closeText} onPress={() => onClear?.()}>
-        X
-      </Text>
+      {query ? (
+        <Text style={styles.closeText} onPress={() => onClear?.()}>
+          X
+        </Text>
+      ) : null}
     </View>
   );
 }
@@ -34,12 +36,13 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
+    height: 40,
   },
   closeText: {
     borderColor: '#999',
     color: '#333',
     fontWeight: '700',
-    padding: 10,
-    textAlign: 'right',
+    textAlign: 'center',
+    paddingRight: 10,
   },
 });
