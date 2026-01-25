@@ -6,8 +6,10 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "test": "tsc --noEmit",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "test": "npm run test:typings && npm run test:expo-deps",
+    "test:typings": "tsc --noEmit",
+    "test:expo-deps": "npx expo install --check --json"
   },
   "dependencies": {
     "expo": "~54.0.31",
