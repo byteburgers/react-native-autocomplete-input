@@ -31,8 +31,8 @@
   },
   "homepage": "https://github.com/byteburgers/react-native-autocomplete-input#readme",
   "peerDependencies": {
-    "react": ">=16.8.0 <19.1.1",
-    "react-native": ">=0.60.0"
+    "react": "*",
+    "react-native": "*"
   },
   "devDependencies": {
     "@react-native/typescript-config": "^0.82.1",
