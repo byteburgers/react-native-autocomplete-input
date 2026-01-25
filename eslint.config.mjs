@@ -4,7 +4,7 @@ import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import react from 'eslint-plugin-react';
 import globals from 'globals';
 
-export default tsEslint.config(
+export default [
   {
     ignores: ['node_modules', '**/dist'],
   },
@@ -27,4 +27,4 @@ export default tsEslint.config(
       },
     },
   },
-);
+];
