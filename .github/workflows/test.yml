@@ -20,5 +20,7 @@ jobs:
       run: npm ci
     - name: Test
       run: npm test
+    - name: Validate example dependencies
+      run: (cd examples/StarWarsMovieFinder && npx expo install --check --json)
     - name: Build
       run: npm run build
