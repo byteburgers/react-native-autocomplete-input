@@ -20,8 +20,8 @@ export function Search({ isLoading, query, setQuery, placeholder, onClear }: Pro
         onChangeText={setQuery}
         placeholder={placeholder}
       />
-      {query ? (
-        <Text style={styles.closeText} onPress={() => onClear?.()}>
+      {query && onClear ? (
+        <Text style={styles.closeText} onPress={() => onClear()}>
           X
         </Text>
       ) : null}
