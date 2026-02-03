@@ -7,7 +7,7 @@ import { Search } from './Search';
 
 function StarWarsMovieFinder(): React.ReactElement {
   const [allMovies, setAllMovies] = useState<Movies>([]);
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState('foo');
   const queriedMovies = React.useMemo(() => filterMovies(allMovies, query), [allMovies, query]);
 
   const [firstMovieSuggestion] = queriedMovies;
@@ -37,15 +37,7 @@ function StarWarsMovieFinder(): React.ReactElement {
             editable={!isLoading}
             autoCorrect={false}
             data={suggestions}
-            renderTextInput={() => (
-              <Search
-                isLoading={isLoading}
-                query={query}
-                setQuery={setQuery}
-                placeholder={placeholder}
-                onClear={handleClear}
-              />
-            )}
+            renderTextInput={(props) => <Search {...props} onClear={handleClear} />}
             value={query}
             onChangeText={setQuery}
             placeholder={placeholder}

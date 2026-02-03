@@ -1,26 +1,15 @@
 import type { ReactNode } from 'react';
-import { TextInput, Text, View, StyleSheet } from 'react-native';
+import { TextInput, Text, View, StyleSheet, TextInputProps } from 'react-native';
 
-type Props = {
-  isLoading: boolean;
-  query: string;
-  setQuery: (query: string) => void;
-  placeholder: string;
+type Props = TextInputProps & {
   onClear?: () => void;
 };
 
-export function Search({ isLoading, query, setQuery, placeholder, onClear }: Props): ReactNode {
+export function Search({ onClear, style, ...textInputProps }: Props): ReactNode {
   return (
     <View style={styles.row}>
-      <TextInput
-        style={styles.input}
-        editable={!isLoading}
-        autoCorrect={false}
-        value={query}
-        onChangeText={setQuery}
-        placeholder={placeholder}
-      />
-      {query && onClear ? (
+      <TextInput style={[style, styles.input]} {...textInputProps} />
+      {textInputProps.value && onClear ? (
         <Text style={styles.closeText} onPress={() => onClear()}>
           X
         </Text>
@@ -36,11 +25,9 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    height: 40,
   },
   closeText: {
     borderColor: '#999',
-    color: '#333',
     fontWeight: '700',
     textAlign: 'center',
     paddingRight: 10,
