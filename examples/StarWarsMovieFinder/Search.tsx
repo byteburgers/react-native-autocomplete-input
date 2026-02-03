@@ -1,5 +1,12 @@
 import type { ReactNode } from 'react';
-import { TextInput, Text, View, StyleSheet, TextInputProps, TouchableOpacity } from 'react-native';
+import {
+  TextInput,
+  Text,
+  View,
+  StyleSheet,
+  type TextInputProps,
+  TouchableOpacity,
+} from 'react-native';
 
 type Props = TextInputProps & {
   onClear?: () => void;
