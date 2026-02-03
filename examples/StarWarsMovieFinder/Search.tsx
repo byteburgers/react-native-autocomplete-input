@@ -32,6 +32,7 @@ export function Search({ onClear, style, ...textInputProps }: Props): ReactNode 
 
 const styles = StyleSheet.create({
   row: {
+    backgroundColor: '#fff',
     alignItems: 'center',
     flexDirection: 'row',
   },
