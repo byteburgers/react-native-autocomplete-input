@@ -35,7 +35,7 @@
     "react-native": "*"
   },
   "devDependencies": {
-    "@react-native/typescript-config": "^0.82.1",
+    "@react-native/typescript-config": "^0.84.0",
     "@testing-library/react-native": "13.3.3",
     "react-test-renderer": "19.1.0",
     "@types/jest": "^30.0.0",
