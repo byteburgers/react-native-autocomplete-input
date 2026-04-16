@@ -9,6 +9,10 @@ updates:
         patterns:
           - 'react'
           - 'react-test-renderer'
+      expo:
+        patterns:
+          - 'expo'
+          - 'expo-*'
     ignore:
       # React and React Native versions are managed by Expo SDK compatibility.
       - dependency-name: 'react'
