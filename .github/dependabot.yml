@@ -14,7 +14,15 @@ updates:
           - 'expo'
           - 'expo-*'
     ignore:
-      # React and React Native versions are managed by Expo SDK compatibility.
+      # React, React Native, and Expo SDK-managed packages must stay aligned.
+      - dependency-name: 'expo'
+        update-types:
+          - 'version-update:semver-major'
+          - 'version-update:semver-minor'
+      - dependency-name: 'expo-*'
+        update-types:
+          - 'version-update:semver-major'
+          - 'version-update:semver-minor'
       - dependency-name: 'react'
       - dependency-name: 'react-*'
       - dependency-name: 'react-native'
